@@ -69,6 +69,7 @@ def parse_scalar(value: str) -> Any:
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
     if not text.startswith("---\n"):
         return {}, text
 

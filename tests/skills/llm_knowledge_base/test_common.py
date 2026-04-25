@@ -56,6 +56,23 @@ def test_parse_frontmatter_parses_indented_list_items():
     assert body == "Body text\n"
 
 
+def test_parse_frontmatter_accepts_crlf_newlines():
+    metadata, body = parse_frontmatter(
+        "---\r\n"
+        "source_refs:\r\n"
+        "  - source-a#chunk-001\r\n"
+        "related_pages: [armbar]\r\n"
+        "title: Example\r\n"
+        "---\r\n"
+        "Body text\r\n"
+    )
+
+    assert metadata["source_refs"] == ["source-a#chunk-001"]
+    assert metadata["related_pages"] == ["armbar"]
+    assert metadata["title"] == "Example"
+    assert body == "Body text\n"
+
+
 def test_parse_frontmatter_rejects_non_key_value_lines():
     with pytest.raises(ValueError, match="invalid frontmatter line: not valid yaml line"):
         parse_frontmatter(

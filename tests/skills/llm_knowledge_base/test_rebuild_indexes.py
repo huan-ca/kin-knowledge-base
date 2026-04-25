@@ -17,6 +17,74 @@ def test_rebuild_indexes_creates_index_gap_report_conflict_report_and_link_map(t
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
 
+    source_compendium_page = repo / "kb" / "sources" / "compendium.md"
+    source_compendium_page.parent.mkdir(parents=True, exist_ok=True)
+    source_compendium_page.write_text(
+        """---
+id: source-compendium
+type: source
+title: Compendium
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Compendium
+""",
+        encoding="utf-8",
+    )
+
+    source_overview_page = repo / "kb" / "sources" / "overview.md"
+    source_overview_page.write_text(
+        """---
+id: source-overview
+type: source
+title: Overview
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Overview
+""",
+        encoding="utf-8",
+    )
+
+    armbar_page = repo / "kb" / "concepts" / "armbar.md"
+    armbar_page.parent.mkdir(parents=True, exist_ok=True)
+    armbar_page.write_text(
+        """---
+id: armbar
+type: concept
+title: Armbar
+status: active
+confidence: 0.88
+claim_label: fact
+source_refs: [source-compendium#chunk-020]
+related_pages: []
+---
+# Armbar
+""",
+        encoding="utf-8",
+    )
+
+    triangle_choke_page = repo / "kb" / "concepts" / "triangle-choke.md"
+    triangle_choke_page.write_text(
+        """---
+id: triangle-choke
+type: concept
+title: Triangle Choke
+status: active
+confidence: 0.87
+claim_label: fact
+source_refs: [source-compendium#chunk-021]
+related_pages: []
+---
+# Triangle Choke
+""",
+        encoding="utf-8",
+    )
+
     concept_page = repo / "kb" / "concepts" / "closed-guard.md"
     concept_page.parent.mkdir(parents=True, exist_ok=True)
     concept_page.write_text(
@@ -103,6 +171,39 @@ def test_rebuild_indexes_includes_nested_index_and_readme_pages_without_re_readi
     repo = tmp_path / "demo-repo"
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    source_concepts_page = repo / "kb" / "sources" / "concepts.md"
+    source_concepts_page.parent.mkdir(parents=True, exist_ok=True)
+    source_concepts_page.write_text(
+        """---
+id: source-concepts
+type: source
+title: Concepts Source
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Concepts Source
+""",
+        encoding="utf-8",
+    )
+
+    source_foo_page = repo / "kb" / "sources" / "foo.md"
+    source_foo_page.write_text(
+        """---
+id: source-foo
+type: source
+title: Foo Source
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Foo Source
+""",
+        encoding="utf-8",
+    )
 
     nested_index_page = repo / "kb" / "concepts" / "index.md"
     nested_index_page.parent.mkdir(parents=True, exist_ok=True)
@@ -563,6 +664,23 @@ def test_rebuild_indexes_allows_inline_comment_in_domain_type_policy(tmp_path):
     )
     config_path.write_text(config_text, encoding="utf-8")
 
+    source_page = repo / "kb" / "sources" / "source-a.md"
+    source_page.parent.mkdir(parents=True, exist_ok=True)
+    source_page.write_text(
+        """---
+id: source-a
+type: source
+title: Source A
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Source A
+""",
+        encoding="utf-8",
+    )
+
     valid_page = repo / "kb" / "lessons" / "valid-lesson.md"
     valid_page.parent.mkdir(parents=True, exist_ok=True)
     valid_page.write_text(
@@ -589,3 +707,94 @@ related_pages: []
     )
 
     assert result.returncode == 0, result.stderr
+
+
+def test_rebuild_indexes_rejects_unknown_related_page_reference(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    invalid_page = repo / "kb" / "concepts" / "broken-related-page.md"
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(
+        """---
+id: broken-related-page
+type: concept
+title: Broken Related Page
+status: active
+confidence: 0.5
+claim_label: fact
+source_refs: [source-compendium#chunk-001]
+related_pages: [missing-page]
+---
+# Broken Related Page
+""",
+        encoding="utf-8",
+    )
+
+    source_page = repo / "kb" / "sources" / "compendium.md"
+    source_page.parent.mkdir(parents=True, exist_ok=True)
+    source_page.write_text(
+        """---
+id: source-compendium
+type: source
+title: Compendium
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Compendium
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "related_pages references unknown page id 'missing-page'" in result.stderr
+
+
+def test_rebuild_indexes_rejects_unknown_source_reference(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    invalid_page = repo / "kb" / "concepts" / "broken-source-ref.md"
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(
+        """---
+id: broken-source-ref
+type: concept
+title: Broken Source Ref
+status: active
+confidence: 0.5
+claim_label: fact
+source_refs: [source-does-not-exist#chunk-001]
+related_pages: []
+---
+# Broken Source Ref
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "source_refs references unknown page id 'source-does-not-exist'" in result.stderr

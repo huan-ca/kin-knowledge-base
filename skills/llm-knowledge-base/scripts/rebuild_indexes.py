@@ -190,6 +190,34 @@ def load_pages(
     return pages
 
 
+def validate_page_references(pages: list[dict]) -> None:
+    page_types_by_id = {page["id"]: page["type"] for page in pages}
+
+    for page in pages:
+        for related_page_id in page["related_pages"]:
+            if related_page_id not in page_types_by_id:
+                raise ValueError(
+                    f"related_pages references unknown page id '{related_page_id}' in {page['path']}"
+                )
+
+        if page["type"] in NON_SUBSTANTIVE_PAGE_TYPES:
+            continue
+
+        for source_ref in page["source_refs"]:
+            if not isinstance(source_ref, str):
+                raise ValueError(f"source_refs entries must be strings in {page['path']}")
+            source_page_id = source_ref.split("#", 1)[0]
+            source_page_type = page_types_by_id.get(source_page_id)
+            if source_page_type is None:
+                raise ValueError(
+                    f"source_refs references unknown page id '{source_page_id}' in {page['path']}"
+                )
+            if source_page_type != "source":
+                raise ValueError(
+                    f"source_refs must point to source pages; '{source_page_id}' in {page['path']} is type '{source_page_type}'"
+                )
+
+
 def render_index(pages: list[dict]) -> str:
     grouped: dict[str, list[dict]] = {}
     for page in pages:
@@ -305,6 +333,7 @@ def main() -> None:
     try:
         required_metadata, required_substantive_metadata, allowed_page_types = load_repo_policy(repo_root)
         pages = load_pages(repo_root / "kb", required_metadata, required_substantive_metadata, allowed_page_types)
+        validate_page_references(pages)
     except ValueError as exc:
         raise SystemExit(str(exc))
 
