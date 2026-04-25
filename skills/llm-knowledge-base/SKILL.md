@@ -1,85 +1,119 @@
 ---
 name: llm-knowledge-base
-description: "[TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]"
+description: Bootstrap and maintain a codex-managed linked markdown knowledge base from raw source files plus root configuration. Use when Codex needs to create an "LLM wiki", ingest raw documents into a normalized knowledge base, track file hashes and ingestion state, rebuild indexes or reports, or generate downstream artifacts such as curriculum, lesson plans, gap reports, improvement reports, policy drafts, or culture documents while preserving provenance, confidence, and explicit missing-information handling.
 ---
 
-# Llm Knowledge Base
+# LLM Knowledge Base
 
 ## Overview
 
-[TODO: 1-2 sentences explaining what this skill enables]
+Use this skill to create and maintain a repo-local knowledge base that separates evidence in `raw/` from normalized knowledge in `kb/`, reproducible outputs in `generated/`, and operational state in `.kb-state/`.
 
-## Structuring This Skill
+If the request needs facts the KB does not support, do not invent them. Surface the missing information as an `open-question`, gap report entry, or direct explanation to the user.
 
-[TODO: Choose the structure that best fits this skill's purpose. Common patterns:
+## Quick Start
 
-**1. Workflow-Based** (best for sequential processes)
-- Works well when there are clear step-by-step procedures
-- Example: DOCX skill with "Workflow Decision Tree" -> "Reading" -> "Creating" -> "Editing"
-- Structure: ## Overview -> ## Workflow Decision Tree -> ## Step 1 -> ## Step 2...
+For a new repo:
 
-**2. Task-Based** (best for tool collections)
-- Works well when the skill offers different operations/capabilities
-- Example: PDF skill with "Quick Start" -> "Merge PDFs" -> "Split PDFs" -> "Extract Text"
-- Structure: ## Overview -> ## Quick Start -> ## Task Category 1 -> ## Task Category 2...
+```bash
+python3 skills/llm-knowledge-base/scripts/init_repo.py .
+```
 
-**3. Reference/Guidelines** (best for standards or specifications)
-- Works well for brand guidelines, coding standards, or requirements
-- Example: Brand styling with "Brand Guidelines" -> "Colors" -> "Typography" -> "Features"
-- Structure: ## Overview -> ## Guidelines -> ## Specifications -> ## Usage...
+For new or replaced raw files:
 
-**4. Capabilities-Based** (best for integrated systems)
-- Works well when the skill provides multiple interrelated features
-- Example: Product Management with "Core Capabilities" -> numbered capability list
-- Structure: ## Overview -> ## Core Capabilities -> ### 1. Feature -> ### 2. Feature...
+```bash
+python3 skills/llm-knowledge-base/scripts/update_manifest.py .
+python3 skills/llm-knowledge-base/scripts/plan_ingestion.py .
+```
 
-Patterns can be mixed and matched as needed. Most skills combine patterns (e.g., start with task-based, add workflow for complex operations).
+After adding or editing `kb/` pages:
 
-Delete this entire "Structuring This Skill" section when done - it's just guidance.]
+```bash
+python3 skills/llm-knowledge-base/scripts/rebuild_indexes.py .
+```
 
-## [TODO: Replace with the first main section based on chosen structure]
+## Repo Contract
 
-[TODO: Add content here. See examples in existing skills:
-- Code samples for technical skills
-- Decision trees for complex workflows
-- Concrete examples with realistic user requests
-- References to scripts/templates/references as needed]
+Follow `references/repo-contract.md`.
 
-## Resources (optional)
+- `knowledge-base.yaml` is human-owned policy.
+- `raw/` is immutable evidence.
+- `kb/` is Codex-managed normalized knowledge.
+- `generated/` is reproducible output.
+- `published/` is human-maintained output.
+- `.kb-state/` is operational memory.
 
-Create only the resource directories this skill actually needs. Delete this section if no resources are required.
+## Workflow
 
-### scripts/
-Executable code (Python/Bash/etc.) that can be run directly to perform specific operations.
+### 1. Bootstrap
 
-**Examples from other skills:**
-- PDF skill: `fill_fillable_fields.py`, `extract_form_field_info.py` - utilities for PDF manipulation
-- DOCX skill: `document.py`, `utilities.py` - Python modules for document processing
+Run `scripts/init_repo.py` at repo root to create the standard layout and starter state files.
+Do not move config into `kb/`; keep `knowledge-base.yaml` at repo root because it is policy, not generated knowledge.
 
-**Appropriate for:** Python scripts, shell scripts, or any executable code that performs automation, data processing, or specific operations.
+### 2. Detect raw-file changes
 
-**Note:** Scripts may be executed without loading into context, but can still be read by Codex for patching or environment adjustments.
+Users may copy or unzip files directly into `raw/`.
+Run `scripts/update_manifest.py` to hash the current raw files and update `.kb-state/raw-manifest.json`.
+Run `scripts/plan_ingestion.py` to separate files into `to_ingest`, `unchanged`, and `removed`.
 
-### references/
-Documentation and reference material intended to be loaded into context to inform Codex's process and thinking.
+Treat removed files as review items. Do not silently delete derived KB pages.
 
-**Examples from other skills:**
-- Product management: `communication.md`, `context_building.md` - detailed workflow guides
-- BigQuery: API reference documentation and query examples
-- Finance: Schema documentation, company policies
+### 3. Normalize knowledge into `kb/`
 
-**Appropriate for:** In-depth documentation, API references, database schemas, comprehensive guides, or any detailed information that Codex should reference while working.
+Create atomic markdown pages in `kb/` using the templates in `assets/templates/pages/`.
+Create one `source` page per raw artifact.
+Break synthesized knowledge into small pages with explicit links and source references.
 
-### assets/
-Files not intended to be loaded into context, but rather used within the output Codex produces.
+Use:
 
-**Examples from other skills:**
-- Brand styling: PowerPoint template files (.pptx), logo files
-- Frontend builder: HTML/React boilerplate project directories
-- Typography: Font files (.ttf, .woff2)
+- `source.md` for source artifacts
+- `knowledge-page.md` for `concept`, `procedure`, `glossary-term`, and `decision`
+- `domain-page.md` for configured domain-specific page types
+- `open-question.md` for missing or ambiguous information
+- `report.md` for generated analytical outputs
 
-**Appropriate for:** Templates, boilerplate code, document templates, images, icons, fonts, or any files meant to be copied or used in the final output.
+### 4. Rebuild derived indexes and reports
 
----
+After changing `kb/`, run `scripts/rebuild_indexes.py`.
+This refreshes:
 
-**Not every skill requires all three types of resources.**
+- `kb/index.md`
+- `generated/reports/gap-report.md`
+- `generated/reports/conflict-report.md`
+- `.kb-state/link-map.json`
+
+### 5. Generate downstream artifacts
+
+Generate curriculum, lesson plans, policy drafts, culture docs, and reports from `kb/`, not directly from `raw/`.
+Use `references/output-patterns.md` for output expectations.
+Every generated artifact should surface provenance, confidence, and missing prerequisites.
+
+## Page Types
+
+Follow `references/page-types.md`.
+
+Use universal page types for shared structure:
+
+- `source`
+- `concept`
+- `procedure`
+- `glossary-term`
+- `decision`
+- `open-question`
+- `report`
+
+Use domain-specific page types from `knowledge-base.yaml`.
+If the taxonomy is insufficient, propose new types instead of silently making them canonical.
+
+## Provenance and Confidence
+
+Follow `references/provenance-and-confidence.md`.
+
+Every substantive page should include:
+
+- source references
+- a confidence score
+- a conservative distinction between fact and inference
+- an explicit record of missing information when the evidence is incomplete
+
+If two sources conflict, preserve both claims, reduce confidence, and create an `open-question` or conflict report entry.
