@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from common import ensure_dir, read_json, templates_root, write_json, write_text
+from common import ensure_dir, templates_root, write_json, write_text
 
 
 README_TEXT = {
@@ -35,8 +35,6 @@ def build_repo(repo_root: Path, force: bool = False) -> None:
         path = repo_root / relative_path
         if force or not path.exists():
             write_json(path, payload)
-        else:
-            read_json(path, payload)
 
 
 def main() -> None:

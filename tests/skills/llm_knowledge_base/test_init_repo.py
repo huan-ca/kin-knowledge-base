@@ -40,3 +40,30 @@ def test_init_repo_bootstraps_expected_layout(tmp_path):
 
     manifest_text = (repo / ".kb-state" / "raw-manifest.json").read_text(encoding="utf-8")
     assert '"files": {}' in manifest_text
+
+
+def test_init_repo_preserves_existing_state_files_without_parsing_on_non_force_rerun(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+
+    initial_result = subprocess.run(
+        [sys.executable, str(SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert initial_result.returncode == 0, initial_result.stderr
+
+    malformed_state = repo / ".kb-state" / "raw-manifest.json"
+    malformed_text = "{not valid json\n"
+    malformed_state.write_text(malformed_text, encoding="utf-8")
+
+    rerun_result = subprocess.run(
+        [sys.executable, str(SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert rerun_result.returncode == 0, rerun_result.stderr
+    assert malformed_state.read_text(encoding="utf-8") == malformed_text

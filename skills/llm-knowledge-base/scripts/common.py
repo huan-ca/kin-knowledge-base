@@ -47,6 +47,8 @@ def sha256_file(path: Path) -> str:
 
 def parse_scalar(value: str) -> Any:
     value = value.strip()
+    if value == "[]":
+        return []
     if value.startswith('"') and value.endswith('"'):
         return value[1:-1]
     if value.startswith("'") and value.endswith("'"):
