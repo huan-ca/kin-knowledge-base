@@ -21,3 +21,16 @@ def test_parse_frontmatter_preserves_inline_empty_lists():
     assert metadata["related_pages"] == []
     assert metadata["title"] == "Example"
     assert body == "Body text\n"
+
+
+def test_parse_frontmatter_parses_inline_non_empty_lists():
+    metadata, _body = parse_frontmatter(
+        "---\n"
+        "source_refs: [source-a#chunk-001, source-b#chunk-002]\n"
+        "related_pages: [armbar, triangle-choke]\n"
+        "---\n"
+        "Body text\n"
+    )
+
+    assert metadata["source_refs"] == ["source-a#chunk-001", "source-b#chunk-002"]
+    assert metadata["related_pages"] == ["armbar", "triangle-choke"]

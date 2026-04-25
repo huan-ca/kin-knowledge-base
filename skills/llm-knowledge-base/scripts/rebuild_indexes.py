@@ -9,9 +9,14 @@ from common import ensure_dir, iter_markdown_files, parse_frontmatter, write_jso
 def load_pages(kb_root: Path) -> list[dict]:
     pages = []
     for path in iter_markdown_files(kb_root):
-        metadata, _body = parse_frontmatter(path.read_text(encoding="utf-8"))
+        try:
+            metadata, _body = parse_frontmatter(path.read_text(encoding="utf-8"))
+        except ValueError as exc:
+            relative_path = path.relative_to(kb_root.parent).as_posix()
+            raise ValueError(f"missing or invalid frontmatter in {relative_path}") from exc
         if not metadata:
-            continue
+            relative_path = path.relative_to(kb_root.parent).as_posix()
+            raise ValueError(f"missing or invalid frontmatter in {relative_path}")
         pages.append(
             {
                 "id": metadata.get("id", path.stem),
