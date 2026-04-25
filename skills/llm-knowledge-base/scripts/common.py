@@ -80,12 +80,13 @@ def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
 
     for raw_line in header.splitlines():
         line = raw_line.rstrip()
+        stripped = line.lstrip()
         if not line:
             continue
-        if line.startswith("- "):
+        if stripped.startswith("- "):
             if not current_key:
-                raise ValueError(f"invalid frontmatter list item: {line}")
-            metadata.setdefault(current_key, []).append(parse_scalar(line[2:]))
+                raise ValueError(f"invalid frontmatter list item: {stripped}")
+            metadata.setdefault(current_key, []).append(parse_scalar(stripped[2:]))
             continue
         if ":" not in line:
             raise ValueError(f"invalid frontmatter line: {line}")
@@ -108,5 +109,5 @@ def iter_markdown_files(root: Path) -> list[Path]:
     return sorted(
         path
         for path in root.rglob("*.md")
-        if path.is_file() and path.name not in {"README.md", "index.md"}
+        if path.is_file() and not (path.parent == root and path.name in {"README.md", "index.md"})
     )

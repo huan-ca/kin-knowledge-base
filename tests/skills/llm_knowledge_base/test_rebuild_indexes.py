@@ -94,6 +94,60 @@ related_pages: []
     assert link_map["closed-guard"]["type"] == "concept"
 
 
+def test_rebuild_indexes_includes_nested_index_and_readme_pages_without_re_reading_generated_top_level_index(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    nested_index_page = repo / "kb" / "concepts" / "index.md"
+    nested_index_page.parent.mkdir(parents=True, exist_ok=True)
+    nested_index_page.write_text(
+        """---
+id: concepts-overview
+type: concept
+title: Concepts Overview
+status: active
+confidence: 0.8
+source_refs: []
+related_pages: []
+---
+# Concepts Overview
+""",
+        encoding="utf-8",
+    )
+
+    nested_readme_page = repo / "kb" / "foo" / "README.md"
+    nested_readme_page.parent.mkdir(parents=True, exist_ok=True)
+    nested_readme_page.write_text(
+        """---
+id: foo-readme
+type: procedure
+title: Foo Readme
+status: active
+confidence: 0.85
+source_refs: []
+related_pages: []
+---
+# Foo Readme
+""",
+        encoding="utf-8",
+    )
+
+    subprocess.run([sys.executable, str(REBUILD_SCRIPT), str(repo)], check=True)
+    subprocess.run([sys.executable, str(REBUILD_SCRIPT), str(repo)], check=True)
+
+    index_text = (repo / "kb" / "index.md").read_text(encoding="utf-8")
+    link_map = json.loads((repo / ".kb-state" / "link-map.json").read_text(encoding="utf-8"))
+
+    assert "- [Concepts Overview](concepts/index.md) (`confidence: 0.80`, `status: active`)" in index_text
+    assert "- [Foo Readme](foo/README.md) (`confidence: 0.85`, `status: active`)" in index_text
+    assert link_map["concepts-overview"]["path"] == "kb/concepts/index.md"
+    assert link_map["foo-readme"]["path"] == "kb/foo/README.md"
+
+
 def test_rebuild_indexes_fails_loudly_when_frontmatter_is_missing(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
     assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"

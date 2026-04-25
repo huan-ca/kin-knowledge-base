@@ -38,6 +38,24 @@ def test_parse_frontmatter_parses_inline_non_empty_lists():
     assert metadata["related_pages"] == ["armbar", "triangle-choke"]
 
 
+def test_parse_frontmatter_parses_indented_list_items():
+    metadata, body = parse_frontmatter(
+        "---\n"
+        "source_refs:\n"
+        "  - source-a#chunk-001\n"
+        "  - source-b#chunk-002\n"
+        "related_pages:\n"
+        "  - armbar\n"
+        "  - triangle-choke\n"
+        "---\n"
+        "Body text\n"
+    )
+
+    assert metadata["source_refs"] == ["source-a#chunk-001", "source-b#chunk-002"]
+    assert metadata["related_pages"] == ["armbar", "triangle-choke"]
+    assert body == "Body text\n"
+
+
 def test_parse_frontmatter_rejects_non_key_value_lines():
     with pytest.raises(ValueError, match="invalid frontmatter line: not valid yaml line"):
         parse_frontmatter(
