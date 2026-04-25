@@ -40,6 +40,12 @@ def scan_repo(repo_root: Path, batch_id: str) -> tuple[dict, dict]:
         else:
             status = "changed"
 
+        last_ingested_hash = previous_entry.get("last_ingested_hash")
+        source_page_id = previous_entry.get("source_page_id")
+        if previous_entry.get("present") is False:
+            last_ingested_hash = None
+            source_page_id = None
+
         summary[status] += 1
         current_files[relative_path] = {
             "relative_path": relative_path,
@@ -49,8 +55,8 @@ def scan_repo(repo_root: Path, batch_id: str) -> tuple[dict, dict]:
             "import_batch_id": batch_id,
             "present": True,
             "status": status,
-            "last_ingested_hash": previous_entry.get("last_ingested_hash"),
-            "source_page_id": previous_entry.get("source_page_id"),
+            "last_ingested_hash": last_ingested_hash,
+            "source_page_id": source_page_id,
         }
         seen_paths.add(relative_path)
 

@@ -7,6 +7,14 @@ INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
 MANIFEST_SCRIPT = Path("skills/llm-knowledge-base/scripts/update_manifest.py").resolve()
 
 
+def should_task4_ingest(entry: dict) -> bool:
+    return entry["present"] and (
+        entry["status"] != "unchanged"
+        or entry.get("last_ingested_hash") != entry["sha256"]
+        or entry.get("source_page_id") is None
+    )
+
+
 def test_update_manifest_marks_new_changed_and_removed_files(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
     assert MANIFEST_SCRIPT.exists(), f"missing script: {MANIFEST_SCRIPT}"
@@ -96,5 +104,6 @@ def test_update_manifest_marks_restored_file_with_same_bytes_as_changed(tmp_path
 
     assert restored_entry["status"] == "changed"
     assert restored_entry["present"] is True
-    assert restored_entry["last_ingested_hash"] == restored_entry["sha256"]
-    assert restored_entry["source_page_id"] == "page-123"
+    assert restored_entry["last_ingested_hash"] is None
+    assert restored_entry["source_page_id"] is None
+    assert should_task4_ingest(restored_entry) is True
