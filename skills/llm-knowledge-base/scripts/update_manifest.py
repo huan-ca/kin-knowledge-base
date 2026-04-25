@@ -13,13 +13,14 @@ def build_batch_id(explicit_batch_id: str | None) -> str:
     return datetime.now(timezone.utc).strftime("batch-%Y%m%dT%H%M%SZ")
 
 
-def scan_repo(repo_root: Path, batch_id: str) -> dict:
+def scan_repo(repo_root: Path, batch_id: str) -> tuple[dict, dict]:
     manifest_path = repo_root / ".kb-state" / "raw-manifest.json"
     previous = read_json(manifest_path, {"format_version": 1, "files": {}, "last_scan_batch_id": None})
     previous_files = previous.get("files", {})
 
     current_files: dict[str, dict] = {}
     seen_paths: set[str] = set()
+    summary = {"new": 0, "changed": 0, "removed": 0, "unchanged": 0}
 
     for path in sorted((repo_root / "raw").rglob("*")):
         if not path.is_file():
@@ -32,11 +33,14 @@ def scan_repo(repo_root: Path, batch_id: str) -> dict:
 
         if previous_hash is None:
             status = "new"
+        elif previous_entry.get("present") is False:
+            status = "changed"
         elif previous_hash == sha256:
             status = "unchanged"
         else:
             status = "changed"
 
+        summary[status] += 1
         current_files[relative_path] = {
             "relative_path": relative_path,
             "sha256": sha256,
@@ -53,6 +57,13 @@ def scan_repo(repo_root: Path, batch_id: str) -> dict:
     for relative_path, previous_entry in previous_files.items():
         if relative_path in seen_paths:
             continue
+        if previous_entry.get("present") is False:
+            current_files[relative_path] = {
+                **previous_entry,
+                "relative_path": relative_path,
+            }
+            continue
+        summary["removed"] += 1
         current_files[relative_path] = {
             **previous_entry,
             "relative_path": relative_path,
@@ -61,19 +72,17 @@ def scan_repo(repo_root: Path, batch_id: str) -> dict:
             "import_batch_id": batch_id,
         }
 
-    return {
-        "format_version": 1,
-        "last_scan_batch_id": batch_id,
-        "files": current_files,
-    }
+    return (
+        {
+            "format_version": 1,
+            "last_scan_batch_id": batch_id,
+            "files": current_files,
+        },
+        summary,
+    )
 
 
-def build_history_entry(manifest: dict, batch_id: str) -> dict:
-    summary = {"new": 0, "changed": 0, "removed": 0, "unchanged": 0}
-    for entry in manifest["files"].values():
-        status = entry["status"]
-        if status in summary:
-            summary[status] += 1
+def build_history_entry(summary: dict, batch_id: str) -> dict:
     return {
         "batch_id": batch_id,
         "scanned_at": datetime.now(timezone.utc).isoformat(),
@@ -89,12 +98,12 @@ def main() -> None:
 
     repo_root = Path(args.repo_root).resolve()
     batch_id = build_batch_id(args.batch_id)
-    manifest = scan_repo(repo_root, batch_id)
+    manifest, summary = scan_repo(repo_root, batch_id)
     write_json(repo_root / ".kb-state" / "raw-manifest.json", manifest)
 
     history_path = repo_root / ".kb-state" / "ingestion-history.json"
     history = read_json(history_path, {"batches": []})
-    history["batches"].append(build_history_entry(manifest, batch_id))
+    history["batches"].append(build_history_entry(summary, batch_id))
     write_json(history_path, history)
 
 
