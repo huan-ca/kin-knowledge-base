@@ -114,7 +114,7 @@ title: Concepts Overview
 status: active
 confidence: 0.8
 claim_label: fact
-source_refs: []
+source_refs: [source-concepts#chunk-001]
 related_pages: []
 ---
 # Concepts Overview
@@ -132,7 +132,7 @@ title: Foo Readme
 status: active
 confidence: 0.85
 claim_label: inference
-source_refs: []
+source_refs: [source-foo#chunk-001]
 related_pages: []
 ---
 # Foo Readme
@@ -302,7 +302,7 @@ title: Duplicate Page Id One
 status: active
 confidence: 0.6
 claim_label: fact
-source_refs: []
+source_refs: [source-dup#chunk-001]
 related_pages: []
 ---
 # Duplicate Page Id One
@@ -320,7 +320,7 @@ title: Duplicate Page Id Two
 status: active
 confidence: 0.7
 claim_label: inference
-source_refs: []
+source_refs: [source-dup#chunk-002]
 related_pages: []
 ---
 # Duplicate Page Id Two
@@ -355,6 +355,18 @@ related_pages: []
             "source_refs: source-a#chunk-001\n"
             "related_pages: []\n",
             "source_refs must be a list in kb/concepts/source-refs-not-list.md",
+        ),
+        (
+            "source-refs-empty",
+            "id: source-refs-empty\n"
+            "type: concept\n"
+            "title: Source Refs Empty\n"
+            "status: active\n"
+            "confidence: 0.5\n"
+            "claim_label: fact\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "source_refs must not be empty in kb/concepts/source-refs-empty.md",
         ),
         (
             "related-pages-not-list",
@@ -456,6 +468,18 @@ related_pages: []
             "related_pages: []\n",
             "status must be a string in kb/concepts/status-not-string.md",
         ),
+        (
+            "claim-label-invalid",
+            "id: claim-label-invalid\n"
+            "type: concept\n"
+            "title: Claim Label Invalid\n"
+            "status: active\n"
+            "confidence: 0.5\n"
+            "claim_label: nonsense\n"
+            "source_refs: [source-a#chunk-001]\n"
+            "related_pages: []\n",
+            "claim_label must be one of 'editorial-normalization', 'fact', 'inference', 'open-question' in kb/concepts/claim-label-invalid.md",
+        ),
     ],
 )
 def test_rebuild_indexes_validates_frontmatter_schema(tmp_path, page_name, frontmatter_body, expected_error):
@@ -522,3 +546,46 @@ related_pages: []
 
     assert result.returncode != 0
     assert f"missing required metadata field 'claim_label' in {relative_path}" in result.stderr
+
+
+def test_rebuild_indexes_allows_inline_comment_in_domain_type_policy(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    config_path = repo / "knowledge-base.yaml"
+    config_text = config_path.read_text(encoding="utf-8").replace(
+        "  - lesson\n",
+        "  - lesson # human note\n",
+    )
+    config_path.write_text(config_text, encoding="utf-8")
+
+    valid_page = repo / "kb" / "lessons" / "valid-lesson.md"
+    valid_page.parent.mkdir(parents=True, exist_ok=True)
+    valid_page.write_text(
+        """---
+id: valid-lesson
+type: lesson
+title: Valid Lesson
+status: active
+confidence: 0.6
+claim_label: fact
+source_refs: [source-a#chunk-001]
+related_pages: []
+---
+# Valid Lesson
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr

@@ -10,6 +10,7 @@ required_page_metadata:
   - confidence
 required_substantive_page_metadata:
   - claim_label
+  - source_refs
 confidence_rubric:
   1.0: "Directly supported by multiple source chunks with no conflict."
   0.8: "Directly supported by one clear source chunk."

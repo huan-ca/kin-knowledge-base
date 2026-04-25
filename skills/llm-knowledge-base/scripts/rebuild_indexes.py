@@ -17,6 +17,7 @@ UNIVERSAL_PAGE_TYPES = {
 }
 NON_SUBSTANTIVE_PAGE_TYPES = {"source", "open-question", "report"}
 DEFAULT_REQUIRED_METADATA_FIELDS = {"id", "type", "title", "status", "confidence"}
+ALLOWED_CLAIM_LABELS = {"fact", "inference", "editorial-normalization", "open-question"}
 
 
 def load_repo_policy(repo_root: Path) -> tuple[set[str], set[str], set[str]]:
@@ -56,7 +57,10 @@ def load_repo_policy(repo_root: Path) -> tuple[set[str], set[str], set[str]]:
             continue
 
         if current_list_key and stripped.startswith("- "):
-            list_fields[current_list_key].append(parse_scalar(stripped[2:]))
+            item_text = stripped[2:]
+            if " #" in item_text:
+                item_text = item_text.split(" #", 1)[0].rstrip()
+            list_fields[current_list_key].append(parse_scalar(item_text))
 
     domain_page_types = {
         item for item in list_fields["canonical_domain_types"] if isinstance(item, str) and item
@@ -124,12 +128,25 @@ def validate_page_metadata(
     if not 0.0 <= confidence <= 1.0:
         raise ValueError(f"confidence must be between 0.0 and 1.0 in {relative_path}")
 
+    claim_label = metadata.get("claim_label")
+    if page_type not in NON_SUBSTANTIVE_PAGE_TYPES:
+        if not isinstance(claim_label, str):
+            raise ValueError(f"claim_label must be a string in {relative_path}")
+        if claim_label not in ALLOWED_CLAIM_LABELS:
+            allowed_labels_text = ", ".join(f"'{label}'" for label in sorted(ALLOWED_CLAIM_LABELS))
+            raise ValueError(
+                f"claim_label must be one of {allowed_labels_text} in {relative_path}"
+            )
+        if not source_refs:
+            raise ValueError(f"source_refs must not be empty in {relative_path}")
+
     return {
         "id": page_id,
         "type": page_type,
         "title": title,
         "status": status,
         "confidence": confidence,
+        "claim_label": claim_label,
         "source_refs": source_refs,
         "related_pages": related_pages,
     }
