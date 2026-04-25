@@ -193,6 +193,40 @@ not valid yaml line
             "related_pages: []\n",
             "confidence must be numeric in kb/concepts/confidence-not-numeric.md",
         ),
+        (
+            "type-not-string",
+            "id: type-not-string\n"
+            "type:\n"
+            "- concept\n"
+            "title: Type Not String\n"
+            "confidence: 0.5\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "type must be a string in kb/concepts/type-not-string.md",
+        ),
+        (
+            "title-not-string",
+            "id: title-not-string\n"
+            "type: concept\n"
+            "title:\n"
+            "- Bad Title\n"
+            "confidence: 0.5\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "title must be a string in kb/concepts/title-not-string.md",
+        ),
+        (
+            "status-not-string",
+            "id: status-not-string\n"
+            "type: concept\n"
+            "title: Status Not String\n"
+            "status:\n"
+            "- active\n"
+            "confidence: 0.5\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "status must be a string in kb/concepts/status-not-string.md",
+        ),
     ],
 )
 def test_rebuild_indexes_validates_frontmatter_schema(tmp_path, page_name, frontmatter_body, expected_error):

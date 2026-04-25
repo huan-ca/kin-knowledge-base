@@ -11,6 +11,18 @@ def validate_page_metadata(metadata: dict, relative_path: str) -> dict:
     if not isinstance(page_id, str):
         raise ValueError(f"id must be a string in {relative_path}")
 
+    page_type = metadata.get("type", "unknown")
+    if not isinstance(page_type, str):
+        raise ValueError(f"type must be a string in {relative_path}")
+
+    title = metadata.get("title", page_id.replace("-", " ").title())
+    if not isinstance(title, str):
+        raise ValueError(f"title must be a string in {relative_path}")
+
+    status = metadata.get("status", "draft")
+    if not isinstance(status, str):
+        raise ValueError(f"status must be a string in {relative_path}")
+
     source_refs = metadata.get("source_refs", [])
     if not isinstance(source_refs, list):
         raise ValueError(f"source_refs must be a list in {relative_path}")
@@ -27,9 +39,9 @@ def validate_page_metadata(metadata: dict, relative_path: str) -> dict:
 
     return {
         "id": page_id,
-        "type": metadata.get("type", "unknown"),
-        "title": metadata.get("title", page_id.replace("-", " ").title()),
-        "status": metadata.get("status", "draft"),
+        "type": page_type,
+        "title": title,
+        "status": status,
         "confidence": confidence,
         "source_refs": source_refs,
         "related_pages": related_pages,
