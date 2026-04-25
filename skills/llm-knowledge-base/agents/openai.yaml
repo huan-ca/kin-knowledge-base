@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Knowledge Base"
+  short_description: "Build and maintain linked LLM wikis"
+  default_prompt: "Use this skill to create or maintain a linked markdown knowledge base with provenance, confidence, and incremental ingestion."
