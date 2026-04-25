@@ -117,4 +117,6 @@ Every substantive page should include:
 - a conservative distinction between `fact`, `inference`, `editorial-normalization`, and `open-question`
 - an explicit record of missing information when the evidence is incomplete
 
+The bootstrap policy should enforce this through `required_substantive_page_metadata` in `knowledge-base.yaml`.
+
 If two sources conflict, preserve both claims, reduce confidence, and create an `open-question` or conflict report entry.

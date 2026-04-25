@@ -36,6 +36,8 @@ def test_init_repo_bootstraps_expected_layout(tmp_path):
 
     config_text = (repo / "knowledge-base.yaml").read_text(encoding="utf-8")
     assert "canonical_domain_types:" in config_text
+    assert "required_substantive_page_metadata:" in config_text
+    assert "claim_label" in config_text
     assert "confidence_rubric:" in config_text
 
     manifest_text = (repo / ".kb-state" / "raw-manifest.json").read_text(encoding="utf-8")

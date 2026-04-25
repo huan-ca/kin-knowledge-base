@@ -1,6 +1,6 @@
 ---
 id: {{ page_id }}
-type: concept
+type: {{ page_type }}
 title: "{{ title }}"
 status: draft
 confidence: 0.5

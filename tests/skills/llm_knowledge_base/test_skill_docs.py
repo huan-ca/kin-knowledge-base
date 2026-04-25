@@ -3,6 +3,7 @@ from pathlib import Path
 
 SKILL = Path("skills/llm-knowledge-base/SKILL.md")
 REPORT_TEMPLATE = Path("skills/llm-knowledge-base/assets/templates/pages/report.md")
+KNOWLEDGE_PAGE_TEMPLATE = Path("skills/llm-knowledge-base/assets/templates/pages/knowledge-page.md")
 REFERENCES = [
     Path("skills/llm-knowledge-base/references/repo-contract.md"),
     Path("skills/llm-knowledge-base/references/page-types.md"),
@@ -36,3 +37,9 @@ def test_report_template_scaffolds_output_requirements():
     assert "## Source Basis" in text
     assert "## Confidence" in text
     assert "## Missing Prerequisites" in text
+
+
+def test_shared_knowledge_page_template_leaves_page_type_configurable():
+    text = KNOWLEDGE_PAGE_TEMPLATE.read_text(encoding="utf-8")
+    assert "type: {{ page_type }}" in text
+    assert "type: concept" not in text

@@ -15,10 +15,11 @@ UNIVERSAL_PAGE_TYPES = {
     "open-question",
     "report",
 }
+NON_SUBSTANTIVE_PAGE_TYPES = {"source", "open-question", "report"}
 DEFAULT_REQUIRED_METADATA_FIELDS = {"id", "type", "title", "status", "confidence"}
 
 
-def load_repo_policy(repo_root: Path) -> tuple[set[str], set[str]]:
+def load_repo_policy(repo_root: Path) -> tuple[set[str], set[str], set[str]]:
     config_path = repo_root / "knowledge-base.yaml"
     if not config_path.exists():
         raise ValueError(f"missing repo policy file: {config_path.name}")
@@ -26,6 +27,7 @@ def load_repo_policy(repo_root: Path) -> tuple[set[str], set[str]]:
     list_fields = {
         "canonical_domain_types": [],
         "required_page_metadata": [],
+        "required_substantive_page_metadata": [],
     }
     current_list_key: str | None = None
 
@@ -62,13 +64,17 @@ def load_repo_policy(repo_root: Path) -> tuple[set[str], set[str]]:
     required_metadata = DEFAULT_REQUIRED_METADATA_FIELDS | {
         item for item in list_fields["required_page_metadata"] if isinstance(item, str) and item
     }
-    return required_metadata, UNIVERSAL_PAGE_TYPES | domain_page_types
+    required_substantive_metadata = {
+        item for item in list_fields["required_substantive_page_metadata"] if isinstance(item, str) and item
+    }
+    return required_metadata, required_substantive_metadata, UNIVERSAL_PAGE_TYPES | domain_page_types
 
 
 def validate_page_metadata(
     metadata: dict,
     relative_path: str,
     required_metadata: set[str],
+    required_substantive_metadata: set[str],
     allowed_page_types: set[str],
 ) -> dict:
     missing_fields = [field for field in sorted(required_metadata) if field not in metadata]
@@ -88,6 +94,11 @@ def validate_page_metadata(
         raise ValueError(
             f"unknown page type '{page_type}' in {relative_path}; allowed page types: {allowed_types_text}"
         )
+    if page_type not in NON_SUBSTANTIVE_PAGE_TYPES:
+        missing_fields = [field for field in sorted(required_substantive_metadata) if field not in metadata]
+        if missing_fields:
+            missing_field = missing_fields[0]
+            raise ValueError(f"missing required metadata field '{missing_field}' in {relative_path}")
 
     title = metadata.get("title")
     if not isinstance(title, str):
@@ -110,6 +121,8 @@ def validate_page_metadata(
         confidence = float(raw_confidence)
     except (TypeError, ValueError) as exc:
         raise ValueError(f"confidence must be numeric in {relative_path}") from exc
+    if not 0.0 <= confidence <= 1.0:
+        raise ValueError(f"confidence must be between 0.0 and 1.0 in {relative_path}")
 
     return {
         "id": page_id,
@@ -122,7 +135,12 @@ def validate_page_metadata(
     }
 
 
-def load_pages(kb_root: Path, required_metadata: set[str], allowed_page_types: set[str]) -> list[dict]:
+def load_pages(
+    kb_root: Path,
+    required_metadata: set[str],
+    required_substantive_metadata: set[str],
+    allowed_page_types: set[str],
+) -> list[dict]:
     pages = []
     seen_page_ids: dict[str, str] = {}
     for path in iter_markdown_files(kb_root):
@@ -133,7 +151,13 @@ def load_pages(kb_root: Path, required_metadata: set[str], allowed_page_types: s
             raise ValueError(f"missing or invalid frontmatter in {relative_path}: {exc}") from exc
         if not metadata:
             raise ValueError(f"missing or invalid frontmatter in {relative_path}")
-        validated = validate_page_metadata(metadata, relative_path, required_metadata, allowed_page_types)
+        validated = validate_page_metadata(
+            metadata,
+            relative_path,
+            required_metadata,
+            required_substantive_metadata,
+            allowed_page_types,
+        )
         existing_path = seen_page_ids.get(validated["id"])
         if existing_path:
             raise ValueError(
@@ -262,8 +286,8 @@ def main() -> None:
 
     repo_root = Path(args.repo_root).resolve()
     try:
-        required_metadata, allowed_page_types = load_repo_policy(repo_root)
-        pages = load_pages(repo_root / "kb", required_metadata, allowed_page_types)
+        required_metadata, required_substantive_metadata, allowed_page_types = load_repo_policy(repo_root)
+        pages = load_pages(repo_root / "kb", required_metadata, required_substantive_metadata, allowed_page_types)
     except ValueError as exc:
         raise SystemExit(str(exc))
 

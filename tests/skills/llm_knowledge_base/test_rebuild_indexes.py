@@ -26,6 +26,7 @@ type: concept
 title: Closed Guard
 status: active
 confidence: 0.9
+claim_label: fact
 source_refs: [source-compendium#chunk-001, source-compendium#chunk-009]
 related_pages: [armbar, triangle-choke]
 ---
@@ -59,6 +60,7 @@ type: concept
 title: Conflicting Terminology
 status: conflict
 confidence: 0.4
+claim_label: editorial-normalization
 source_refs:
 - source-overview#chunk-002
 related_pages: []
@@ -111,6 +113,7 @@ type: concept
 title: Concepts Overview
 status: active
 confidence: 0.8
+claim_label: fact
 source_refs: []
 related_pages: []
 ---
@@ -128,6 +131,7 @@ type: procedure
 title: Foo Readme
 status: active
 confidence: 0.85
+claim_label: inference
 source_refs: []
 related_pages: []
 ---
@@ -221,6 +225,7 @@ def test_rebuild_indexes_requires_all_configured_metadata_fields(tmp_path, missi
         "title": "Missing Required Metadata",
         "status": "active",
         "confidence": "0.5",
+        "claim_label": "fact",
         "source_refs": "[]",
         "related_pages": "[]",
     }
@@ -296,6 +301,7 @@ type: concept
 title: Duplicate Page Id One
 status: active
 confidence: 0.6
+claim_label: fact
 source_refs: []
 related_pages: []
 ---
@@ -313,6 +319,7 @@ type: procedure
 title: Duplicate Page Id Two
 status: active
 confidence: 0.7
+claim_label: inference
 source_refs: []
 related_pages: []
 ---
@@ -344,6 +351,7 @@ related_pages: []
             "title: Source Refs Not List\n"
             "status: active\n"
             "confidence: 0.5\n"
+            "claim_label: fact\n"
             "source_refs: source-a#chunk-001\n"
             "related_pages: []\n",
             "source_refs must be a list in kb/concepts/source-refs-not-list.md",
@@ -355,6 +363,7 @@ related_pages: []
             "title: Related Pages Not List\n"
             "status: active\n"
             "confidence: 0.5\n"
+            "claim_label: fact\n"
             "source_refs: []\n"
             "related_pages: armbar\n",
             "related_pages must be a list in kb/concepts/related-pages-not-list.md",
@@ -367,6 +376,7 @@ related_pages: []
             "title: Id Not String\n"
             "status: active\n"
             "confidence: 0.5\n"
+            "claim_label: fact\n"
             "source_refs: []\n"
             "related_pages: []\n",
             "id must be a string in kb/concepts/id-not-string.md",
@@ -378,9 +388,34 @@ related_pages: []
             "title: Confidence Not Numeric\n"
             "status: active\n"
             "confidence: very-sure\n"
+            "claim_label: fact\n"
             "source_refs: []\n"
             "related_pages: []\n",
             "confidence must be numeric in kb/concepts/confidence-not-numeric.md",
+        ),
+        (
+            "confidence-below-range",
+            "id: confidence-below-range\n"
+            "type: concept\n"
+            "title: Confidence Below Range\n"
+            "status: active\n"
+            "confidence: -0.1\n"
+            "claim_label: fact\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "confidence must be between 0.0 and 1.0 in kb/concepts/confidence-below-range.md",
+        ),
+        (
+            "confidence-above-range",
+            "id: confidence-above-range\n"
+            "type: concept\n"
+            "title: Confidence Above Range\n"
+            "status: active\n"
+            "confidence: 1.1\n"
+            "claim_label: fact\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "confidence must be between 0.0 and 1.0 in kb/concepts/confidence-above-range.md",
         ),
         (
             "type-not-string",
@@ -390,6 +425,7 @@ related_pages: []
             "title: Type Not String\n"
             "status: active\n"
             "confidence: 0.5\n"
+            "claim_label: fact\n"
             "source_refs: []\n"
             "related_pages: []\n",
             "type must be a string in kb/concepts/type-not-string.md",
@@ -402,6 +438,7 @@ related_pages: []
             "- Bad Title\n"
             "status: active\n"
             "confidence: 0.5\n"
+            "claim_label: fact\n"
             "source_refs: []\n"
             "related_pages: []\n",
             "title must be a string in kb/concepts/title-not-string.md",
@@ -414,6 +451,7 @@ related_pages: []
             "status:\n"
             "- active\n"
             "confidence: 0.5\n"
+            "claim_label: fact\n"
             "source_refs: []\n"
             "related_pages: []\n",
             "status must be a string in kb/concepts/status-not-string.md",
@@ -441,3 +479,46 @@ def test_rebuild_indexes_validates_frontmatter_schema(tmp_path, page_name, front
 
     assert result.returncode != 0
     assert expected_error in result.stderr
+
+
+@pytest.mark.parametrize(
+    ("relative_path", "page_type"),
+    [
+        ("kb/concepts/missing-claim-label.md", "concept"),
+        ("kb/lessons/missing-claim-label.md", "lesson"),
+    ],
+)
+def test_rebuild_indexes_requires_claim_label_for_substantive_pages(tmp_path, relative_path, page_type):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    invalid_page = repo / relative_path
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(
+        f"""---
+id: missing-claim-label
+type: {page_type}
+title: Missing Claim Label
+status: active
+confidence: 0.5
+source_refs: []
+related_pages: []
+---
+# Missing Claim Label
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert f"missing required metadata field 'claim_label' in {relative_path}" in result.stderr
