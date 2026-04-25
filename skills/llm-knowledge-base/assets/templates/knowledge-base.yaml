@@ -1,0 +1,29 @@
+domain_name: "Example Domain"
+canonical_domain_types:
+  - lesson
+  - curriculum-unit
+required_page_metadata:
+  - id
+  - type
+  - title
+  - status
+  - confidence
+confidence_rubric:
+  1.0: "Directly supported by multiple source chunks with no conflict."
+  0.8: "Directly supported by one clear source chunk."
+  0.6: "Reasonable inference from available material."
+  0.4: "Weakly supported, incomplete, or partially conflicting."
+  0.2: "Open question or unsupported request."
+generation_targets:
+  - curriculum
+  - lesson-plan
+  - gap-report
+  - improvement-report
+proposal_policy:
+  auto_allow_proposed_types: false
+repo_contract:
+  raw_dir: raw
+  kb_dir: kb
+  generated_dir: generated
+  published_dir: published
+  state_dir: .kb-state
