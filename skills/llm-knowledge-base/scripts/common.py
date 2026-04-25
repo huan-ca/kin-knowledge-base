@@ -82,11 +82,13 @@ def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
         line = raw_line.rstrip()
         if not line:
             continue
-        if line.startswith("- ") and current_key:
+        if line.startswith("- "):
+            if not current_key:
+                raise ValueError(f"invalid frontmatter list item: {line}")
             metadata.setdefault(current_key, []).append(parse_scalar(line[2:]))
             continue
         if ":" not in line:
-            continue
+            raise ValueError(f"invalid frontmatter line: {line}")
         key, value = line.split(":", 1)
         key = key.strip()
         value = value.strip()

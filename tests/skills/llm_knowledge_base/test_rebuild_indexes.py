@@ -3,6 +3,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
 REBUILD_SCRIPT = Path("skills/llm-knowledge-base/scripts/rebuild_indexes.py").resolve()
 
@@ -111,3 +113,106 @@ def test_rebuild_indexes_fails_loudly_when_frontmatter_is_missing(tmp_path):
     assert result.returncode != 0
     assert "missing or invalid frontmatter" in result.stderr
     assert "kb/concepts/missing-frontmatter.md" in result.stderr
+
+
+def test_rebuild_indexes_fails_loudly_when_frontmatter_contains_invalid_line(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    invalid_page = repo / "kb" / "concepts" / "invalid-frontmatter-line.md"
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(
+        """---
+id: invalid-frontmatter-line
+type: concept
+title: Invalid Frontmatter Line
+not valid yaml line
+---
+# Invalid Frontmatter Line
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "missing or invalid frontmatter in kb/concepts/invalid-frontmatter-line.md" in result.stderr
+    assert "invalid frontmatter line: not valid yaml line" in result.stderr
+
+
+@pytest.mark.parametrize(
+    ("page_name", "frontmatter_body", "expected_error"),
+    [
+        (
+            "source-refs-not-list",
+            "id: source-refs-not-list\n"
+            "type: concept\n"
+            "title: Source Refs Not List\n"
+            "confidence: 0.5\n"
+            "source_refs: source-a#chunk-001\n"
+            "related_pages: []\n",
+            "source_refs must be a list in kb/concepts/source-refs-not-list.md",
+        ),
+        (
+            "related-pages-not-list",
+            "id: related-pages-not-list\n"
+            "type: concept\n"
+            "title: Related Pages Not List\n"
+            "confidence: 0.5\n"
+            "source_refs: []\n"
+            "related_pages: armbar\n",
+            "related_pages must be a list in kb/concepts/related-pages-not-list.md",
+        ),
+        (
+            "id-not-string",
+            "id:\n"
+            "- stray-item\n"
+            "type: concept\n"
+            "title: Id Not String\n"
+            "confidence: 0.5\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "id must be a string in kb/concepts/id-not-string.md",
+        ),
+        (
+            "confidence-not-numeric",
+            "id: confidence-not-numeric\n"
+            "type: concept\n"
+            "title: Confidence Not Numeric\n"
+            "confidence: very-sure\n"
+            "source_refs: []\n"
+            "related_pages: []\n",
+            "confidence must be numeric in kb/concepts/confidence-not-numeric.md",
+        ),
+    ],
+)
+def test_rebuild_indexes_validates_frontmatter_schema(tmp_path, page_name, frontmatter_body, expected_error):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    invalid_page = repo / "kb" / "concepts" / f"{page_name}.md"
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(f"---\n{frontmatter_body}---\n# Invalid Page\n", encoding="utf-8")
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert expected_error in result.stderr

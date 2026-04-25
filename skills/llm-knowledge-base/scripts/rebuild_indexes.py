@@ -6,27 +6,51 @@ from pathlib import Path
 from common import ensure_dir, iter_markdown_files, parse_frontmatter, write_json, write_text
 
 
+def validate_page_metadata(metadata: dict, relative_path: str) -> dict:
+    page_id = metadata.get("id")
+    if not isinstance(page_id, str):
+        raise ValueError(f"id must be a string in {relative_path}")
+
+    source_refs = metadata.get("source_refs", [])
+    if not isinstance(source_refs, list):
+        raise ValueError(f"source_refs must be a list in {relative_path}")
+
+    related_pages = metadata.get("related_pages", [])
+    if not isinstance(related_pages, list):
+        raise ValueError(f"related_pages must be a list in {relative_path}")
+
+    raw_confidence = metadata.get("confidence", 0.0)
+    try:
+        confidence = float(raw_confidence)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"confidence must be numeric in {relative_path}") from exc
+
+    return {
+        "id": page_id,
+        "type": metadata.get("type", "unknown"),
+        "title": metadata.get("title", page_id.replace("-", " ").title()),
+        "status": metadata.get("status", "draft"),
+        "confidence": confidence,
+        "source_refs": source_refs,
+        "related_pages": related_pages,
+    }
+
+
 def load_pages(kb_root: Path) -> list[dict]:
     pages = []
     for path in iter_markdown_files(kb_root):
+        relative_path = path.relative_to(kb_root.parent).as_posix()
         try:
             metadata, _body = parse_frontmatter(path.read_text(encoding="utf-8"))
         except ValueError as exc:
-            relative_path = path.relative_to(kb_root.parent).as_posix()
-            raise ValueError(f"missing or invalid frontmatter in {relative_path}") from exc
+            raise ValueError(f"missing or invalid frontmatter in {relative_path}: {exc}") from exc
         if not metadata:
-            relative_path = path.relative_to(kb_root.parent).as_posix()
             raise ValueError(f"missing or invalid frontmatter in {relative_path}")
+        validated = validate_page_metadata(metadata, relative_path)
         pages.append(
             {
-                "id": metadata.get("id", path.stem),
-                "type": metadata.get("type", "unknown"),
-                "title": metadata.get("title", path.stem.replace("-", " ").title()),
-                "status": metadata.get("status", "draft"),
-                "confidence": float(metadata.get("confidence", 0.0)),
-                "source_refs": metadata.get("source_refs", []),
-                "related_pages": metadata.get("related_pages", []),
-                "path": path.relative_to(kb_root.parent).as_posix(),
+                **validated,
+                "path": relative_path,
             }
         )
     return pages
@@ -107,7 +131,10 @@ def main() -> None:
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
-    pages = load_pages(repo_root / "kb")
+    try:
+        pages = load_pages(repo_root / "kb")
+    except ValueError as exc:
+        raise SystemExit(str(exc))
 
     write_text(repo_root / "kb" / "index.md", render_index(pages), overwrite=True)
 
