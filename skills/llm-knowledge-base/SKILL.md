@@ -80,6 +80,7 @@ This refreshes:
 - `kb/index.md`
 - `generated/reports/gap-report.md`
 - `generated/reports/conflict-report.md`
+- `generated/reports/improvement-report.md`
 - `.kb-state/link-map.json`
 
 ### 5. Generate downstream artifacts
@@ -113,7 +114,7 @@ Every substantive page should include:
 
 - source references
 - a confidence score
-- a conservative distinction between fact and inference
+- a conservative distinction between `fact`, `inference`, `editorial-normalization`, and `open-question`
 - an explicit record of missing information when the evidence is incomplete
 
 If two sources conflict, preserve both claims, reduce confidence, and create an `open-question` or conflict report entry.
