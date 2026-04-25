@@ -83,6 +83,9 @@ related_pages: []
         "- Add or refine source material for [Missing Drill Detail](../../kb/open-questions/missing-drill-detail.md) "
         "because its current confidence is 0.20."
     ) in improvement_report_text
+    assert "## Source Basis" in improvement_report_text
+    assert "## Confidence" in improvement_report_text
+    assert "## Missing Prerequisites" in improvement_report_text
     assert link_map["closed-guard"]["path"] == "kb/concepts/closed-guard.md"
     assert link_map["closed-guard"]["related_pages"] == ["armbar", "triangle-choke"]
     assert isinstance(link_map["closed-guard"]["related_pages"], list)

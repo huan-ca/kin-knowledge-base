@@ -127,8 +127,45 @@ def render_improvement_report(pages: list[dict]) -> str:
     lines = [
         "# Improvement Report",
         "",
-        "## Recommended Improvements",
+        "## Source Basis",
     ]
+    for page in weak_pages:
+        if page["source_refs"]:
+            lines.append(
+                f"- [{page['title']}](../../{page['path']}): derived from {', '.join(f'`{ref}`' for ref in page['source_refs'])}"
+            )
+        else:
+            lines.append(f"- [{page['title']}](../../{page['path']}): no supporting source refs recorded.")
+
+    lines.extend(
+        [
+            "",
+            "## Confidence",
+        ]
+    )
+    for page in weak_pages:
+        lines.append(f"- [{page['title']}](../../{page['path']}): current confidence {page['confidence']:.2f}.")
+
+    lines.extend(
+        [
+            "",
+            "## Missing Prerequisites",
+        ]
+    )
+    for page in weak_pages:
+        if page["type"] == "open-question":
+            lines.append(f"- [{page['title']}](../../{page['path']}): unresolved question blocks stronger output.")
+        elif not page["source_refs"]:
+            lines.append(f"- [{page['title']}](../../{page['path']}): missing supporting source refs.")
+        else:
+            lines.append(f"- [{page['title']}](../../{page['path']}): stronger corroborating evidence is still needed.")
+
+    lines.extend(
+        [
+            "",
+        "## Recommended Improvements",
+        ]
+    )
     for page in weak_pages:
         lines.append(
             f"- Add or refine source material for [{page['title']}](../../{page['path']}) "
