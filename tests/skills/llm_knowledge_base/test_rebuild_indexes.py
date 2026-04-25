@@ -152,6 +152,134 @@ not valid yaml line
     assert "invalid frontmatter line: not valid yaml line" in result.stderr
 
 
+@pytest.mark.parametrize("missing_field", ["type", "title", "status", "confidence"])
+def test_rebuild_indexes_requires_all_configured_metadata_fields(tmp_path, missing_field):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    metadata = {
+        "id": "missing-required-metadata",
+        "type": "concept",
+        "title": "Missing Required Metadata",
+        "status": "active",
+        "confidence": "0.5",
+        "source_refs": "[]",
+        "related_pages": "[]",
+    }
+    del metadata[missing_field]
+    frontmatter = "\n".join(f"{key}: {value}" for key, value in metadata.items())
+
+    invalid_page = repo / "kb" / "concepts" / "missing-required-metadata.md"
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(f"---\n{frontmatter}\n---\n# Invalid Page\n", encoding="utf-8")
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert f"missing required metadata field '{missing_field}' in kb/concepts/missing-required-metadata.md" in result.stderr
+
+
+def test_rebuild_indexes_rejects_unknown_page_types(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    invalid_page = repo / "kb" / "concepts" / "unknown-page-type.md"
+    invalid_page.parent.mkdir(parents=True, exist_ok=True)
+    invalid_page.write_text(
+        """---
+id: unknown-page-type
+type: alien-taxonomy
+title: Unknown Page Type
+status: active
+confidence: 0.5
+source_refs: []
+related_pages: []
+---
+# Unknown Page Type
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "unknown page type 'alien-taxonomy' in kb/concepts/unknown-page-type.md" in result.stderr
+    assert "allowed page types:" in result.stderr
+
+
+def test_rebuild_indexes_rejects_duplicate_page_ids(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    page_one = repo / "kb" / "concepts" / "duplicate-id-one.md"
+    page_one.parent.mkdir(parents=True, exist_ok=True)
+    page_one.write_text(
+        """---
+id: duplicate-page-id
+type: concept
+title: Duplicate Page Id One
+status: active
+confidence: 0.6
+source_refs: []
+related_pages: []
+---
+# Duplicate Page Id One
+""",
+        encoding="utf-8",
+    )
+
+    page_two = repo / "kb" / "procedures" / "duplicate-id-two.md"
+    page_two.parent.mkdir(parents=True, exist_ok=True)
+    page_two.write_text(
+        """---
+id: duplicate-page-id
+type: procedure
+title: Duplicate Page Id Two
+status: active
+confidence: 0.7
+source_refs: []
+related_pages: []
+---
+# Duplicate Page Id Two
+""",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [sys.executable, str(REBUILD_SCRIPT), str(repo)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "duplicate page id 'duplicate-page-id'" in result.stderr
+    assert "kb/concepts/duplicate-id-one.md" in result.stderr
+    assert "kb/procedures/duplicate-id-two.md" in result.stderr
+
+
 @pytest.mark.parametrize(
     ("page_name", "frontmatter_body", "expected_error"),
     [
@@ -160,6 +288,7 @@ not valid yaml line
             "id: source-refs-not-list\n"
             "type: concept\n"
             "title: Source Refs Not List\n"
+            "status: active\n"
             "confidence: 0.5\n"
             "source_refs: source-a#chunk-001\n"
             "related_pages: []\n",
@@ -170,6 +299,7 @@ not valid yaml line
             "id: related-pages-not-list\n"
             "type: concept\n"
             "title: Related Pages Not List\n"
+            "status: active\n"
             "confidence: 0.5\n"
             "source_refs: []\n"
             "related_pages: armbar\n",
@@ -181,6 +311,7 @@ not valid yaml line
             "- stray-item\n"
             "type: concept\n"
             "title: Id Not String\n"
+            "status: active\n"
             "confidence: 0.5\n"
             "source_refs: []\n"
             "related_pages: []\n",
@@ -191,6 +322,7 @@ not valid yaml line
             "id: confidence-not-numeric\n"
             "type: concept\n"
             "title: Confidence Not Numeric\n"
+            "status: active\n"
             "confidence: very-sure\n"
             "source_refs: []\n"
             "related_pages: []\n",
@@ -202,6 +334,7 @@ not valid yaml line
             "type:\n"
             "- concept\n"
             "title: Type Not String\n"
+            "status: active\n"
             "confidence: 0.5\n"
             "source_refs: []\n"
             "related_pages: []\n",
@@ -213,6 +346,7 @@ not valid yaml line
             "type: concept\n"
             "title:\n"
             "- Bad Title\n"
+            "status: active\n"
             "confidence: 0.5\n"
             "source_refs: []\n"
             "related_pages: []\n",
