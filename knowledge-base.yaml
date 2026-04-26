@@ -1,0 +1,126 @@
+domain_name: "Brazilian Jiu-Jitsu Gym Knowledge Base"
+
+canonical_domain_types:
+  - position
+  - submission
+  - escape
+  - transition
+  - drill
+  - lesson
+  - curriculum-unit
+  - class-type
+  - program
+  - policy
+  - value
+  - staff-role
+  - audience
+
+required_page_metadata:
+  - id
+  - type
+  - title
+  - status
+  - confidence
+
+required_substantive_page_metadata:
+  - claim_label
+  - source_refs
+
+confidence_rubric:
+  1.0: "Directly supported by multiple source chunks with no conflict."
+  0.8: "Directly supported by one clear source chunk."
+  0.6: "Reasonable inference from available material."
+  0.4: "Weakly supported, incomplete, partially conflicting, or overly context-dependent."
+  0.2: "Open question, unsupported request, or material needing human clarification."
+
+generation_targets:
+  - curriculum
+  - lesson-plan
+  - class-overview
+  - gap-report
+  - improvement-report
+  - policy-draft
+  - culture-guide
+  - staff-handbook-section
+
+proposal_policy:
+  auto_allow_proposed_types: false
+
+repo_contract:
+  raw_dir: raw
+  kb_dir: kb
+  generated_dir: generated
+  published_dir: published
+  state_dir: .kb-state
+
+taxonomy_guidance:
+  technical_instruction_types:
+    - position
+    - submission
+    - escape
+    - transition
+    - drill
+    - lesson
+    - curriculum-unit
+  gym_operations_and_community_types:
+    - class-type
+    - program
+    - policy
+    - value
+    - staff-role
+    - audience
+  universal_types_also_available:
+    - source
+    - concept
+    - procedure
+    - glossary-term
+    - decision
+    - open-question
+    - report
+
+metadata_guidance:
+  required_on_all_substantive_pages:
+    - claim_label
+    - source_refs
+    - confidence
+  recommended_curriculum_metadata:
+    - program_level
+    - belt_level
+    - age_group
+    - skill_stage
+    - teaching_goal
+  recommended_ops_metadata:
+    - audience
+    - owner_role
+    - policy_scope
+    - class_format
+    - review_cycle
+  apply_curriculum_metadata_to_types:
+    - lesson
+    - curriculum-unit
+    - drill
+    - class-type
+  apply_ops_metadata_to_types:
+    - class-type
+    - program
+    - policy
+    - value
+    - staff-role
+  note: "Recommended metadata should be used when relevant, but not forced onto pages where it does not fit."
+
+generation_guidance:
+  curriculum_outputs_should_prioritize:
+    - clear progression
+    - age and skill appropriateness
+    - explicit teaching goals
+    - source-backed sequencing
+  ops_outputs_should_prioritize:
+    - policy clarity
+    - role clarity
+    - cultural consistency
+    - audience fit
+  missing_information_policy:
+    - do not invent unsupported details
+    - surface gaps explicitly
+    - reduce confidence when evidence is weak or conflicting
+    - create open-question or report entries when prerequisites are missing
