@@ -45,11 +45,13 @@ Include:
 
 ## Program Syllabus Files
 
-Each program directory should contain:
+Place the syllabus files at the top `generated/curriculum/` level:
 
-- `generated/curriculum/tots/program-syllabus.md`
-- `generated/curriculum/youth/program-syllabus.md`
-- `generated/curriculum/adult/program-syllabus.md`
+- `generated/curriculum/tots-syllabus.md`
+- `generated/curriculum/youth-syllabus.md`
+- `generated/curriculum/adult-syllabus.md`
+
+Do not duplicate syllabus files inside the program subdirectories.
 
 ## Program Syllabus Contents
 
