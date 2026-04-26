@@ -27,6 +27,7 @@ proposal_policy:
 repo_contract:
   raw_dir: raw
   kb_dir: kb
+  jobs_dir: jobs
   generated_dir: generated
   published_dir: published
   state_dir: .kb-state

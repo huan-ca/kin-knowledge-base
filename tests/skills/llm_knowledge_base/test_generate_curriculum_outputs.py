@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+from hashlib import sha256
 from pathlib import Path
 
 INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
@@ -10,6 +11,16 @@ GENERATE_SCRIPT = Path("skills/llm-knowledge-base/scripts/generate_curriculum_ou
 def write_page(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
+
+
+def hash_tree(root: Path) -> str:
+    digest = sha256()
+    for path in sorted(root.rglob("*")):
+        if not path.is_file():
+            continue
+        digest.update(path.relative_to(root).as_posix().encode("utf-8"))
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
 
 
 def build_youth_weeks() -> list[dict]:
@@ -191,6 +202,46 @@ related_pages: []
     )
 
 
+def seed_repo_reports(repo: Path) -> None:
+    write_page(repo / "generated" / "reports" / "gap-report.md", "# Gap Report\n")
+    write_page(repo / "generated" / "reports" / "conflict-report.md", "# Conflict Report\n")
+    write_page(repo / "generated" / "reports" / "improvement-report.md", "# Improvement Report\n")
+
+
+def write_job_file(repo: Path, job_name: str, *, instructions: list[str] | None = None, qa: list[str] | None = None) -> None:
+    instruction_lines = "\n".join(f"- {item}" for item in (instructions or [])) or "No additional instructions."
+    qa_lines = "\n".join(f"- {item}" for item in (qa or [])) or "No additional Q&A."
+    write_page(
+        repo / "jobs" / job_name / "job.md",
+        f"""---
+id: {job_name}
+title: "Test Job {job_name}"
+generation_targets:
+  - curriculum
+status: active
+transient: false
+---
+# Test Job
+
+## Purpose
+
+Generate curriculum outputs for testing.
+
+## Instructions
+
+{instruction_lines}
+
+## Q&A
+
+{qa_lines}
+
+## Notes
+
+No extra notes.
+""",
+    )
+
+
 def test_generate_curriculum_outputs_creates_expected_program_directories_and_week_files(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
 
@@ -198,22 +249,30 @@ def test_generate_curriculum_outputs_creates_expected_program_directories_and_we
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
     seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "weekly-curriculum")
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo)], check=True)
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
-    assert (repo / "generated" / "curriculum" / "youth" / "week-01-curriculum.md").exists()
-    assert (repo / "generated" / "curriculum" / "youth" / "week-24-fully-scripted-session.md").exists()
-    assert (repo / "generated" / "curriculum" / "adult" / "week-24-curriculum.md").exists()
-    assert (repo / "generated" / "curriculum" / "adult" / "week-24-fully-scripted-session.md").exists()
-    assert (repo / "generated" / "curriculum" / "tots" / "week-12-curriculum.md").exists()
-    assert (repo / "generated" / "curriculum" / "tots" / "week-12-coach-guide.md").exists()
-    assert (repo / "generated" / "curriculum" / "tots-syllabus.md").exists()
-    assert (repo / "generated" / "curriculum" / "youth-syllabus.md").exists()
-    assert (repo / "generated" / "curriculum" / "adult-syllabus.md").exists()
+    output_root = repo / "generated" / "weekly-curriculum"
+    assert (output_root / "curriculum" / "youth" / "week-01-curriculum.md").exists()
+    assert (output_root / "curriculum" / "youth" / "week-24-fully-scripted-session.md").exists()
+    assert (output_root / "curriculum" / "adult" / "week-24-curriculum.md").exists()
+    assert (output_root / "curriculum" / "adult" / "week-24-fully-scripted-session.md").exists()
+    assert (output_root / "curriculum" / "tots" / "week-12-curriculum.md").exists()
+    assert (output_root / "curriculum" / "tots" / "week-12-coach-guide.md").exists()
+    assert (output_root / "curriculum" / "tots-syllabus.md").exists()
+    assert (output_root / "curriculum" / "youth-syllabus.md").exists()
+    assert (output_root / "curriculum" / "adult-syllabus.md").exists()
+    assert (output_root / "reports" / "gap-report.md").exists()
+    assert (output_root / "reports" / "conflict-report.md").exists()
+    assert (output_root / "reports" / "improvement-report.md").exists()
+    assert (output_root / "new-facts" / "index.md").exists()
+    assert not (repo / "generated" / "curriculum").exists()
 
-    assert len(list((repo / "generated" / "curriculum" / "youth").glob("*.md"))) == 96
-    assert len(list((repo / "generated" / "curriculum" / "adult").glob("*.md"))) == 96
-    assert len(list((repo / "generated" / "curriculum" / "tots").glob("*.md"))) == 48
+    assert len(list((output_root / "curriculum" / "youth").glob("*.md"))) == 96
+    assert len(list((output_root / "curriculum" / "adult").glob("*.md"))) == 96
+    assert len(list((output_root / "curriculum" / "tots").glob("*.md"))) == 48
 
 
 def test_generate_curriculum_outputs_include_level_sections_and_program_specific_notes(tmp_path):
@@ -223,16 +282,19 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
     seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "weekly-curriculum")
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo)], check=True)
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
-    youth_text = (repo / "generated" / "curriculum" / "youth" / "week-01-curriculum.md").read_text(encoding="utf-8")
-    adult_text = (repo / "generated" / "curriculum" / "adult" / "week-01-curriculum.md").read_text(encoding="utf-8")
+    output_root = repo / "generated" / "weekly-curriculum" / "curriculum"
+    youth_text = (output_root / "youth" / "week-01-curriculum.md").read_text(encoding="utf-8")
+    adult_text = (output_root / "adult" / "week-01-curriculum.md").read_text(encoding="utf-8")
     adult_lower_body_text = (
-        repo / "generated" / "curriculum" / "adult" / "week-24-curriculum.md"
+        output_root / "adult" / "week-24-curriculum.md"
     ).read_text(encoding="utf-8")
-    tots_text = (repo / "generated" / "curriculum" / "tots" / "week-01-curriculum.md").read_text(encoding="utf-8")
-    youth_syllabus_text = (repo / "generated" / "curriculum" / "youth-syllabus.md").read_text(encoding="utf-8")
+    tots_text = (output_root / "tots" / "week-01-curriculum.md").read_text(encoding="utf-8")
+    youth_syllabus_text = (output_root / "youth-syllabus.md").read_text(encoding="utf-8")
 
     assert "- Week: 01" in youth_text
     assert "- Cycle: defensive" in youth_text
@@ -247,3 +309,93 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
     assert "## Game" in tots_text
     assert "| Week | Cycle | Theme | Description | Main Goal |" in youth_syllabus_text
     assert "| 01 | defensive | Youth Theme 01 | Youth ground focus 01 | Youth goal 01 |" in youth_syllabus_text
+
+
+def test_generate_curriculum_outputs_do_not_modify_kb_and_emit_empty_new_facts_when_no_human_deltas(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "weekly-curriculum")
+
+    kb_hash_before = hash_tree(repo / "kb")
+
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    kb_hash_after = hash_tree(repo / "kb")
+    new_facts_dir = repo / "generated" / "weekly-curriculum" / "new-facts"
+    index_text = (new_facts_dir / "index.md").read_text(encoding="utf-8")
+
+    assert kb_hash_after == kb_hash_before
+    assert list(new_facts_dir.glob("fact-*.md")) == []
+    assert "No candidate new facts were found in this job." in index_text
+
+
+def test_generate_curriculum_outputs_emit_candidate_new_fact_files_for_non_redundant_human_deltas(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(
+        repo,
+        "weekly-curriculum",
+        qa=["Add a coaches-only review checkpoint after week 12."],
+    )
+
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    new_facts_dir = repo / "generated" / "weekly-curriculum" / "new-facts"
+    fact_paths = sorted(new_facts_dir.glob("fact-*.md"))
+    index_text = (new_facts_dir / "index.md").read_text(encoding="utf-8")
+    fact_text = fact_paths[0].read_text(encoding="utf-8")
+
+    assert len(fact_paths) == 1
+    assert "Add a coaches-only review checkpoint after week 12." in fact_text
+    assert "Suggested Raw Filename:" in fact_text
+    assert "Suggested KB Target Area:" in fact_text
+    assert "Why It Appears New" in fact_text
+    assert fact_paths[0].name in index_text
+
+
+def test_generate_curriculum_outputs_reject_reserved_job_names(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "reports")
+
+    result = subprocess.run(
+        [sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "reports"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "reserved generated path" in result.stderr
+
+
+def test_generate_curriculum_outputs_rerun_replaces_job_workspace_contents(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(
+        repo,
+        "weekly-curriculum",
+        qa=["Add a coaches-only review checkpoint after week 12."],
+    )
+
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    new_facts_dir = repo / "generated" / "weekly-curriculum" / "new-facts"
+    assert len(list(new_facts_dir.glob("fact-*.md"))) == 1
+
+    write_job_file(repo, "weekly-curriculum")
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    assert list(new_facts_dir.glob("fact-*.md")) == []
+    assert "No candidate new facts were found in this job." in (new_facts_dir / "index.md").read_text(encoding="utf-8")

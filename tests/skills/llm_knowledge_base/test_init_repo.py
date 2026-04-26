@@ -40,9 +40,11 @@ def test_init_repo_bootstraps_expected_layout(tmp_path):
     assert "claim_label" in config_text
     assert "source_refs" in config_text
     assert "confidence_rubric:" in config_text
+    assert "jobs_dir: jobs" in config_text
 
     manifest_text = (repo / ".kb-state" / "raw-manifest.json").read_text(encoding="utf-8")
     assert '"files": {}' in manifest_text
+    assert not (repo / "jobs").exists()
 
 
 def test_init_repo_preserves_existing_state_files_without_parsing_on_non_force_rerun(tmp_path):

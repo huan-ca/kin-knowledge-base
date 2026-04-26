@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import shutil
 from pathlib import Path
 
 from common import ensure_dir, parse_frontmatter, write_text
@@ -26,10 +28,22 @@ PROGRAM_CONFIG = {
 }
 
 OUTPUT_TYPES = ("curriculum", "quick-outline", "coach-guide", "fully-scripted-session")
+JOB_REQUIRED_FIELDS = ("id", "title", "generation_targets", "status", "transient")
+JOB_REQUIRED_SECTIONS = ("Purpose", "Instructions", "Q&A", "Notes")
+RESERVED_GENERATED_NAMES = {"README", "README.md", "curriculum", "reports"}
 
 
 def prose(text: str) -> str:
     return text.rstrip().rstrip(".")
+
+
+def normalize_text(text: str) -> str:
+    return " ".join(re.findall(r"[a-z0-9]+", text.lower()))
+
+
+def slugify(text: str, default: str = "item") -> str:
+    parts = re.findall(r"[a-z0-9]+", text.lower())
+    return "-".join(parts[:12]) or default
 
 
 def build_output_filename(week: dict, output_type: str) -> str:
@@ -58,6 +72,175 @@ def load_program_data(repo_root: Path, program: str) -> tuple[dict, list[dict]]:
     if not isinstance(weeks, list):
         raise ValueError(f"weeks payload must be a list in {page_path}")
     return metadata, weeks
+
+
+def validate_job_name(job_name: str) -> None:
+    if job_name in RESERVED_GENERATED_NAMES:
+        raise ValueError(f"reserved generated path: {job_name}")
+    if job_name in {".", ".."} or "/" in job_name or "\\" in job_name:
+        raise ValueError(f"invalid job name: {job_name}")
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", job_name):
+        raise ValueError(f"invalid job name: {job_name}")
+
+
+def parse_markdown_sections(body: str) -> dict[str, str]:
+    sections: dict[str, list[str]] = {}
+    current_section: str | None = None
+
+    for line in body.splitlines():
+        if line.startswith("## "):
+            current_section = line[3:].strip()
+            sections[current_section] = []
+            continue
+        if current_section is not None:
+            sections[current_section].append(line)
+
+    return {key: "\n".join(lines).strip() for key, lines in sections.items()}
+
+
+def load_job_data(repo_root: Path, job_name: str) -> tuple[dict, dict[str, str]]:
+    validate_job_name(job_name)
+    job_path = repo_root / "jobs" / job_name / "job.md"
+    if not job_path.exists():
+        raise ValueError(f"missing job file: {job_path}")
+
+    metadata, body = parse_frontmatter(job_path.read_text(encoding="utf-8"))
+    missing_fields = [field for field in JOB_REQUIRED_FIELDS if field not in metadata]
+    if missing_fields:
+        raise ValueError(f"job file is missing required fields: {', '.join(missing_fields)}")
+
+    targets = metadata.get("generation_targets")
+    if not isinstance(targets, list) or "curriculum" not in targets:
+        raise ValueError("job file must include 'curriculum' in generation_targets")
+
+    sections = parse_markdown_sections(body)
+    missing_sections = [section for section in JOB_REQUIRED_SECTIONS if section not in sections]
+    if missing_sections:
+        raise ValueError(f"job file is missing required sections: {', '.join(missing_sections)}")
+    return metadata, sections
+
+
+def build_kb_corpus(repo_root: Path) -> str:
+    parts: list[str] = []
+    kb_root = repo_root / "kb"
+    for path in sorted(kb_root.rglob("*.md")):
+        if path.is_file():
+            parts.append(normalize_text(path.read_text(encoding="utf-8")))
+    return "\n".join(parts)
+
+
+def extract_candidate_statements(job_sections: dict[str, str]) -> list[str]:
+    statements: list[str] = []
+    for section_name in ("Instructions", "Q&A"):
+        for line in job_sections.get(section_name, "").splitlines():
+            stripped = line.strip()
+            if stripped.startswith("- "):
+                statements.append(stripped[2:].strip())
+    return statements
+
+
+def suggest_kb_target_area(statement: str) -> str:
+    normalized = normalize_text(statement)
+    if any(token in normalized for token in ("week", "curriculum", "class", "lesson")):
+        return "kb/curriculum/"
+    if any(token in normalized for token in ("coach", "procedure", "warm up", "warmup", "drill")):
+        return "kb/procedures/"
+    if "program" in normalized:
+        return "kb/programs/"
+    return "kb/concepts/"
+
+
+def build_new_fact_records(repo_root: Path, job_name: str, job_sections: dict[str, str]) -> list[dict]:
+    kb_corpus = build_kb_corpus(repo_root)
+    records: list[dict] = []
+    seen: set[str] = set()
+
+    for statement in extract_candidate_statements(job_sections):
+        normalized = normalize_text(statement)
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        if normalized in kb_corpus:
+            continue
+
+        index = len(records) + 1
+        records.append(
+            {
+                "index": index,
+                "statement": statement,
+                "slug": slugify(statement, default=f"fact-{index:03d}"),
+                "suggested_raw_filename": f"job-{job_name}-fact-{index:03d}-{slugify(statement)}.md",
+                "suggested_kb_target_area": suggest_kb_target_area(statement),
+                "claim_label": "fact",
+                "confidence": "0.80",
+                "why_new": "No normalized exact-text match was found in the current kb/ pages.",
+            }
+        )
+    return records
+
+
+def render_new_fact(job_name: str, record: dict) -> str:
+    return "\n".join(
+        [
+            f"# Candidate New Fact {record['index']:03d}",
+            "",
+            f"- Source Job: {job_name}",
+            f"- Claim Label: {record['claim_label']}",
+            f"- Confidence: {record['confidence']}",
+            f"- Suggested Raw Filename: {record['suggested_raw_filename']}",
+            f"- Suggested KB Target Area: {record['suggested_kb_target_area']}",
+            "",
+            "## Human-Origin Statement",
+            record["statement"],
+            "",
+            "## Why It Appears New",
+            record["why_new"],
+            "",
+        ]
+    )
+
+
+def render_new_facts_index(job_name: str, records: list[dict]) -> str:
+    lines = [
+        f"# New Facts Review: {job_name}",
+        "",
+        "This directory contains human-supplied deltas from the job instructions and Q&A that did not match the current `kb/` text.",
+        "Review these files manually before promoting any of them into `raw/`.",
+        "",
+    ]
+    if not records:
+        lines.append("No candidate new facts were found in this job.")
+        lines.append("")
+        return "\n".join(lines)
+
+    lines.extend(["## Candidate Facts", ""])
+    for record in records:
+        filename = f"fact-{record['index']:03d}-{record['slug']}.md"
+        lines.append(f"- [{filename}]({filename})")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def reset_output_dir(path: Path) -> Path:
+    if path.exists():
+        shutil.rmtree(path)
+    return ensure_dir(path)
+
+
+def copy_reports(repo_root: Path, output_root: Path) -> None:
+    reports_root = ensure_dir(output_root / "reports")
+    source_reports = repo_root / "generated" / "reports"
+    for report_path in sorted(source_reports.glob("*.md")):
+        shutil.copyfile(report_path, reports_root / report_path.name)
+
+
+def write_new_facts(repo_root: Path, output_root: Path, job_name: str, job_sections: dict[str, str]) -> None:
+    new_facts_root = ensure_dir(output_root / "new-facts")
+    records = build_new_fact_records(repo_root, job_name, job_sections)
+    write_text(new_facts_root / "index.md", render_new_facts_index(job_name, records), overwrite=True)
+    for record in records:
+        filename = f"fact-{record['index']:03d}-{record['slug']}.md"
+        write_text(new_facts_root / filename, render_new_fact(job_name, record), overwrite=True)
 
 
 def render_metadata_block(program: str, week: dict) -> list[str]:
@@ -332,28 +515,36 @@ def render_output(program: str, output_type: str, metadata: dict, week: dict) ->
     raise ValueError(f"unknown output type: {output_type}")
 
 
-def generate_outputs(repo_root: Path) -> None:
+def generate_outputs(repo_root: Path, job_name: str) -> None:
+    _, job_sections = load_job_data(repo_root, job_name)
+    output_root = ensure_dir(repo_root / "generated" / job_name)
+    curriculum_root = reset_output_dir(output_root / "curriculum")
+    reset_output_dir(output_root / "reports")
+    reset_output_dir(output_root / "new-facts")
+
     for program in PROGRAM_CONFIG:
         metadata, weeks = load_program_data(repo_root, program)
-        output_dir = ensure_dir(repo_root / "generated" / "curriculum" / program)
-        for path in output_dir.glob("*.md"):
-            path.unlink()
+        output_dir = ensure_dir(curriculum_root / program)
         for week in weeks:
             for output_type in OUTPUT_TYPES:
                 filename = build_output_filename(week, output_type)
                 content = render_output(program, output_type, metadata, week)
                 write_text(output_dir / filename, content, overwrite=True)
-        syllabus_path = repo_root / "generated" / "curriculum" / f"{program}-syllabus.md"
+        syllabus_path = curriculum_root / f"{program}-syllabus.md"
         write_text(syllabus_path, render_program_syllabus(program, weeks), overwrite=True)
+
+    copy_reports(repo_root, output_root)
+    write_new_facts(repo_root, output_root, job_name, job_sections)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate weekly curriculum markdown outputs from KB theme maps.")
     parser.add_argument("repo_root", help="Path to the repo root.")
+    parser.add_argument("--job-name", required=True, help="Job name under jobs/<job-name>/job.md.")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
-    generate_outputs(repo_root)
+    generate_outputs(repo_root, args.job_name)
 
 
 if __name__ == "__main__":

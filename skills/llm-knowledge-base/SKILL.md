@@ -7,7 +7,7 @@ description: Bootstrap and maintain a codex-managed linked markdown knowledge ba
 
 ## Overview
 
-Use this skill to create and maintain a repo-local knowledge base that separates evidence in `raw/` from normalized knowledge in `kb/`, reproducible outputs in `generated/`, and operational state in `.kb-state/`.
+Use this skill to create and maintain a repo-local knowledge base that separates evidence in `raw/` from normalized knowledge in `kb/`, human-owned generation inputs in `jobs/`, reproducible outputs in `generated/`, and operational state in `.kb-state/`.
 
 If the request needs facts the KB does not support, do not invent them. Surface the missing information as an `open-question`, gap report entry, or direct explanation to the user.
 
@@ -39,7 +39,8 @@ Follow `references/repo-contract.md`.
 - `knowledge-base.yaml` is human-owned policy.
 - `raw/` is immutable evidence.
 - `kb/` is Codex-managed normalized knowledge.
-- `generated/` is reproducible output.
+- `jobs/` is human-owned generation input.
+- `generated/` is reproducible output, typically under `generated/<job-name>/`.
 - `published/` is human-maintained output.
 - `.kb-state/` is operational memory.
 
@@ -49,6 +50,7 @@ Follow `references/repo-contract.md`.
 
 Run `scripts/init_repo.py` at repo root to create the standard layout and starter state files.
 Do not move config into `kb/`; keep `knowledge-base.yaml` at repo root because it is policy, not generated knowledge.
+Generation should never write back into `kb/`.
 
 ### 2. Detect raw-file changes
 
@@ -94,6 +96,7 @@ This refreshes:
 ### 5. Generate downstream artifacts
 
 Generate curriculum, lesson plans, policy drafts, culture docs, and reports from `kb/`, not directly from `raw/`.
+When a repo uses job-scoped generation, load human instructions from `jobs/<job-name>/` and emit artifacts under `generated/<job-name>/`.
 Use `references/output-patterns.md` for output expectations.
 Every generated artifact should surface provenance, confidence, and missing prerequisites.
 

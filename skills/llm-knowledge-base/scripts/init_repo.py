@@ -8,7 +8,7 @@ from common import ensure_dir, templates_root, write_json, write_text
 
 README_TEXT = {
     "kb/README.md": "# Knowledge Base\n\nThis directory is Codex-managed derived knowledge rebuilt from `raw/` plus `knowledge-base.yaml`.\n",
-    "generated/README.md": "# Generated Outputs\n\nThis directory contains reproducible generated artifacts derived from `kb/`.\n",
+    "generated/README.md": "# Generated Outputs\n\nThis directory contains reproducible generated artifacts derived from `kb/`.\n\nJob-scoped outputs should live under `generated/<job-name>/`.\nRepo-wide reports remain under `generated/reports/`.\n",
     "published/README.md": "# Published Outputs\n\nMove human-maintained outputs here once they should no longer be overwritten automatically.\n",
 }
 
