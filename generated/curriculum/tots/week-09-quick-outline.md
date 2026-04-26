@@ -1,0 +1,14 @@
+# Tots Week 09 Quick Outline
+
+## Metadata
+- Week: 09
+- Cycle: partner
+- Theme: Top Pressure Through Movement Games
+- Movement Theme: Staying heavy and connected on top without squeezing.
+- Class Length: 30 minutes
+
+- Theme: Top Pressure Through Movement Games
+- Movement Theme: Staying heavy and connected on top without squeezing.
+- Game: Top turtle tag and chest-to-back balance game.
+- Coordination Focus: Weight placement and following a moving partner.
+- BJJ Exposure: Simple top control ideas through playful contact.

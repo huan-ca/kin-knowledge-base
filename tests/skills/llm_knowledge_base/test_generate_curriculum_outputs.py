@@ -201,48 +201,15 @@ def test_generate_curriculum_outputs_creates_expected_program_directories_and_we
 
     subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo)], check=True)
 
-    assert (
-        repo
-        / "generated"
-        / "curriculum"
-        / "youth"
-        / "week-01_[defensive]_[youth-theme-01]_[curriculum].md"
-    ).exists()
-    assert (
-        repo
-        / "generated"
-        / "curriculum"
-        / "youth"
-        / "week-24_[offensive]_[youth-self-defense-ground]_[scripted-session].md"
-    ).exists()
-    assert (
-        repo
-        / "generated"
-        / "curriculum"
-        / "adult"
-        / "week-24_[offensive]_[adult-lower-body-defense]_[curriculum].md"
-    ).exists()
-    assert (
-        repo
-        / "generated"
-        / "curriculum"
-        / "adult"
-        / "week-24_[offensive]_[adult-lower-body-defense]_[scripted-session].md"
-    ).exists()
-    assert (
-        repo
-        / "generated"
-        / "curriculum"
-        / "tots"
-        / "week-12_[review]_[tots-theme-12]_[curriculum].md"
-    ).exists()
-    assert (
-        repo
-        / "generated"
-        / "curriculum"
-        / "tots"
-        / "week-12_[review]_[tots-theme-12]_[coach-guide].md"
-    ).exists()
+    assert (repo / "generated" / "curriculum" / "youth" / "week-01-curriculum.md").exists()
+    assert (repo / "generated" / "curriculum" / "youth" / "week-24-fully-scripted-session.md").exists()
+    assert (repo / "generated" / "curriculum" / "adult" / "week-24-curriculum.md").exists()
+    assert (repo / "generated" / "curriculum" / "adult" / "week-24-fully-scripted-session.md").exists()
+    assert (repo / "generated" / "curriculum" / "tots" / "week-12-curriculum.md").exists()
+    assert (repo / "generated" / "curriculum" / "tots" / "week-12-coach-guide.md").exists()
+    assert (repo / "generated" / "curriculum" / "tots-syllabus.md").exists()
+    assert (repo / "generated" / "curriculum" / "youth-syllabus.md").exists()
+    assert (repo / "generated" / "curriculum" / "adult-syllabus.md").exists()
 
     assert len(list((repo / "generated" / "curriculum" / "youth").glob("*.md"))) == 96
     assert len(list((repo / "generated" / "curriculum" / "adult").glob("*.md"))) == 96
@@ -259,22 +226,24 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
 
     subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo)], check=True)
 
-    youth_text = (
-        repo / "generated" / "curriculum" / "youth" / "week-01_[defensive]_[youth-theme-01]_[curriculum].md"
-    ).read_text(encoding="utf-8")
-    adult_text = (
-        repo / "generated" / "curriculum" / "adult" / "week-01_[defensive]_[adult-theme-01]_[curriculum].md"
-    ).read_text(encoding="utf-8")
+    youth_text = (repo / "generated" / "curriculum" / "youth" / "week-01-curriculum.md").read_text(encoding="utf-8")
+    adult_text = (repo / "generated" / "curriculum" / "adult" / "week-01-curriculum.md").read_text(encoding="utf-8")
     adult_lower_body_text = (
-        repo / "generated" / "curriculum" / "adult" / "week-24_[offensive]_[adult-lower-body-defense]_[curriculum].md"
+        repo / "generated" / "curriculum" / "adult" / "week-24-curriculum.md"
     ).read_text(encoding="utf-8")
-    tots_text = (
-        repo / "generated" / "curriculum" / "tots" / "week-01_[foundation]_[tots-theme-01]_[curriculum].md"
-    ).read_text(encoding="utf-8")
+    tots_text = (repo / "generated" / "curriculum" / "tots" / "week-01-curriculum.md").read_text(encoding="utf-8")
+    youth_syllabus_text = (repo / "generated" / "curriculum" / "youth-syllabus.md").read_text(encoding="utf-8")
 
+    assert "- Week: 01" in youth_text
+    assert "- Cycle: defensive" in youth_text
+    assert "- Theme: Youth Theme 01" in youth_text
     assert "## Level 1" in youth_text
     assert "## Level 2" in youth_text
     assert "## Adult-Specific Notes" in adult_text
     assert "Adult Lower-Body Defense" in adult_lower_body_text
+    assert "- Cycle: foundation" in tots_text
+    assert "- Movement Theme: Movement theme 01" in tots_text
     assert "## Movement Theme" in tots_text
     assert "## Game" in tots_text
+    assert "| Week | Cycle | Theme | Description | Main Goal |" in youth_syllabus_text
+    assert "| 01 | defensive | Youth Theme 01 | Youth ground focus 01 | Youth goal 01 |" in youth_syllabus_text

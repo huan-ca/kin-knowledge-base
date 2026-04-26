@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from pathlib import Path
 
 from common import ensure_dir, parse_frontmatter, write_text
@@ -26,34 +25,16 @@ PROGRAM_CONFIG = {
     },
 }
 
-OUTPUT_TYPES = (
-    "curriculum",
-    "quick-outline",
-    "coach-guide",
-    "fully-scripted-session",
-)
+OUTPUT_TYPES = ("curriculum", "quick-outline", "coach-guide", "fully-scripted-session")
 
 
 def prose(text: str) -> str:
     return text.rstrip().rstrip(".")
 
 
-def slugify(value: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
-    return slug or "unspecified"
-
-
 def build_output_filename(week: dict, output_type: str) -> str:
     week_number = int(week["week"])
-    cycle = slugify(str(week.get("cycle", "unspecified")))
-    theme_slug = slugify(str(week.get("theme", "unspecified")))
-    file_type = {
-        "curriculum": "curriculum",
-        "quick-outline": "quick-outline",
-        "coach-guide": "coach-guide",
-        "fully-scripted-session": "scripted-session",
-    }[output_type]
-    return f"week-{week_number:02d}_[{cycle}]_[{theme_slug}]_[{file_type}].md"
+    return f"week-{week_number:02d}-{output_type}.md"
 
 
 def extract_json_block(body: str) -> dict:
@@ -79,10 +60,62 @@ def load_program_data(repo_root: Path, program: str) -> tuple[dict, list[dict]]:
     return metadata, weeks
 
 
+def render_metadata_block(program: str, week: dict) -> list[str]:
+    lines = [
+        "## Metadata",
+        f"- Week: {int(week['week']):02d}",
+        f"- Cycle: {week.get('cycle', 'unspecified')}",
+        f"- Theme: {week.get('theme', 'Not specified')}",
+    ]
+    if program == "tots":
+        lines.extend(
+            [
+                f"- Movement Theme: {week.get('movement_theme', 'Not specified')}",
+                f"- Class Length: {PROGRAM_CONFIG[program]['class_length']}",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                f"- Teaching Goal: {week.get('teaching_goal', 'Not specified')}",
+                f"- Class Length: {PROGRAM_CONFIG[program]['class_length']}",
+            ]
+        )
+    return lines
+
+
+def render_program_syllabus(program: str, weeks: list[dict]) -> str:
+    title = PROGRAM_CONFIG[program]["program_title"]
+    lines = [
+        f"# {title} Program Syllabus",
+        "",
+        f"This syllabus maps the {title.lower()} weekly sequence to its cycle, theme, description, and main goal.",
+        "",
+        "| Week | Cycle | Theme | Description | Main Goal |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+
+    for week in weeks:
+        if program == "tots":
+            description = week.get("movement_theme", "Not specified")
+            main_goal = week.get("coach_notes", "Not specified")
+        else:
+            sections = week.get("sections", [])
+            description = sections[0].get("focus", "Not specified") if sections else "Not specified"
+            main_goal = week.get("teaching_goal", "Not specified")
+        lines.append(
+            f"| {int(week['week']):02d} | {week.get('cycle', 'unspecified')} | {week.get('theme', 'Not specified')} | {description} | {main_goal} |"
+        )
+
+    return "\n".join(lines) + "\n"
+
+
 def render_youth_or_adult_curriculum(program: str, metadata: dict, week: dict) -> str:
     program_title = PROGRAM_CONFIG[program]["program_title"]
     lines = [
         f"# {program_title} Week {week['week']:02d} Curriculum",
+        "",
+        *render_metadata_block(program, week),
         "",
         "## Snapshot",
         f"- Theme: {week['theme']}",
@@ -126,6 +159,8 @@ def render_tots_curriculum(metadata: dict, week: dict) -> str:
     lines = [
         f"# Tots Week {week['week']:02d} Curriculum",
         "",
+        *render_metadata_block("tots", week),
+        "",
         "## Snapshot",
         f"- Theme: {week['theme']}",
         f"- Class Length: {PROGRAM_CONFIG['tots']['class_length']}",
@@ -159,6 +194,8 @@ def render_quick_outline(program: str, week: dict) -> str:
     lines = [
         f"# {PROGRAM_CONFIG[program]['program_title']} Week {week['week']:02d} Quick Outline",
         "",
+        *render_metadata_block(program, week),
+        "",
         f"- Theme: {week['theme']}",
     ]
     if program == "tots":
@@ -185,6 +222,8 @@ def render_quick_outline(program: str, week: dict) -> str:
 def render_coach_guide(program: str, week: dict) -> str:
     lines = [
         f"# {PROGRAM_CONFIG[program]['program_title']} Week {week['week']:02d} Coach Guide",
+        "",
+        *render_metadata_block(program, week),
         "",
         "## Weekly Intent",
         week.get("teaching_goal", week.get("theme", "Not specified")),
@@ -229,6 +268,8 @@ def render_fully_scripted_session(program: str, week: dict) -> str:
     title = PROGRAM_CONFIG[program]["program_title"]
     lines = [
         f"# {title} Week {week['week']:02d} Fully Scripted Session",
+        "",
+        *render_metadata_block(program, week),
         "",
         "## Opening Script",
         f"Introduce the theme: {prose(week['theme'])}. Tell the class the goal is {prose(week.get('teaching_goal', week['theme']))}.",
@@ -302,6 +343,8 @@ def generate_outputs(repo_root: Path) -> None:
                 filename = build_output_filename(week, output_type)
                 content = render_output(program, output_type, metadata, week)
                 write_text(output_dir / filename, content, overwrite=True)
+        syllabus_path = repo_root / "generated" / "curriculum" / f"{program}-syllabus.md"
+        write_text(syllabus_path, render_program_syllabus(program, weeks), overwrite=True)
 
 
 def main() -> None:
