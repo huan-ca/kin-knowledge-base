@@ -1,5 +1,72 @@
 {
-  "files": {},
+  "files": {
+    "raw/KIN BJJ Compendium.md": {
+      "import_batch_id": "batch-20260426T003501Z",
+      "last_ingested_hash": "c1003ab169e87d0a6660e7aa97559fa9cc58c6e623fd238cf76501778edcd7f2",
+      "modified_timestamp": "2026-04-26T00:25:10.898965+00:00",
+      "present": true,
+      "relative_path": "raw/KIN BJJ Compendium.md",
+      "sha256": "c1003ab169e87d0a6660e7aa97559fa9cc58c6e623fd238cf76501778edcd7f2",
+      "size": 432164,
+      "source_page_id": "source-kin-bjj-compendium",
+      "status": "unchanged"
+    },
+    "raw/KIN BJJ Compendium.pdf": {
+      "import_batch_id": "batch-20260426T003151Z",
+      "last_ingested_hash": "69453649d53bf5e6038443885ada834beb2171d4ac07d3575d4ee137ebe70f87",
+      "modified_timestamp": "2026-04-25T20:05:37.132488+00:00",
+      "present": false,
+      "relative_path": "raw/KIN BJJ Compendium.pdf",
+      "sha256": "69453649d53bf5e6038443885ada834beb2171d4ac07d3575d4ee137ebe70f87",
+      "size": 791244,
+      "source_page_id": "source-kin-bjj-compendium",
+      "status": "removed"
+    },
+    "raw/KIN BJJ kids lesson plan structure.md": {
+      "import_batch_id": "batch-20260426T003501Z",
+      "last_ingested_hash": "aa50428e10ebd3ee9ff82fa5eff29a7f6634c1498acb7dec3c201c4e72b7a7f5",
+      "modified_timestamp": "2026-04-26T00:26:02.467288+00:00",
+      "present": true,
+      "relative_path": "raw/KIN BJJ kids lesson plan structure.md",
+      "sha256": "aa50428e10ebd3ee9ff82fa5eff29a7f6634c1498acb7dec3c201c4e72b7a7f5",
+      "size": 820215,
+      "source_page_id": "source-kin-bjj-kids-lesson-plan-structure",
+      "status": "unchanged"
+    },
+    "raw/KIN BJJ kids lesson plan structure.pdf": {
+      "import_batch_id": "batch-20260426T003151Z",
+      "last_ingested_hash": "45369347a3280c0a773eb28eb3e51aee0cc92b600e13261141913629d6feda8b",
+      "modified_timestamp": "2026-04-25T20:37:34.781655+00:00",
+      "present": false,
+      "relative_path": "raw/KIN BJJ kids lesson plan structure.pdf",
+      "sha256": "45369347a3280c0a773eb28eb3e51aee0cc92b600e13261141913629d6feda8b",
+      "size": 4991551,
+      "source_page_id": "source-kin-bjj-kids-lesson-plan-structure",
+      "status": "removed"
+    },
+    "raw/high level overview.md": {
+      "import_batch_id": "batch-20260426T003501Z",
+      "last_ingested_hash": "f16e015374bc3279a03165507b0ff14257dff27a47721820b78266c236f7206b",
+      "modified_timestamp": "2026-04-26T00:26:02.463278+00:00",
+      "present": true,
+      "relative_path": "raw/high level overview.md",
+      "sha256": "f16e015374bc3279a03165507b0ff14257dff27a47721820b78266c236f7206b",
+      "size": 2366,
+      "source_page_id": "source-high-level-overview",
+      "status": "unchanged"
+    },
+    "raw/high level overview.pdf": {
+      "import_batch_id": "batch-20260426T003151Z",
+      "last_ingested_hash": "1764fd37d802933513efeaa9ebe85fdb8cb9a5e74357c746a7653ad5fe8b723e",
+      "modified_timestamp": "2026-04-25T20:37:50.730626+00:00",
+      "present": false,
+      "relative_path": "raw/high level overview.pdf",
+      "sha256": "1764fd37d802933513efeaa9ebe85fdb8cb9a5e74357c746a7653ad5fe8b723e",
+      "size": 43920,
+      "source_page_id": "source-high-level-overview",
+      "status": "removed"
+    }
+  },
   "format_version": 1,
-  "last_scan_batch_id": null
+  "last_scan_batch_id": "batch-20260426T003501Z"
 }

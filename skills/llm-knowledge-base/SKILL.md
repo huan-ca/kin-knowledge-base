@@ -64,6 +64,14 @@ Create atomic markdown pages in `kb/` using the templates in `assets/templates/p
 Create one `source` page per raw artifact.
 Break synthesized knowledge into small pages with explicit links and source references.
 
+Default to a dense ingestion pass, not a minimal summary pass.
+
+- Preserve as much supported information from `raw/` as practical.
+- Prefer many small KB pages over a few broad summary pages when the source supports that decomposition.
+- Expand source pages with section-level or topic-level extracted claims so downstream generation has more recoverable evidence.
+- When a source contains multiple distinct operational, curriculum, policy, cultural, or technical concepts, split them into separate pages instead of collapsing them into one blended summary.
+- Only use a lighter ingestion mode when the user explicitly asks for a fast, narrow, or partial pass.
+
 Use:
 
 - `source.md` for source artifacts
@@ -88,6 +96,15 @@ This refreshes:
 Generate curriculum, lesson plans, policy drafts, culture docs, and reports from `kb/`, not directly from `raw/`.
 Use `references/output-patterns.md` for output expectations.
 Every generated artifact should surface provenance, confidence, and missing prerequisites.
+
+## Ingestion Density
+
+High-granularity ingestion is the default.
+
+- Capture source detail conservatively, but capture a lot of it.
+- Prefer explicit decomposition of sections, rules, procedures, frameworks, and technical systems into separate pages.
+- Treat high-quality markdown or text sources as an opportunity to build a richer KB, not just a smaller summary.
+- If the source is too large to finish in one pass, still maximize useful coverage and leave explicit `open-question` pages for the remainder instead of shrinking the whole ingestion effort.
 
 ## Page Types
 

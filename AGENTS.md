@@ -13,6 +13,7 @@ The agent’s job is to:
 - maintain reproducible outputs in `generated/`
 - preserve provenance, confidence, and explicit gap reporting
 - avoid fabricating missing facts
+- preserve as much supported source detail in `kb/` as practical
 
 ## Operating Model
 
@@ -32,6 +33,9 @@ The intended flow is:
 - `published/` is human-owned and should not be overwritten automatically.
 - Every substantive KB page should carry `claim_label`, `source_refs`, and `confidence`.
 - Missing prerequisites must be surfaced clearly instead of guessed.
+- Dense ingestion is the default: prefer many smaller, source-backed pages over thin summary pages.
+- Source pages should preserve substantial extracted detail when the raw files support it.
+- A lighter ingestion pass should only be used when explicitly requested.
 
 ## Confidence and Provenance
 

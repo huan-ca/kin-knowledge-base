@@ -1,1 +1,393 @@
-{}
+{
+  "announcements-and-student-recognition": {
+    "path": "kb/procedures/announcements-and-student-recognition.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-013",
+      "source-kin-bjj-compendium#chunk-009"
+    ],
+    "type": "procedure"
+  },
+  "basic-bjj-match-strategy": {
+    "path": "kb/concepts/basic-bjj-match-strategy.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-013",
+      "source-kin-bjj-compendium#chunk-014"
+    ],
+    "type": "concept"
+  },
+  "class-structure-principles": {
+    "path": "kb/class-types/class-structure-principles.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-006",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-004"
+    ],
+    "type": "class-type"
+  },
+  "community-and-recognition-principles": {
+    "path": "kb/concepts/community-and-recognition-principles.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-013",
+      "source-kin-bjj-compendium#chunk-009"
+    ],
+    "type": "concept"
+  },
+  "competition-training-session-framework": {
+    "path": "kb/class-types/competition-training-session-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-010"
+    ],
+    "type": "class-type"
+  },
+  "curriculum-week-design-rules": {
+    "path": "kb/curriculum/curriculum-week-design-rules.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-high-level-overview#chunk-006",
+      "source-high-level-overview#chunk-007"
+    ],
+    "type": "curriculum-unit"
+  },
+  "drilling-methodology": {
+    "path": "kb/procedures/drilling-methodology.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-008",
+      "source-kin-bjj-compendium#chunk-010"
+    ],
+    "type": "procedure"
+  },
+  "escape-framework": {
+    "path": "kb/concepts/escape-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "concept"
+  },
+  "foundational-youth-values": {
+    "path": "kb/values/foundational-youth-values.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-002",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-005"
+    ],
+    "type": "value"
+  },
+  "future-black-belt-program": {
+    "path": "kb/programs/future-black-belt-program.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-005"
+    ],
+    "type": "program"
+  },
+  "games-instructional-use": {
+    "path": "kb/procedures/games-instructional-use.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-006",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-005"
+    ],
+    "type": "procedure"
+  },
+  "general-physical-preparedness-framework": {
+    "path": "kb/concepts/general-physical-preparedness-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-011"
+    ],
+    "type": "concept"
+  },
+  "groundwork-cycle-framework": {
+    "path": "kb/curriculum/groundwork-cycle-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-high-level-overview#chunk-003"
+    ],
+    "type": "curriculum-unit"
+  },
+  "guard-framework": {
+    "path": "kb/position/guard-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017",
+      "source-kin-bjj-compendium#chunk-018"
+    ],
+    "type": "position"
+  },
+  "ibjjf-leg-lock-curriculum": {
+    "path": "kb/curriculum/ibjjf-leg-lock-curriculum.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-018",
+      "source-high-level-overview#chunk-005"
+    ],
+    "type": "curriculum-unit"
+  },
+  "ibjjf-points-and-advantages-basics": {
+    "path": "kb/concepts/ibjjf-points-and-advantages-basics.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-014"
+    ],
+    "type": "concept"
+  },
+  "kids-age-and-duration-guidelines": {
+    "path": "kb/class-types/kids-age-and-duration-guidelines.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-007",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-001",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-002"
+    ],
+    "type": "class-type"
+  },
+  "kids-youth-development-program": {
+    "path": "kb/programs/kids-youth-development-program.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-001",
+      "source-kin-bjj-compendium#chunk-002"
+    ],
+    "type": "program"
+  },
+  "knee-on-belly-system": {
+    "path": "kb/position/knee-on-belly-system.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "position"
+  },
+  "life-skills-chat-framework": {
+    "path": "kb/procedures/life-skills-chat-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-005",
+      "source-kin-bjj-compendium#chunk-001"
+    ],
+    "type": "procedure"
+  },
+  "mat-safety-program": {
+    "path": "kb/policies/mat-safety-program.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-011",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-012"
+    ],
+    "type": "policy"
+  },
+  "mount-system": {
+    "path": "kb/position/mount-system.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "position"
+  },
+  "movement-and-warmup-framework": {
+    "path": "kb/concepts/movement-and-warmup-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-015"
+    ],
+    "type": "concept"
+  },
+  "north-south-system": {
+    "path": "kb/position/north-south-system.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "position"
+  },
+  "open-question-supplementary-programs-need-full-build-outs": {
+    "path": "kb/open-questions/supplementary-programs-need-full-build-outs.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "open-question"
+  },
+  "open-question-week-by-week-curriculum-sequence": {
+    "path": "kb/open-questions/week-by-week-curriculum-sequence.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "open-question"
+  },
+  "passing-framework": {
+    "path": "kb/position/passing-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-018"
+    ],
+    "type": "position"
+  },
+  "positional-control-framework": {
+    "path": "kb/concepts/positional-control-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-016",
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "concept"
+  },
+  "promotions-model-4a": {
+    "path": "kb/policies/promotions-model-4a.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-009"
+    ],
+    "type": "policy"
+  },
+  "rear-mount-system": {
+    "path": "kb/position/rear-mount-system.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "position"
+  },
+  "roll-call-and-welcome-procedure": {
+    "path": "kb/procedures/roll-call-and-welcome-procedure.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-009",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
+    ],
+    "type": "procedure"
+  },
+  "side-control-system": {
+    "path": "kb/position/side-control-system.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "position"
+  },
+  "source-high-level-overview": {
+    "path": "kb/sources/high-level-overview.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
+  },
+  "source-kin-bjj-compendium": {
+    "path": "kb/sources/kin-bjj-compendium.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
+  },
+  "source-kin-bjj-kids-lesson-plan-structure": {
+    "path": "kb/sources/kin-bjj-kids-lesson-plan-structure.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
+  },
+  "sparring-guidelines": {
+    "path": "kb/policies/sparring-guidelines.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-012",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-012"
+    ],
+    "type": "policy"
+  },
+  "submission-framework": {
+    "path": "kb/concepts/submission-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-018"
+    ],
+    "type": "concept"
+  },
+  "supplementary-youth-programs": {
+    "path": "kb/programs/supplementary-youth-programs.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-003",
+      "source-kin-bjj-compendium#chunk-004"
+    ],
+    "type": "program"
+  },
+  "takedown-framework": {
+    "path": "kb/curriculum/takedown-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-018",
+      "source-high-level-overview#chunk-002"
+    ],
+    "type": "curriculum-unit"
+  },
+  "takedown-progression-framework": {
+    "path": "kb/curriculum/takedown-progression-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-high-level-overview#chunk-002"
+    ],
+    "type": "curriculum-unit"
+  },
+  "technical-lesson-delivery-model": {
+    "path": "kb/procedures/technical-lesson-delivery-model.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-011",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-007"
+    ],
+    "type": "procedure"
+  },
+  "turtle-system": {
+    "path": "kb/position/turtle-system.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "position"
+  },
+  "uke-and-tori-drilling-roles": {
+    "path": "kb/concepts/uke-and-tori-drilling-roles.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-009"
+    ],
+    "type": "concept"
+  },
+  "warm-up-philosophy": {
+    "path": "kb/procedures/warm-up-philosophy.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-010",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
+    ],
+    "type": "procedure"
+  },
+  "youth-24-week-curriculum-framework": {
+    "path": "kb/curriculum/youth-24-week-curriculum-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-high-level-overview#chunk-001",
+      "source-high-level-overview#chunk-006",
+      "source-high-level-overview#chunk-007"
+    ],
+    "type": "curriculum-unit"
+  },
+  "youth-class-template-60-minutes": {
+    "path": "kb/class-types/youth-class-template-60-minutes.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-008",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
+    ],
+    "type": "class-type"
+  },
+  "youth-submission-safety-framework": {
+    "path": "kb/curriculum/youth-submission-safety-framework.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-kin-bjj-compendium#chunk-018"
+    ],
+    "type": "curriculum-unit"
+  }
+}
