@@ -7,7 +7,6 @@
 - Movement Theme: Staying connected while changing direction.
 - Class Length: 30 minutes
 
-- Theme: Partner Connection And Positional Awareness
 - Movement Theme: Staying connected while changing direction.
 - Game: Mirror partner game and follow-the-leader grappling patterns.
 - Coordination Focus: Reaction, mirroring, and spatial awareness with a partner.

@@ -7,7 +7,4 @@
 - Teaching Goal: Finish the adult cycle with practical leg-lock defense, escape priorities, and safe countering concepts.
 - Class Length: 60 minutes
 
-- Theme: Lower-Body Defense: Hand Fighting, Escapes, And Counter-Attacks
-- Cycle: defensive
-- Teaching Goal: Finish the adult cycle with practical leg-lock defense, escape priorities, and safe countering concepts.
 - Primary Focus: Lower-body submission defense through hand fighting, knee-line clearing, and safe positional recovery.

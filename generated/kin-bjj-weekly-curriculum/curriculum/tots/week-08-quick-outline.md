@@ -7,7 +7,6 @@
 - Movement Theme: Posting, standing safely, and recovering base.
 - Class Length: 30 minutes
 
-- Theme: Stand-Up Base And Technical Stand-Up Play
 - Movement Theme: Posting, standing safely, and recovering base.
 - Game: Treasure grab technical stand-up relay.
 - Coordination Focus: Posting hand placement and standing without crossing feet.

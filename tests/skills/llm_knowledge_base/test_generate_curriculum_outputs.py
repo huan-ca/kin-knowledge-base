@@ -311,6 +311,26 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
     assert "| 01 | defensive | Youth Theme 01 | Youth ground focus 01 | Youth goal 01 |" in youth_syllabus_text
 
 
+def test_generate_curriculum_outputs_quick_outline_does_not_repeat_metadata_fields(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "weekly-curriculum")
+
+    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    adult_quick_outline = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-03-quick-outline.md"
+    ).read_text(encoding="utf-8")
+
+    assert adult_quick_outline.count("- Theme: Adult Theme 03") == 1
+    assert adult_quick_outline.count("- Cycle: defensive") == 1
+    assert adult_quick_outline.count("- Teaching Goal: Adult goal 03") == 1
+    assert "- Ground Focus: Adult ground focus 03" in adult_quick_outline
+
+
 def test_generate_curriculum_outputs_do_not_modify_kb_and_emit_empty_new_facts_when_no_human_deltas(tmp_path):
     repo = tmp_path / "demo-repo"
     repo.mkdir()

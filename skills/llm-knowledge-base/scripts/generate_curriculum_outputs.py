@@ -379,7 +379,6 @@ def render_quick_outline(program: str, week: dict) -> str:
         "",
         *render_metadata_block(program, week),
         "",
-        f"- Theme: {week['theme']}",
     ]
     if program == "tots":
         lines.extend(
@@ -391,12 +390,6 @@ def render_quick_outline(program: str, week: dict) -> str:
             ]
         )
     else:
-        lines.extend(
-            [
-                f"- Cycle: {week.get('cycle', 'unspecified')}",
-                f"- Teaching Goal: {week.get('teaching_goal', 'Not specified')}",
-            ]
-        )
         for section in week.get("sections", []):
             lines.append(f"- {section['name']}: {section.get('focus', 'Not specified')}")
     return "\n".join(lines) + "\n"

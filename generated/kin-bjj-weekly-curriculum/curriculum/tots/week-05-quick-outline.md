@@ -7,7 +7,6 @@
 - Movement Theme: Touch, post, peel, and reconnect.
 - Class Length: 30 minutes
 
-- Theme: Hand Fighting And Grip Awareness
 - Movement Theme: Touch, post, peel, and reconnect.
 - Game: Hand-tag and grip-break reaction game.
 - Coordination Focus: Fast hands and simple reaction timing.

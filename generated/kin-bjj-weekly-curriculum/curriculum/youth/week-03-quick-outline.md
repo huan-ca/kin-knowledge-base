@@ -7,7 +7,4 @@
 - Teaching Goal: Introduce closed guard as a controlled offensive platform with posture breaking and simple sweep entries.
 - Class Length: 60 minutes
 
-- Theme: Closed Guard Control And Simple Sweeps
-- Cycle: offensive
-- Teaching Goal: Introduce closed guard as a controlled offensive platform with posture breaking and simple sweep entries.
 - Primary Focus: Closed guard posture breaking and hip-bump style sweep threats.
