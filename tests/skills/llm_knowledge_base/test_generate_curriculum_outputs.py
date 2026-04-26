@@ -70,11 +70,26 @@ def build_adult_weeks() -> list[dict]:
 
 
 def build_tots_weeks() -> list[dict]:
+    cycles = {
+        1: "foundation",
+        2: "foundation",
+        3: "foundation",
+        4: "foundation",
+        5: "movement",
+        6: "movement",
+        7: "movement",
+        8: "movement",
+        9: "partner",
+        10: "partner",
+        11: "partner",
+        12: "review",
+    }
     weeks = []
     for week in range(1, 13):
         weeks.append(
             {
                 "week": week,
+                "cycle": cycles[week],
                 "theme": f"Tots Theme {week:02d}",
                 "movement_theme": f"Movement theme {week:02d}",
                 "game": f"Game {week:02d}",
@@ -186,12 +201,48 @@ def test_generate_curriculum_outputs_creates_expected_program_directories_and_we
 
     subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo)], check=True)
 
-    assert (repo / "generated" / "curriculum" / "youth" / "week-01-curriculum.md").exists()
-    assert (repo / "generated" / "curriculum" / "youth" / "week-24-fully-scripted-session.md").exists()
-    assert (repo / "generated" / "curriculum" / "adult" / "week-24-curriculum.md").exists()
-    assert (repo / "generated" / "curriculum" / "adult" / "week-24-fully-scripted-session.md").exists()
-    assert (repo / "generated" / "curriculum" / "tots" / "week-12-curriculum.md").exists()
-    assert (repo / "generated" / "curriculum" / "tots" / "week-12-coach-guide.md").exists()
+    assert (
+        repo
+        / "generated"
+        / "curriculum"
+        / "youth"
+        / "week-01_[defensive]_[youth-theme-01]_[curriculum].md"
+    ).exists()
+    assert (
+        repo
+        / "generated"
+        / "curriculum"
+        / "youth"
+        / "week-24_[offensive]_[youth-self-defense-ground]_[scripted-session].md"
+    ).exists()
+    assert (
+        repo
+        / "generated"
+        / "curriculum"
+        / "adult"
+        / "week-24_[offensive]_[adult-lower-body-defense]_[curriculum].md"
+    ).exists()
+    assert (
+        repo
+        / "generated"
+        / "curriculum"
+        / "adult"
+        / "week-24_[offensive]_[adult-lower-body-defense]_[scripted-session].md"
+    ).exists()
+    assert (
+        repo
+        / "generated"
+        / "curriculum"
+        / "tots"
+        / "week-12_[review]_[tots-theme-12]_[curriculum].md"
+    ).exists()
+    assert (
+        repo
+        / "generated"
+        / "curriculum"
+        / "tots"
+        / "week-12_[review]_[tots-theme-12]_[coach-guide].md"
+    ).exists()
 
     assert len(list((repo / "generated" / "curriculum" / "youth").glob("*.md"))) == 96
     assert len(list((repo / "generated" / "curriculum" / "adult").glob("*.md"))) == 96
@@ -208,12 +259,18 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
 
     subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo)], check=True)
 
-    youth_text = (repo / "generated" / "curriculum" / "youth" / "week-01-curriculum.md").read_text(encoding="utf-8")
-    adult_text = (repo / "generated" / "curriculum" / "adult" / "week-01-curriculum.md").read_text(encoding="utf-8")
-    adult_lower_body_text = (
-        repo / "generated" / "curriculum" / "adult" / "week-24-curriculum.md"
+    youth_text = (
+        repo / "generated" / "curriculum" / "youth" / "week-01_[defensive]_[youth-theme-01]_[curriculum].md"
     ).read_text(encoding="utf-8")
-    tots_text = (repo / "generated" / "curriculum" / "tots" / "week-01-curriculum.md").read_text(encoding="utf-8")
+    adult_text = (
+        repo / "generated" / "curriculum" / "adult" / "week-01_[defensive]_[adult-theme-01]_[curriculum].md"
+    ).read_text(encoding="utf-8")
+    adult_lower_body_text = (
+        repo / "generated" / "curriculum" / "adult" / "week-24_[offensive]_[adult-lower-body-defense]_[curriculum].md"
+    ).read_text(encoding="utf-8")
+    tots_text = (
+        repo / "generated" / "curriculum" / "tots" / "week-01_[foundation]_[tots-theme-01]_[curriculum].md"
+    ).read_text(encoding="utf-8")
 
     assert "## Level 1" in youth_text
     assert "## Level 2" in youth_text

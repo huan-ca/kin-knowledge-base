@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from common import ensure_dir, parse_frontmatter, write_text
@@ -35,6 +36,24 @@ OUTPUT_TYPES = (
 
 def prose(text: str) -> str:
     return text.rstrip().rstrip(".")
+
+
+def slugify(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return slug or "unspecified"
+
+
+def build_output_filename(week: dict, output_type: str) -> str:
+    week_number = int(week["week"])
+    cycle = slugify(str(week.get("cycle", "unspecified")))
+    theme_slug = slugify(str(week.get("theme", "unspecified")))
+    file_type = {
+        "curriculum": "curriculum",
+        "quick-outline": "quick-outline",
+        "coach-guide": "coach-guide",
+        "fully-scripted-session": "scripted-session",
+    }[output_type]
+    return f"week-{week_number:02d}_[{cycle}]_[{theme_slug}]_[{file_type}].md"
 
 
 def extract_json_block(body: str) -> dict:
@@ -279,9 +298,8 @@ def generate_outputs(repo_root: Path) -> None:
         for path in output_dir.glob("*.md"):
             path.unlink()
         for week in weeks:
-            week_number = int(week["week"])
             for output_type in OUTPUT_TYPES:
-                filename = f"week-{week_number:02d}-{output_type}.md"
+                filename = build_output_filename(week, output_type)
                 content = render_output(program, output_type, metadata, week)
                 write_text(output_dir / filename, content, overwrite=True)
 

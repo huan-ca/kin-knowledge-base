@@ -36,6 +36,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
   "weeks": [
     {
       "week": 1,
+      "cycle": "foundation",
       "theme": "Mat Rules, Base, And Ready Stance",
       "movement_theme": "Athletic base and stopping on command.",
       "game": "Red light, green light with BJJ stance freezes.",
@@ -45,6 +46,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 2,
+      "cycle": "foundation",
       "theme": "Animal Movement And Locomotion",
       "movement_theme": "Bear crawls, crab walks, and low movement patterns.",
       "game": "Animal race relays with short distances and resets.",
@@ -54,6 +56,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 3,
+      "cycle": "foundation",
       "theme": "Breakfalls And Rolling Confidence",
       "movement_theme": "Safe falling, rocking, and rolling.",
       "game": "Crash-pad fall and recover challenge.",
@@ -63,6 +66,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 4,
+      "cycle": "foundation",
       "theme": "Bridging, Shrimping, And Turning",
       "movement_theme": "Hip lift, hip escape, and turning to a side.",
       "game": "Bridge over the river and shrimp race.",
@@ -72,6 +76,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 5,
+      "cycle": "movement",
       "theme": "Hand Fighting And Grip Awareness",
       "movement_theme": "Touch, post, peel, and reconnect.",
       "game": "Hand-tag and grip-break reaction game.",
@@ -81,6 +86,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 6,
+      "cycle": "movement",
       "theme": "Balance, Posture, And Push-Pull Games",
       "movement_theme": "Staying tall while resisting light pushes and pulls.",
       "game": "Sumo circle balance game with controlled contact.",
@@ -90,6 +96,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 7,
+      "cycle": "movement",
       "theme": "Level Changes And Penetration Steps",
       "movement_theme": "Dropping levels and stepping forward without falling over.",
       "game": "Cone shot game with targets and quick resets.",
@@ -99,6 +106,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 8,
+      "cycle": "movement",
       "theme": "Stand-Up Base And Technical Stand-Up Play",
       "movement_theme": "Posting, standing safely, and recovering base.",
       "game": "Treasure grab technical stand-up relay.",
@@ -108,6 +116,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 9,
+      "cycle": "partner",
       "theme": "Top Pressure Through Movement Games",
       "movement_theme": "Staying heavy and connected on top without squeezing.",
       "game": "Top turtle tag and chest-to-back balance game.",
@@ -117,6 +126,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 10,
+      "cycle": "partner",
       "theme": "Escape Movement And Space-Making",
       "movement_theme": "Turning, framing, and crawling back to space.",
       "game": "Escape the island game with soft partner pressure.",
@@ -126,6 +136,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 11,
+      "cycle": "partner",
       "theme": "Partner Connection And Positional Awareness",
       "movement_theme": "Staying connected while changing direction.",
       "game": "Mirror partner game and follow-the-leader grappling patterns.",
@@ -135,6 +146,7 @@ This page defines a 12-week tots sequence for ages 4 to 7. It is intentionally m
     },
     {
       "week": 12,
+      "cycle": "review",
       "theme": "Review Circuit And Fun Challenge Day",
       "movement_theme": "Mixing the favorite movements from the cycle into one class.",
       "game": "Obstacle course review day with stations.",
