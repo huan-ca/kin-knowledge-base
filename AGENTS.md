@@ -71,3 +71,4 @@ Key helper scripts:
 - [skills/llm-knowledge-base/scripts/update_manifest.py](/Users/huan/dev/kin/skills/llm-knowledge-base/scripts/update_manifest.py)
 - [skills/llm-knowledge-base/scripts/plan_ingestion.py](/Users/huan/dev/kin/skills/llm-knowledge-base/scripts/plan_ingestion.py)
 - [skills/llm-knowledge-base/scripts/rebuild_indexes.py](/Users/huan/dev/kin/skills/llm-knowledge-base/scripts/rebuild_indexes.py)
+- [skills/llm-knowledge-base/scripts/run_generation.py](/Users/huan/dev/kin/skills/llm-knowledge-base/scripts/run_generation.py)

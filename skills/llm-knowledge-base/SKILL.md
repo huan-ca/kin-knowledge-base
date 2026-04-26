@@ -32,6 +32,12 @@ After adding or editing `kb/` pages:
 python3 skills/llm-knowledge-base/scripts/rebuild_indexes.py .
 ```
 
+For job-scoped generation:
+
+```bash
+python3 skills/llm-knowledge-base/scripts/run_generation.py . --job-name <job-name>
+```
+
 ## Repo Contract
 
 Follow `references/repo-contract.md`.
@@ -96,7 +102,7 @@ This refreshes:
 ### 5. Generate downstream artifacts
 
 Generate curriculum, lesson plans, policy drafts, culture docs, and reports from `kb/`, not directly from `raw/`.
-When a repo uses job-scoped generation, load human instructions from `jobs/<job-name>/` and emit artifacts under `generated/<job-name>/`.
+When a repo uses job-scoped generation, load the job spec from `jobs/<job-name>/job.yaml`, optional notes from `jobs/<job-name>/notes.md`, and emit artifacts under `generated/<job-name>/`.
 Use `references/output-patterns.md` for output expectations.
 Every generated artifact should surface provenance, confidence, and missing prerequisites.
 

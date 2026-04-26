@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +38,19 @@ def write_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def git_commit(repo_root: Path) -> str | None:
+    result = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip() or None
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -66,6 +80,78 @@ def parse_scalar(value: str) -> Any:
         return int(value)
     except ValueError:
         return value
+
+
+def parse_simple_yaml(text: str) -> dict[str, Any]:
+    lines = text.replace("\r\n", "\n").replace("\r", "\n").splitlines()
+
+    def indentation(line: str) -> int:
+        return len(line) - len(line.lstrip(" "))
+
+    def parse_block(index: int, indent: int) -> tuple[Any, int]:
+        mapping: dict[str, Any] = {}
+        sequence: list[Any] | None = None
+
+        while index < len(lines):
+            raw = lines[index]
+            if not raw.strip():
+                index += 1
+                continue
+            current_indent = indentation(raw)
+            if current_indent < indent:
+                break
+            if current_indent > indent:
+                raise ValueError(f"invalid indentation: {raw}")
+
+            stripped = raw.strip()
+            if stripped.startswith("- "):
+                if mapping:
+                    raise ValueError("cannot mix list items and mapping at same indentation")
+                if sequence is None:
+                    sequence = []
+                item_text = stripped[2:].strip()
+                if not item_text:
+                    value, index = parse_block(index + 1, indent + 2)
+                    sequence.append(value)
+                    continue
+                sequence.append(parse_scalar(item_text))
+                index += 1
+                continue
+
+            if sequence is not None:
+                raise ValueError("cannot mix mapping entries and list items at same indentation")
+            if ":" not in stripped:
+                raise ValueError(f"invalid yaml line: {raw}")
+            key, remainder = stripped.split(":", 1)
+            remainder = remainder.strip()
+            if remainder:
+                mapping[key] = parse_scalar(remainder)
+                index += 1
+                continue
+
+            next_index = index + 1
+            while next_index < len(lines) and not lines[next_index].strip():
+                next_index += 1
+            if next_index >= len(lines) or indentation(lines[next_index]) <= indent:
+                mapping[key] = {}
+                index = next_index
+                continue
+
+            value, index = parse_block(next_index, indent + 2)
+            mapping[key] = value
+
+        if sequence is not None:
+            return sequence, index
+        return mapping, index
+
+    parsed, _ = parse_block(0, 0)
+    if not isinstance(parsed, dict):
+        raise ValueError("top-level yaml payload must be a mapping")
+    return parsed
+
+
+def read_simple_yaml(path: Path) -> dict[str, Any]:
+    return parse_simple_yaml(path.read_text(encoding="utf-8"))
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:

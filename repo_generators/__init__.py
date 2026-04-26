@@ -1,0 +1,1 @@
+"""Repo-local document generators."""

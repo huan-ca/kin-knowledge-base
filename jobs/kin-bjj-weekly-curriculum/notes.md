@@ -1,12 +1,4 @@
----
-id: kin-bjj-weekly-curriculum
-title: "KIN BJJ Weekly Curriculum"
-generation_targets:
-  - curriculum
-status: active
-transient: false
----
-# KIN BJJ Weekly Curriculum Job
+# KIN BJJ Weekly Curriculum Notes
 
 ## Purpose
 

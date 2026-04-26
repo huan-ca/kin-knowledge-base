@@ -1,0 +1,15 @@
+id: kin-bjj-weekly-curriculum
+title: KIN BJJ Weekly Curriculum
+generator: curriculum
+generation_targets:
+  - curriculum
+status: active
+transient: false
+inputs:
+  kb_pages:
+    - kb/curriculum/youth-24-week-theme-map.md
+    - kb/curriculum/adult-24-week-theme-map.md
+    - kb/curriculum/tots-12-week-theme-map.md
+options:
+  include_reports: true
+  emit_new_facts: true

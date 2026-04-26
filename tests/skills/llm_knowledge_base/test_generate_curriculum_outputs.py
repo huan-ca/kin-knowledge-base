@@ -5,7 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 
 INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
-GENERATE_SCRIPT = Path("skills/llm-knowledge-base/scripts/generate_curriculum_outputs.py").resolve()
+RUN_SCRIPT = Path("skills/llm-knowledge-base/scripts/run_generation.py").resolve()
 
 
 def write_page(path: Path, text: str) -> None:
@@ -212,16 +212,27 @@ def write_job_file(repo: Path, job_name: str, *, instructions: list[str] | None 
     instruction_lines = "\n".join(f"- {item}" for item in (instructions or [])) or "No additional instructions."
     qa_lines = "\n".join(f"- {item}" for item in (qa or [])) or "No additional Q&A."
     write_page(
-        repo / "jobs" / job_name / "job.md",
-        f"""---
-id: {job_name}
-title: "Test Job {job_name}"
+        repo / "jobs" / job_name / "job.yaml",
+        f"""id: {job_name}
+title: Test Job {job_name}
+generator: curriculum
 generation_targets:
   - curriculum
 status: active
 transient: false
----
-# Test Job
+inputs:
+  kb_pages:
+    - kb/curriculum/youth-24-week-theme-map.md
+    - kb/curriculum/adult-24-week-theme-map.md
+    - kb/curriculum/tots-12-week-theme-map.md
+options:
+  include_reports: true
+  emit_new_facts: true
+""",
+    )
+    write_page(
+        repo / "jobs" / job_name / "notes.md",
+        f"""# Test Job
 
 ## Purpose
 
@@ -252,7 +263,7 @@ def test_generate_curriculum_outputs_creates_expected_program_directories_and_we
     seed_repo_reports(repo)
     write_job_file(repo, "weekly-curriculum")
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
     output_root = repo / "generated" / "weekly-curriculum"
     assert (output_root / "curriculum" / "youth" / "week-01-curriculum.md").exists()
@@ -285,7 +296,7 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
     seed_repo_reports(repo)
     write_job_file(repo, "weekly-curriculum")
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
     output_root = repo / "generated" / "weekly-curriculum" / "curriculum"
     youth_text = (output_root / "youth" / "week-01-curriculum.md").read_text(encoding="utf-8")
@@ -319,7 +330,7 @@ def test_generate_curriculum_outputs_quick_outline_does_not_repeat_metadata_fiel
     seed_repo_reports(repo)
     write_job_file(repo, "weekly-curriculum")
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
     adult_quick_outline = (
         repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-03-quick-outline.md"
@@ -341,7 +352,7 @@ def test_generate_curriculum_outputs_do_not_modify_kb_and_emit_empty_new_facts_w
 
     kb_hash_before = hash_tree(repo / "kb")
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
     kb_hash_after = hash_tree(repo / "kb")
     new_facts_dir = repo / "generated" / "weekly-curriculum" / "new-facts"
@@ -364,7 +375,7 @@ def test_generate_curriculum_outputs_emit_candidate_new_fact_files_for_non_redun
         qa=["Add a coaches-only review checkpoint after week 12."],
     )
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
     new_facts_dir = repo / "generated" / "weekly-curriculum" / "new-facts"
     fact_paths = sorted(new_facts_dir.glob("fact-*.md"))
@@ -388,7 +399,7 @@ def test_generate_curriculum_outputs_reject_reserved_job_names(tmp_path):
     write_job_file(repo, "reports")
 
     result = subprocess.run(
-        [sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "reports"],
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "reports"],
         capture_output=True,
         text=True,
         check=False,
@@ -410,12 +421,12 @@ def test_generate_curriculum_outputs_rerun_replaces_job_workspace_contents(tmp_p
         qa=["Add a coaches-only review checkpoint after week 12."],
     )
 
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
     new_facts_dir = repo / "generated" / "weekly-curriculum" / "new-facts"
     assert len(list(new_facts_dir.glob("fact-*.md"))) == 1
 
     write_job_file(repo, "weekly-curriculum")
-    subprocess.run([sys.executable, str(GENERATE_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
 
     assert list(new_facts_dir.glob("fact-*.md")) == []
     assert "No candidate new facts were found in this job." in (new_facts_dir / "index.md").read_text(encoding="utf-8")
