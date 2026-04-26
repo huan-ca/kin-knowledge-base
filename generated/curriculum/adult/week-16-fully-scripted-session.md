@@ -1,0 +1,19 @@
+# Adult Week 16 Fully Scripted Session
+
+## Opening Script
+Introduce the theme: North-South Control And Transition Attacks. Tell the class the goal is Use north-south as both a control point and a route to chained attacks.
+
+## Warm-Up Block
+Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
+
+## Primary Focus Script
+Show the core idea first: North-south control, spin transitions, and submission entry timing.
+Teach Level 1 as the base pattern: Stabilize north-south and connect to one clean attack route.
+Layer Level 2 only after the room is stable: Chain north-south to side control or kimura-style attack windows if the first route closes.
+Repeat the coach emphasis: The chest stays connected even while rotating.
+
+## Adult-Specific Notes
+Allow more exploration of attack branches once the core north-south control is stable.
+
+## Closing Script
+Recap the main idea, reinforce the best example from the room, and set the expectation for live application.

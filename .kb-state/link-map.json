@@ -1,4 +1,26 @@
 {
+  "adult-24-week-theme-map": {
+    "path": "kb/curriculum/adult-24-week-theme-map.md",
+    "related_pages": [
+      "youth-24-week-theme-map",
+      "ibjjf-leg-lock-curriculum",
+      "curriculum-week-design-rules"
+    ],
+    "source_refs": [
+      "source-high-level-overview#chunk-001",
+      "source-high-level-overview#chunk-003",
+      "source-high-level-overview#chunk-004",
+      "source-high-level-overview#chunk-005",
+      "source-high-level-overview#chunk-006",
+      "source-high-level-overview#chunk-007",
+      "source-kin-bjj-compendium#chunk-013",
+      "source-kin-bjj-compendium#chunk-014",
+      "source-kin-bjj-compendium#chunk-016",
+      "source-kin-bjj-compendium#chunk-017",
+      "source-kin-bjj-compendium#chunk-018"
+    ],
+    "type": "curriculum-unit"
+  },
   "announcements-and-student-recognition": {
     "path": "kb/procedures/announcements-and-student-recognition.md",
     "related_pages": [],
@@ -214,8 +236,16 @@
   },
   "open-question-week-by-week-curriculum-sequence": {
     "path": "kb/open-questions/week-by-week-curriculum-sequence.md",
-    "related_pages": [],
-    "source_refs": [],
+    "related_pages": [
+      "youth-24-week-theme-map",
+      "adult-24-week-theme-map",
+      "tots-12-week-theme-map"
+    ],
+    "source_refs": [
+      "source-high-level-overview#chunk-006",
+      "source-high-level-overview#chunk-007",
+      "source-kin-bjj-compendium#chunk-016"
+    ],
     "type": "open-question"
   },
   "passing-framework": {
@@ -338,6 +368,25 @@
     ],
     "type": "procedure"
   },
+  "tots-12-week-theme-map": {
+    "path": "kb/curriculum/tots-12-week-theme-map.md",
+    "related_pages": [
+      "kids-age-and-duration-guidelines",
+      "class-structure-principles",
+      "movement-and-warmup-framework",
+      "games-instructional-use"
+    ],
+    "source_refs": [
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-001",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-002",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-004",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-006",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-011",
+      "source-kin-bjj-compendium#chunk-006",
+      "source-kin-bjj-compendium#chunk-010"
+    ],
+    "type": "curriculum-unit"
+  },
   "turtle-system": {
     "path": "kb/position/turtle-system.md",
     "related_pages": [],
@@ -370,6 +419,30 @@
       "source-high-level-overview#chunk-001",
       "source-high-level-overview#chunk-006",
       "source-high-level-overview#chunk-007"
+    ],
+    "type": "curriculum-unit"
+  },
+  "youth-24-week-theme-map": {
+    "path": "kb/curriculum/youth-24-week-theme-map.md",
+    "related_pages": [
+      "youth-24-week-curriculum-framework",
+      "curriculum-week-design-rules",
+      "groundwork-cycle-framework",
+      "youth-submission-safety-framework"
+    ],
+    "source_refs": [
+      "source-high-level-overview#chunk-001",
+      "source-high-level-overview#chunk-003",
+      "source-high-level-overview#chunk-004",
+      "source-high-level-overview#chunk-005",
+      "source-high-level-overview#chunk-006",
+      "source-high-level-overview#chunk-007",
+      "source-kin-bjj-compendium#chunk-010",
+      "source-kin-bjj-compendium#chunk-016",
+      "source-kin-bjj-compendium#chunk-017",
+      "source-kin-bjj-compendium#chunk-018",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-003",
+      "source-kin-bjj-kids-lesson-plan-structure#chunk-007"
     ],
     "type": "curriculum-unit"
   },

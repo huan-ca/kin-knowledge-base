@@ -1,0 +1,16 @@
+# Youth Week 12 Fully Scripted Session
+
+## Opening Script
+Introduce the theme: Mount Progression To Armbar And Collar Attack. Tell the class the goal is Build mount progression from control into one clear attack pathway and one transition option.
+
+## Warm-Up Block
+Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
+
+## Primary Focus Script
+Show the core idea first: Mount control, high mount progression, and armbar or collar-based attack entries.
+Teach Level 1 as the base pattern: Climb to a stable attacking mount and finish one clean armbar pathway.
+Layer Level 2 only after the room is stable: Switch between armbar and collar attack based on the defender’s hands.
+Repeat the coach emphasis: Make knees and heels part of the control lesson, not an afterthought.
+
+## Closing Script
+Recap the main idea, reinforce the best example from the room, and set the expectation for live application.

@@ -3,7 +3,7 @@
 ## Page Counts
 - `class-type`: 4
 - `concept`: 9
-- `curriculum-unit`: 7
+- `curriculum-unit`: 10
 - `open-question`: 2
 - `policy`: 3
 - `position`: 8
@@ -30,17 +30,20 @@
 - [Uke and Tori Drilling Roles](concepts/uke-and-tori-drilling-roles.md) (`confidence: 0.85`, `status: active`)
 
 ## Curriculum-Unit Pages
+- [Adult 24-Week Theme Map](curriculum/adult-24-week-theme-map.md) (`confidence: 0.65`, `status: active`)
 - [Curriculum Week Design Rules](curriculum/curriculum-week-design-rules.md) (`confidence: 0.80`, `status: active`)
 - [Groundwork Cycle Framework](curriculum/groundwork-cycle-framework.md) (`confidence: 0.80`, `status: active`)
 - [IBJJF Leg Lock Curriculum](curriculum/ibjjf-leg-lock-curriculum.md) (`confidence: 0.80`, `status: active`)
 - [Takedown Framework](curriculum/takedown-framework.md) (`confidence: 0.85`, `status: active`)
 - [Takedown Progression Framework](curriculum/takedown-progression-framework.md) (`confidence: 0.80`, `status: active`)
+- [Tots 12-Week Theme Map](curriculum/tots-12-week-theme-map.md) (`confidence: 0.70`, `status: active`)
 - [Youth 24-Week Curriculum Framework](curriculum/youth-24-week-curriculum-framework.md) (`confidence: 0.80`, `status: active`)
+- [Youth 24-Week Theme Map](curriculum/youth-24-week-theme-map.md) (`confidence: 0.65`, `status: active`)
 - [Youth Submission Safety Framework](curriculum/youth-submission-safety-framework.md) (`confidence: 0.85`, `status: active`)
 
 ## Open-Question Pages
 - [Supplementary Programs Need Full Build-Outs](open-questions/supplementary-programs-need-full-build-outs.md) (`confidence: 0.20`, `status: unresolved`)
-- [Week-by-Week Curriculum Sequence Is Still Underspecified](open-questions/week-by-week-curriculum-sequence.md) (`confidence: 0.20`, `status: unresolved`)
+- [Week-by-Week Curriculum Sequence Is Proposed Rather Than Source-Authored](open-questions/week-by-week-curriculum-sequence.md) (`confidence: 0.40`, `status: unresolved`)
 
 ## Policy Pages
 - [Kids Promotions 4A Model](policies/promotions-model-4a.md) (`confidence: 0.90`, `status: active`)
