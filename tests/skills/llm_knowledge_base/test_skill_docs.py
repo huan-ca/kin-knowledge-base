@@ -4,6 +4,7 @@ from pathlib import Path
 SKILL = Path("skills/llm-knowledge-base/SKILL.md")
 REPORT_TEMPLATE = Path("skills/llm-knowledge-base/assets/templates/pages/report.md")
 KNOWLEDGE_PAGE_TEMPLATE = Path("skills/llm-knowledge-base/assets/templates/pages/knowledge-page.md")
+JOBS_README = Path("jobs/README.md")
 REFERENCES = [
     Path("skills/llm-knowledge-base/references/repo-contract.md"),
     Path("skills/llm-knowledge-base/references/page-types.md"),
@@ -34,6 +35,13 @@ def test_skill_doc_is_concrete_and_placeholder_free():
 def test_reference_docs_exist():
     for reference_path in REFERENCES:
         assert reference_path.exists(), reference_path
+
+
+def test_jobs_readme_documents_optional_examples_directory():
+    text = JOBS_README.read_text(encoding="utf-8")
+    assert "jobs/<job-name>/examples/" in text
+    assert "fully-scripted-session" in text
+    assert "human-owned" in text
 
 
 def test_report_template_scaffolds_output_requirements():

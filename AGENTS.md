@@ -30,6 +30,7 @@ The intended flow is:
 - `knowledge-base.yaml` is policy, not generated content.
 - `raw/` must never be edited by the agent.
 - `kb/` and `generated/` are treated as derived and reproducible.
+- `jobs/` is the human-owned input area for job specs, notes, and optional output examples.
 - `published/` is human-owned and should not be overwritten automatically.
 - Every substantive KB page should carry `claim_label`, `source_refs`, and `confidence`.
 - Missing prerequisites must be surfaced clearly instead of guessed.
@@ -58,6 +59,8 @@ Depending on repository configuration and source material, the agent may generat
 - improvement reports
 - policy drafts
 - culture or team-guideline documents
+
+Job-local example outputs should live under `jobs/<job-name>/examples/<file-type>/` and be treated as prompt/style inputs, not generated artifacts.
 
 ## Main Skill Assets
 

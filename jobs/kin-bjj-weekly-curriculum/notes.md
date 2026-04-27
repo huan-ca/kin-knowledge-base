@@ -8,6 +8,10 @@ Generate the reusable weekly curriculum outputs for the KIN BJJ tots, youth, and
 
 Use the approved KB week maps and emit the standard weekly curriculum files, lesson-plan variants, and program syllabi.
 
+## Examples
+
+Use the job-local examples under `jobs/kin-bjj-weekly-curriculum/examples/` as style and structure references when prompt-based generation is added or updated.
+
 ## Q&A
 
 No additional human-supplied deltas are attached to this job yet.
