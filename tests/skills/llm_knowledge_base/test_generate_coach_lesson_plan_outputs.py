@@ -227,3 +227,35 @@ def test_generate_coach_lesson_plans_resets_output_tree_and_renders_tots_style(t
     assert not stale_file.exists()
     assert "### Main Activity Block" in tots_text
     assert "### Intro Grappling Block" in tots_text
+
+
+def test_generate_coach_lesson_plans_requires_example_kb_pages(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    write_page(
+        repo / "kb" / "sources" / "high-level-overview.md",
+        """---
+id: source-high-level-overview
+type: source
+title: "High Level Overview"
+status: active
+confidence: 0.8
+claim_label: fact
+source_refs: []
+related_pages: []
+---
+# High Level Overview
+""",
+    )
+    write_job(repo)
+
+    result = subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "coach-job"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "example KB pages" in result.stderr

@@ -5,6 +5,7 @@ from importlib import import_module
 
 GENERATOR_REGISTRY = {
     "curriculum": "repo_generators.curriculum",
+    "coach_lesson_plans": "repo_generators.coach_lesson_plans",
 }
 
 
