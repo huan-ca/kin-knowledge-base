@@ -164,6 +164,64 @@ related_pages: []
     assert link_map["closed-guard"]["type"] == "concept"
 
 
+def test_rebuild_indexes_deleted_curriculum_week_maps_do_not_appear_in_index_or_gap_report(tmp_path):
+    assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
+    assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"
+
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+
+    source_overview_page = repo / "kb" / "sources" / "overview.md"
+    source_overview_page.parent.mkdir(parents=True, exist_ok=True)
+    source_overview_page.write_text(
+        """---
+id: source-overview
+type: source
+title: Overview
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Overview
+""",
+        encoding="utf-8",
+    )
+
+    curriculum_rules_page = repo / "kb" / "curriculum" / "curriculum-week-design-rules.md"
+    curriculum_rules_page.parent.mkdir(parents=True, exist_ok=True)
+    curriculum_rules_page.write_text(
+        """---
+id: curriculum-week-design-rules
+type: curriculum-unit
+title: "Curriculum Week Design Rules"
+status: active
+confidence: 0.8
+claim_label: fact
+source_refs:
+- source-overview#chunk-006
+- source-overview#chunk-007
+related_pages: []
+---
+# Curriculum Week Design Rules
+
+## Definition
+Weekly curriculum design follows a fixed set of rules intended to keep theme, progression, and coach usability aligned.
+""",
+        encoding="utf-8",
+    )
+
+    subprocess.run([sys.executable, str(REBUILD_SCRIPT), str(repo)], check=True)
+
+    index_text = (repo / "kb" / "index.md").read_text(encoding="utf-8")
+    gap_report_text = (repo / "generated" / "reports" / "gap-report.md").read_text(encoding="utf-8")
+
+    assert "- [Curriculum Week Design Rules](curriculum/curriculum-week-design-rules.md) (`confidence: 0.80`, `status: active`)" in index_text
+    assert "24-Week Theme Map" not in index_text
+    assert "24-Week Theme Map" not in gap_report_text
+
+
 def test_rebuild_indexes_includes_nested_index_and_readme_pages_without_re_reading_generated_top_level_index(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
     assert REBUILD_SCRIPT.exists(), f"missing script: {REBUILD_SCRIPT}"

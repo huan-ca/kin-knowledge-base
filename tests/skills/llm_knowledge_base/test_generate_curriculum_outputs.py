@@ -253,6 +253,17 @@ No extra notes.
     )
 
 
+def remove_kb_week_maps(repo: Path) -> None:
+    for relative_path in (
+        "kb/curriculum/youth-24-week-theme-map.md",
+        "kb/curriculum/adult-24-week-theme-map.md",
+        "kb/curriculum/tots-12-week-theme-map.md",
+    ):
+        path = repo / relative_path
+        if path.exists():
+            path.unlink()
+
+
 def test_generate_curriculum_outputs_creates_expected_program_directories_and_week_files(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
 
@@ -284,6 +295,52 @@ def test_generate_curriculum_outputs_creates_expected_program_directories_and_we
     assert len(list((output_root / "curriculum" / "youth").glob("*.md"))) == 96
     assert len(list((output_root / "curriculum" / "adult").glob("*.md"))) == 96
     assert len(list((output_root / "curriculum" / "tots").glob("*.md"))) == 48
+
+
+def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    remove_kb_week_maps(repo)
+    write_job_file(repo, "weekly-curriculum")
+
+    result = subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+
+    generated_week_map = repo / "generated" / "weekly-curriculum" / "week-maps" / "adult-24-week-theme-map.md"
+    generated_week_map_text = generated_week_map.read_text(encoding="utf-8")
+
+    assert generated_week_map.exists()
+    assert "type: generated-curriculum-candidate" in generated_week_map_text
+    assert "```json" in generated_week_map_text
+
+
+def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    remove_kb_week_maps(repo)
+    write_job_file(repo, "weekly-curriculum")
+
+    result = subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "generated week map" in result.stderr.lower()
 
 
 def test_generate_curriculum_outputs_include_level_sections_and_program_specific_notes(tmp_path):
