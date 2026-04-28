@@ -18,19 +18,17 @@ Introduce the theme: Snap Down to Front Headlock Fundamentals. Tell the class th
   - Level 1: Snap down into front headlock control.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into front headlock to spin-behind top control
-- **Ground**
+- **Ground: Front headlock to spin-behind top control**
   - Secure: Front headlock to spin-behind top control.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Guillotine threat or positional conversion.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Adult framing: Use adult pacing and decision-making language.
 - Use snaps to create posture reactions, not just speed.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Snap Down to Front Headlock Fundamentals.

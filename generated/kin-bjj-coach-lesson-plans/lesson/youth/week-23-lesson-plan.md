@@ -18,19 +18,17 @@ Introduce the theme: Standing Self-Defence Awareness. Tell the class the goal is
   - Level 1: Safe clinch entry, posture, and balance recovery.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into top control after a simple finish with quick disengagement
-- **Ground**
+- **Ground: Top control after a simple finish with quick disengagement**
   - Secure: Top control after a simple finish with quick disengagement.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: No submission emphasis; positional safety win condition.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Youth framing: Use short cues, clear boundaries, and positive self-defence framing.
 - Frame the lesson as awareness, distance, and adult help.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Standing Self-Defence Awareness.

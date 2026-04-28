@@ -18,19 +18,17 @@ Introduce the theme: Lower-Body Entry and Safety. Tell the class the goal is to 
   - Level 1: Clinch-to-ashi entry with controlled descent.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into ashi garami positioning and partner safety
-- **Ground**
+- **Ground: Ashi garami positioning and partner safety**
   - Secure: Ashi garami positioning and partner safety.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Straight ankle-lock finishing mechanics under clear limits.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Adult framing: Use adult pacing and decision-making language.
 - Teach control, tap awareness, and slow finishing tempo.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Lower-Body Entry and Safety.

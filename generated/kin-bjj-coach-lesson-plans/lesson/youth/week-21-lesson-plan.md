@@ -18,19 +18,19 @@ Introduce the theme: Ankle Pick to Mount Path Fundamentals. Tell the class the g
   - Level 1: Ankle pick with posture break and angle.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into mount entry after a clean finish
-- **Ground**
+- **Ground: Mount entry after a clean finish**
   - Secure: Mount entry after a clean finish.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Mounted attack options and retention.
+- **Submission: Mounted attack options and retention**
+  - Cue: Mounted attack options and retention.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Youth framing: Use short cues, clear boundaries, and positive self-defence framing.
 - Keep the pick low and the chest tall.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Ankle Pick to Mount Path Fundamentals.

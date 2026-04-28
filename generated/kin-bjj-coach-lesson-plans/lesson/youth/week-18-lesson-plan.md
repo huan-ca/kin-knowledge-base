@@ -18,19 +18,19 @@ Introduce the theme: Arm Drag to Rear Body Lock Fundamentals. Tell the class the
   - Level 1: Arm drag to rear angle or mat return.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into rear control entry and seatbelt management
-- **Ground**
+- **Ground: Rear control entry and seatbelt management**
   - Secure: Rear control entry and seatbelt management.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Rear strangle mechanics or back-control win.
+- **Submission: Rear strangle mechanics or back-control win**
+  - Cue: Rear strangle mechanics or back-control win.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Youth framing: Use short cues, clear boundaries, and positive self-defence framing.
 - Teach angle creation before grip chasing.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Arm Drag to Rear Body Lock Fundamentals.

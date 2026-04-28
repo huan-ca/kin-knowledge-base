@@ -18,19 +18,17 @@ Introduce the theme: Body Lock Entry to Mount Fundamentals. Tell the class the g
   - Level 1: Body lock entry with balance-breaking finish.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into mount retention and pressure
-- **Ground**
+- **Ground: Mount retention and pressure**
   - Secure: Mount retention and pressure.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Cross-collar or arm-isolation finish.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Youth framing: Use short cues, clear boundaries, and positive self-defence framing.
 - Teach pressure through chest connection before advancing.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Body Lock Entry to Mount Fundamentals.

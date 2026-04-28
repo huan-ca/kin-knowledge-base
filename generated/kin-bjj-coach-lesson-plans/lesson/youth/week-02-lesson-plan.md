@@ -18,19 +18,19 @@ Introduce the theme: Sprawl, Go-Behind, and Turtle Control Fundamentals. Tell th
   - Level 1: Sprawl reaction to go-behind finish.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into turtle control and seatbelt awareness
-- **Ground**
+- **Ground: Turtle control and seatbelt awareness**
   - Secure: Turtle control and seatbelt awareness.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Back exposure or turnover win condition.
+- **Submission: Back exposure or turnover win condition**
+  - Cue: Back exposure or turnover win condition.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Youth framing: Use short cues, clear boundaries, and positive self-defence framing.
 - Reward defensive reaction and immediate angle changes.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Sprawl, Go-Behind, and Turtle Control Fundamentals.

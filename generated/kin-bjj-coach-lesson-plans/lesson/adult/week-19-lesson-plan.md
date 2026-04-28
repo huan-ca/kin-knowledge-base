@@ -18,19 +18,17 @@ Introduce the theme: Collar Tie to Knee Tap Fundamentals. Tell the class the goa
   - Level 1: Collar tie to knee tap finish.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into passing off the finish into side control
-- **Ground**
+- **Ground: Passing off the finish into side control**
   - Secure: Passing off the finish into side control.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Kimura or top-side attack chain.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Adult framing: Use adult pacing and decision-making language.
 - Emphasize head position and connection through the tap.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Collar Tie to Knee Tap Fundamentals.

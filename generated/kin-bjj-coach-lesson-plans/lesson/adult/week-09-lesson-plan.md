@@ -18,19 +18,19 @@ Introduce the theme: Duck Under to Side Control Fundamentals. Tell the class the
   - Level 1: Duck under entry to clean top position.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into side control switching and pin transitions
-- **Ground**
+- **Ground: Side control switching and pin transitions**
   - Secure: Side control switching and pin transitions.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Americana and transition awareness.
+- **Submission: Americana and transition awareness**
+  - Cue: Americana and transition awareness.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Adult framing: Use adult pacing and decision-making language.
 - Use timing and posture, not arm strength.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Duck Under to Side Control Fundamentals.

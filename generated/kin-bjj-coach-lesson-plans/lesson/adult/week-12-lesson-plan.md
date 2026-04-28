@@ -18,19 +18,17 @@ Introduce the theme: Double Leg to Side Control Fundamentals. Tell the class the
   - Level 1: Double leg entry to a controlled finish on top.
   - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.
   - Outcome: Finish to a clean top position that leads into side control pin and basic top stabilization
-- **Ground**
+- **Ground: Side control pin and basic top stabilization**
   - Secure: Side control pin and basic top stabilization.
   - Level 2: Add a simple transition or pressure-retention task before the finish.
-  - Submission / Win Condition: Americana or shoulder-isolation finish.
+- **Situational Options**
+  - Start from the target control point and rotate on clear win conditions.
+  - Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Coach Notes
 - Adult framing: Use adult pacing and decision-making language.
 - Connect the shot to top pressure without rushing the finish.
 - Keep the room moving with short explanation windows and clear reset points.
-
-## Situational Options
-- Start from the target control point and rotate on clear win conditions.
-- Run short rounds with a fast reset after the first clean win condition or escape.
 
 ## Closing Script
 - Recap the theme: Double Leg to Side Control Fundamentals.
