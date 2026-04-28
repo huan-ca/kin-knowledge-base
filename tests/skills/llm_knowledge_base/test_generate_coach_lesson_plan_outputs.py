@@ -262,6 +262,51 @@ related_pages: []
     assert "example KB pages" in result.stderr
 
 
+def test_generate_coach_lesson_plans_adult_syllabus_uses_table_format(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_example_kb(repo)
+    write_job(repo)
+
+    subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "coach-job"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    syllabus_text = (repo / "generated" / "coach-job" / "lesson" / "adult-syllabus.md").read_text(encoding="utf-8")
+
+    assert "| Week | Cycle | Theme | Main Goal |" in syllabus_text
+    assert "| 01 | offensive |" in syllabus_text
+    assert "- Program: Adult" not in syllabus_text
+    assert "## Coach Note" not in syllabus_text
+
+
+def test_generate_coach_lesson_plans_youth_and_tots_syllabi_use_same_table_format(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_example_kb(repo)
+    write_job(repo)
+
+    subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "coach-job"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    youth_text = (repo / "generated" / "coach-job" / "lesson" / "youth-syllabus.md").read_text(encoding="utf-8")
+    tots_text = (repo / "generated" / "coach-job" / "lesson" / "tots-syllabus.md").read_text(encoding="utf-8")
+
+    assert "| Week | Cycle | Theme | Main Goal |" in youth_text
+    assert "| Week | Cycle | Theme | Main Goal |" in tots_text
+    assert "| 01 | offensive |" in youth_text
+    assert "| 01 | foundation |" in tots_text
+
+
 def test_generate_coach_lesson_plans_offensive_cycles_render_submission_block(tmp_path):
     repo = tmp_path / "demo-repo"
     repo.mkdir()
