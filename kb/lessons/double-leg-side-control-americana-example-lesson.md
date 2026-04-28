@@ -65,9 +65,9 @@ Introduce the theme: Double Leg to Side Control to Americana. Tell the class the
   - **Secure: Crossface + underhook**
   - **Level 2: Transition between various side control pins:**
     - Drilling structure: Around the world: Cross to other side via north/south or through knee ride to mount to disengage
-  - **Submission: Americana**
-    - Cue: Keep your wrist on the ground, pull your elbow to your hip, and slowly rotate and elevate your elbow to finish.
-    - Tip: The Americana will only be effective if you can control/stop the rotation of the person on bottom.
+- **Submission: Americana**
+  - Cue: Keep your wrist on the ground, pull your elbow to your hip, and slowly rotate and elevate your elbow to finish.
+  - Tip: The Americana will only be effective if you can control/stop the rotation of the person on bottom.
 - **Situational Options**:
   - Start with crossface + underhook, roll until escape or americana or kimura grip no submission.
   - Start with crossface + underhook, roll until escape or submission.
