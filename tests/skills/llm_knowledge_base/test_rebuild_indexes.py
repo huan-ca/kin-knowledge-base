@@ -212,14 +212,63 @@ Weekly curriculum design follows a fixed set of rules intended to keep theme, pr
         encoding="utf-8",
     )
 
+    youth_week_map_page = repo / "kb" / "curriculum" / "youth-24-week-theme-map.md"
+    youth_week_map_page.write_text(
+        """---
+id: youth-24-week-theme-map
+type: curriculum-unit
+title: "Youth 24-Week Theme Map"
+status: active
+confidence: 0.65
+claim_label: editorial-normalization
+source_refs:
+- source-overview#chunk-001
+related_pages: [curriculum-week-design-rules]
+---
+# Youth 24-Week Theme Map
+""",
+        encoding="utf-8",
+    )
+
+    adult_week_map_page = repo / "kb" / "curriculum" / "adult-24-week-theme-map.md"
+    adult_week_map_page.write_text(
+        """---
+id: adult-24-week-theme-map
+type: curriculum-unit
+title: "Adult 24-Week Theme Map"
+status: active
+confidence: 0.65
+claim_label: editorial-normalization
+source_refs:
+- source-overview#chunk-001
+related_pages: [curriculum-week-design-rules]
+---
+# Adult 24-Week Theme Map
+""",
+        encoding="utf-8",
+    )
+
+    subprocess.run([sys.executable, str(REBUILD_SCRIPT), str(repo)], check=True)
+    initial_index_text = (repo / "kb" / "index.md").read_text(encoding="utf-8")
+    initial_gap_report_text = (repo / "generated" / "reports" / "gap-report.md").read_text(encoding="utf-8")
+    assert "Youth 24-Week Theme Map" in initial_index_text
+    assert "Adult 24-Week Theme Map" in initial_index_text
+    assert "Youth 24-Week Theme Map" in initial_gap_report_text
+    assert "Adult 24-Week Theme Map" in initial_gap_report_text
+
+    youth_week_map_page.unlink()
+    adult_week_map_page.unlink()
+
     subprocess.run([sys.executable, str(REBUILD_SCRIPT), str(repo)], check=True)
 
     index_text = (repo / "kb" / "index.md").read_text(encoding="utf-8")
     gap_report_text = (repo / "generated" / "reports" / "gap-report.md").read_text(encoding="utf-8")
 
     assert "- [Curriculum Week Design Rules](curriculum/curriculum-week-design-rules.md) (`confidence: 0.80`, `status: active`)" in index_text
-    assert "24-Week Theme Map" not in index_text
-    assert "24-Week Theme Map" not in gap_report_text
+    assert "Youth 24-Week Theme Map" not in index_text
+    assert "Adult 24-Week Theme Map" not in index_text
+    assert "Youth 24-Week Theme Map" not in gap_report_text
+    assert "Adult 24-Week Theme Map" not in gap_report_text
 
 
 def test_rebuild_indexes_includes_nested_index_and_readme_pages_without_re_reading_generated_top_level_index(tmp_path):

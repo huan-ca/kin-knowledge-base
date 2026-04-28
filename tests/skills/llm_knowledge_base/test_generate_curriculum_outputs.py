@@ -4,6 +4,17 @@ import sys
 from hashlib import sha256
 from pathlib import Path
 
+import pytest
+
+REPO_ROOT_FOR_IMPORTS = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT_FOR_IMPORTS) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT_FOR_IMPORTS))
+SKILL_SCRIPTS_FOR_IMPORTS = REPO_ROOT_FOR_IMPORTS / "skills" / "llm-knowledge-base" / "scripts"
+if str(SKILL_SCRIPTS_FOR_IMPORTS) not in sys.path:
+    sys.path.insert(0, str(SKILL_SCRIPTS_FOR_IMPORTS))
+
+from repo_generators import curriculum
+
 INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
 RUN_SCRIPT = Path("skills/llm-knowledge-base/scripts/run_generation.py").resolve()
 
@@ -264,6 +275,152 @@ def remove_kb_week_maps(repo: Path) -> None:
             path.unlink()
 
 
+def write_generated_week_map_page(
+    repo: Path,
+    *,
+    program: str,
+    page_id: str,
+    title: str,
+    source_kb_pages: list[str],
+    weeks: list[dict],
+) -> None:
+    filename_by_program = {
+        "adult": "adult-24-week-theme-map.md",
+        "youth": "youth-24-week-theme-map.md",
+        "tots": "tots-12-week-theme-map.md",
+    }
+    source_kb_pages_text = "".join(f"  - {source_page}\n" for source_page in source_kb_pages)
+    write_page(
+        repo / "generated" / "weekly-curriculum" / "week-maps" / filename_by_program[program],
+        f"""---
+id: {page_id}
+type: generated-curriculum-candidate
+title: "{title}"
+status: active
+source_kb_pages:
+{source_kb_pages_text}generation_notes:
+  - synthesized for boundary testing
+warnings:
+  - none
+confidence: 0.95
+---
+# {title}
+
+Candidate week map for {program}.
+
+```json
+{json.dumps({"weeks": weeks}, indent=2)}
+```
+""",
+    )
+
+
+def write_curriculum_framework_page(repo: Path, page_id: str, title: str, body: str) -> None:
+    write_page(
+        repo / "kb" / "curriculum" / f"{page_id}.md",
+        f"""---
+id: {page_id}
+type: curriculum-unit
+title: "{title}"
+status: active
+confidence: 0.8
+claim_label: fact
+source_refs:
+  - source-overview#chunk-001
+related_pages: []
+---
+# {title}
+
+{body}
+""",
+    )
+
+
+def seed_minimal_framework_repo(repo: Path) -> None:
+    write_page(
+        repo / "kb" / "sources" / "overview.md",
+        """---
+id: source-overview
+type: source
+title: Overview
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Overview
+""",
+    )
+    write_curriculum_framework_page(
+        repo,
+        "curriculum-week-design-rules",
+        "Curriculum Week Design Rules",
+        "Weekly curriculum design follows a fixed set of rules intended to keep theme, progression, and coach usability aligned.",
+    )
+    write_curriculum_framework_page(
+        repo,
+        "youth-24-week-curriculum-framework",
+        "Youth 24-Week Curriculum Framework",
+        "The youth framework defines the sequencing constraints for the 24-week calendar.",
+    )
+    write_curriculum_framework_page(
+        repo,
+        "adult-24-week-curriculum-framework",
+        "Adult 24-Week Curriculum Framework",
+        "The adult framework defines the sequencing constraints for the 24-week calendar.",
+    )
+    write_curriculum_framework_page(
+        repo,
+        "tots-12-week-curriculum-framework",
+        "Tots 12-Week Curriculum Framework",
+        "The tots framework defines the sequencing constraints for the 12-week calendar.",
+    )
+
+
+def write_stage2_job_file(repo: Path, job_name: str) -> None:
+    write_page(
+        repo / "jobs" / job_name / "job.yaml",
+        f"""id: {job_name}
+title: Test Job {job_name}
+generator: curriculum
+generation_targets:
+  - curriculum
+status: active
+transient: false
+inputs:
+  kb_pages:
+    - kb/curriculum/curriculum-week-design-rules.md
+    - kb/curriculum/youth-24-week-curriculum-framework.md
+    - kb/curriculum/adult-24-week-curriculum-framework.md
+    - kb/curriculum/tots-12-week-curriculum-framework.md
+options:
+  include_reports: true
+  emit_new_facts: true
+""",
+    )
+    write_page(
+        repo / "jobs" / job_name / "notes.md",
+        """# Test Job
+
+## Purpose
+
+Generate curriculum outputs for testing.
+
+## Instructions
+
+- Use generated week maps only.
+
+## Q&A
+
+- No additional Q&A.
+
+## Notes
+
+No extra notes.
+""",
+    )
+
+
 def test_generate_curriculum_outputs_creates_expected_program_directories_and_week_files(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
 
@@ -301,10 +458,34 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
     repo = tmp_path / "demo-repo"
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
-    seed_repo_with_sources_and_theme_maps(repo)
+    seed_minimal_framework_repo(repo)
+    write_generated_week_map_page(
+        repo,
+        program="youth",
+        page_id="generated-youth-week-map",
+        title="Youth Generated Week Map",
+        source_kb_pages=["kb/curriculum/youth-24-week-curriculum-framework.md"],
+        weeks=build_youth_weeks(),
+    )
+    write_generated_week_map_page(
+        repo,
+        program="adult",
+        page_id="generated-adult-week-map",
+        title="Adult Generated Week Map",
+        source_kb_pages=["kb/curriculum/adult-24-week-curriculum-framework.md"],
+        weeks=build_adult_weeks(),
+    )
+    write_generated_week_map_page(
+        repo,
+        program="tots",
+        page_id="generated-tots-week-map",
+        title="Tots Generated Week Map",
+        source_kb_pages=["kb/curriculum/tots-12-week-curriculum-framework.md"],
+        weeks=build_tots_weeks(),
+    )
     seed_repo_reports(repo)
     remove_kb_week_maps(repo)
-    write_job_file(repo, "weekly-curriculum")
+    write_stage2_job_file(repo, "weekly-curriculum")
 
     result = subprocess.run(
         [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"],
@@ -321,26 +502,34 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
     assert generated_week_map.exists()
     assert "type: generated-curriculum-candidate" in generated_week_map_text
     assert "```json" in generated_week_map_text
+    assert (repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md").exists()
+    assert "Adult Generated Week Map" in generated_week_map_text
 
 
-def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path):
+def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path, monkeypatch):
     repo = tmp_path / "demo-repo"
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
-    seed_repo_with_sources_and_theme_maps(repo)
+    seed_minimal_framework_repo(repo)
     seed_repo_reports(repo)
     remove_kb_week_maps(repo)
-    write_job_file(repo, "weekly-curriculum")
+    write_stage2_job_file(repo, "weekly-curriculum")
 
-    result = subprocess.run(
-        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"],
-        capture_output=True,
-        text=True,
-        check=False,
+    monkeypatch.setattr(
+        curriculum,
+        "load_program_data",
+        lambda *_args, **_kwargs: pytest.fail("should read generated week maps instead of kb week maps"),
     )
 
-    assert result.returncode != 0
-    assert "generated week map" in result.stderr.lower()
+    with pytest.raises(FileNotFoundError, match="generated week map"):
+        curriculum.generate(
+            repo,
+            {"generator": "curriculum"},
+            {
+                "job_name": "weekly-curriculum",
+                "notes_sections": {"Instructions": "", "Q&A": ""},
+            },
+        )
 
 
 def test_generate_curriculum_outputs_include_level_sections_and_program_specific_notes(tmp_path):
