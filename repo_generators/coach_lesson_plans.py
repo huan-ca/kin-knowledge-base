@@ -307,21 +307,13 @@ def render_syllabus(program: str, weeks: list[dict]) -> str:
     lines = [
         f"# {title} Syllabus",
         "",
-        f"- Program: {title}",
-        f"- Total Weeks: {len(weeks)}",
-        f"- Class Length: {PROGRAM_RULES[program]['class_length']}",
+        f"This syllabus maps the {title.lower()} weekly sequence to its cycle, theme, and main goal.",
         "",
-        "## Weekly Themes",
+        "| Week | Cycle | Theme | Main Goal |",
+        "| --- | --- | --- | --- |",
     ]
     for week in weeks:
-        lines.append(f"- Week {week['week']:02d}: {week['theme']} - {week['teaching_goal']}")
-
-    if program == "adult":
-        lines.extend(["", "## Coach Note", "- Weeks 23-24 reserve lower-body focus with strong safety framing."])
-    elif program == "youth":
-        lines.extend(["", "## Coach Note", "- Weeks 23-24 shift to self-defence awareness framing rather than leg-lock content."])
-    else:
-        lines.extend(["", "## Coach Note", "- This syllabus prioritizes games, movement, and short attention blocks over technique density."])
+        lines.append(f"| {week['week']:02d} | {week['cycle']} | {week['theme']} | {week['teaching_goal']} |")
 
     lines.append("")
     return "\n".join(lines)
