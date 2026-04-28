@@ -1,0 +1,21 @@
+id: kin-bjj-coach-lesson-plans
+title: KIN BJJ Coach Lesson Plans
+generator: coach_lesson_plans
+generation_targets:
+  - lesson-plan
+status: active
+transient: false
+inputs:
+  kb_pages:
+    - kb/sources/high-level-overview.md
+    - kb/sources/kin-bjj-compendium.md
+    - kb/sources/kin-bjj-kids-lesson-plan-structure.md
+    - kb/lessons/double-leg-side-control-americana-example-lesson.md
+    - kb/lessons/tots-week-1-mat-rules-base-ready-stance-example.md
+    - kb/concepts/four-layers-of-bjj-skill-development.md
+    - kb/procedures/technical-lesson-delivery-model.md
+    - kb/procedures/example-lesson-warmup-option-pattern.md
+    - kb/procedures/example-situational-start-pattern.md
+options:
+  include_reports: true
+  emit_missing_info_files: true

@@ -206,6 +206,146 @@ No extra notes.
     )
 
 
+def seed_example_kb(repo: Path) -> None:
+    write_page(
+        repo / "kb" / "sources" / "high-level-overview.md",
+        """---
+id: source-high-level-overview
+type: source
+title: "High Level Overview"
+status: active
+confidence: 0.8
+claim_label: fact
+source_refs: []
+related_pages: []
+---
+# High Level Overview
+
+## Extracted Notes
+- Adult and youth run 24-week programs.
+- Tots runs a 12-week movement-based program.
+""",
+    )
+    write_page(
+        repo / "kb" / "lessons" / "double-leg-side-control-americana-example-lesson.md",
+        """---
+id: double-leg-side-control-americana-example-lesson
+type: lesson
+title: "Double Leg to Side Control to Americana Example Lesson"
+status: active
+confidence: 0.6
+claim_label: editorial-normalization
+source_refs:
+  - source-example-scripted-lesson-plan-adult#chunk-001
+related_pages: []
+---
+# Double Leg to Side Control to Americana Example Lesson
+
+## Preserved Example Format
+
+````markdown
+## Week 1 (Offensive Cycle)
+- Theme: Double Leg to Side Control to Americana
+- Teaching Goal: Build one connected offensive sequence.
+
+## Opening Script
+Introduce the theme.
+
+## Warm-Up Options
+- Duck walks
+- Breakfalls
+
+## Lesson
+- **Takedown**
+  - Level 1: Double leg
+- **Ground**
+  - Level 1: Side control control
+
+## Closing Script
+Recap the lesson.
+````
+""",
+    )
+    write_page(
+        repo / "kb" / "lessons" / "tots-week-1-mat-rules-base-ready-stance-example.md",
+        """---
+id: tots-week-1-mat-rules-base-ready-stance-example
+type: lesson
+title: "Tots Week 1 Mat Rules, Base, And Ready Stance Example"
+status: active
+confidence: 0.8
+claim_label: fact
+source_refs:
+  - source-example-scripted-lesson-plan-tots#chunk-001
+related_pages: []
+---
+# Tots Week 1 Mat Rules, Base, And Ready Stance Example
+
+## Preserved Example Format
+
+````markdown
+## Week 1 (Foundation)
+Theme: Mat Rules, Base, And Ready Stance
+
+## Lesson
+### Warm-Up Block
+- Bear crawls
+
+### Main Activity Block
+- Red light green light
+
+### Closing Script
+- Recap the theme
+````
+""",
+    )
+
+
+def write_coach_lesson_job(repo: Path) -> None:
+    write_page(
+        repo / "jobs" / "coach-job" / "job.yaml",
+        """id: coach-job
+title: Test Coach Lesson Plans
+generator: coach_lesson_plans
+generation_targets:
+  - lesson-plan
+status: active
+transient: false
+inputs:
+  kb_pages:
+    - kb/sources/high-level-overview.md
+    - kb/lessons/double-leg-side-control-americana-example-lesson.md
+    - kb/lessons/tots-week-1-mat-rules-base-ready-stance-example.md
+options:
+  include_reports: false
+  emit_missing_info_files: true
+""",
+    )
+    write_page(
+        repo / "jobs" / "coach-job" / "notes.md",
+        """# Notes
+
+## Purpose
+
+Generate coach-facing lesson plans.
+
+## Instructions
+
+- Preserve example-style formatting.
+- Keep lesson files coach-facing.
+
+## Q&A
+
+- Adult and youth are 24 weeks.
+- Tots is 12 weeks.
+
+## Notes
+
+No extra notes.
+""",
+    )
+
+
 def test_run_generation_executes_curriculum_job_from_job_yaml(tmp_path):
     repo = tmp_path / "demo-repo"
     repo.mkdir()
@@ -261,3 +401,21 @@ def test_legacy_curriculum_script_delegates_to_generic_runner(tmp_path):
 
     assert result.returncode == 0, result.stderr
     assert (repo / "generated" / "weekly-curriculum" / "_meta" / "run.json").exists()
+
+
+def test_run_generation_executes_coach_lesson_plan_job_from_job_yaml(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_example_kb(repo)
+    write_coach_lesson_job(repo)
+
+    result = subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "coach-job"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert (repo / "generated" / "coach-job" / "_meta" / "run.json").exists()
