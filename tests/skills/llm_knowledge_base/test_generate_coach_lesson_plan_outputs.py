@@ -197,6 +197,7 @@ def test_generate_coach_lesson_plans_keep_provenance_out_of_lesson_files(tmp_pat
 
     assert "## Opening Script" in lesson_text
     assert "## Warm-Up Options" in lesson_text
+    assert "Submission / Win Condition" not in lesson_text
     assert "source_refs" not in lesson_text
     assert "claim_label" not in lesson_text
     assert "## KB-Grounded Inputs" in grounding_text
@@ -259,3 +260,47 @@ related_pages: []
 
     assert result.returncode != 0
     assert "example KB pages" in result.stderr
+
+
+def test_generate_coach_lesson_plans_offensive_cycles_render_submission_block(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_example_kb(repo)
+    write_job(repo)
+
+    subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "coach-job"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    lesson_text = (repo / "generated" / "coach-job" / "lesson" / "adult" / "week-01-lesson-plan.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "- **Submission:" in lesson_text
+    assert "- **Situational Options**" in lesson_text
+
+
+def test_generate_coach_lesson_plans_defensive_cycles_keep_situational_without_submission_block(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_example_kb(repo)
+    write_job(repo)
+
+    subprocess.run(
+        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "coach-job"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    lesson_text = (repo / "generated" / "coach-job" / "lesson" / "adult" / "week-03-lesson-plan.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "- **Submission:" not in lesson_text
+    assert "- **Situational Options**" in lesson_text
