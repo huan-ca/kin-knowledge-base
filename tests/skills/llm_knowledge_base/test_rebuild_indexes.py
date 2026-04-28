@@ -251,10 +251,13 @@ related_pages: [curriculum-week-design-rules]
     subprocess.run([sys.executable, str(REBUILD_SCRIPT), str(repo)], check=True)
     initial_index_text = (repo / "kb" / "index.md").read_text(encoding="utf-8")
     initial_gap_report_text = (repo / "generated" / "reports" / "gap-report.md").read_text(encoding="utf-8")
+    initial_link_map = json.loads((repo / ".kb-state" / "link-map.json").read_text(encoding="utf-8"))
     assert "Youth 24-Week Theme Map" in initial_index_text
     assert "Adult 24-Week Theme Map" in initial_index_text
     assert "Youth 24-Week Theme Map" in initial_gap_report_text
     assert "Adult 24-Week Theme Map" in initial_gap_report_text
+    assert "youth-24-week-theme-map" in initial_link_map
+    assert "adult-24-week-theme-map" in initial_link_map
 
     youth_week_map_page.unlink()
     adult_week_map_page.unlink()
@@ -263,12 +266,15 @@ related_pages: [curriculum-week-design-rules]
 
     index_text = (repo / "kb" / "index.md").read_text(encoding="utf-8")
     gap_report_text = (repo / "generated" / "reports" / "gap-report.md").read_text(encoding="utf-8")
+    link_map = json.loads((repo / ".kb-state" / "link-map.json").read_text(encoding="utf-8"))
 
     assert "- [Curriculum Week Design Rules](curriculum/curriculum-week-design-rules.md) (`confidence: 0.80`, `status: active`)" in index_text
     assert "Youth 24-Week Theme Map" not in index_text
     assert "Adult 24-Week Theme Map" not in index_text
     assert "Youth 24-Week Theme Map" not in gap_report_text
     assert "Adult 24-Week Theme Map" not in gap_report_text
+    assert "youth-24-week-theme-map" not in link_map
+    assert "adult-24-week-theme-map" not in link_map
 
 
 def test_rebuild_indexes_includes_nested_index_and_readme_pages_without_re_reading_generated_top_level_index(tmp_path):

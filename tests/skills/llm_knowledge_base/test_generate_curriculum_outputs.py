@@ -156,6 +156,109 @@ related_pages: []
     )
 
 
+def write_poisoned_kb_week_maps(repo: Path) -> None:
+    source_dir = repo / "kb" / "sources"
+    write_page(
+        source_dir / "overview.md",
+        """---
+id: source-overview
+type: source
+title: "Overview"
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Overview
+""",
+    )
+    write_page(
+        source_dir / "compendium.md",
+        """---
+id: source-compendium
+type: source
+title: "Compendium"
+status: active
+confidence: 1.0
+source_refs: []
+related_pages: []
+---
+# Compendium
+""",
+    )
+
+    write_theme_map_page(
+        repo,
+        relative_path="kb/curriculum/youth-24-week-theme-map.md",
+        page_id="youth-24-week-theme-map",
+        title="Youth 24-Week Theme Map",
+        source_page_id="source-overview",
+        weeks=[
+            {
+                "week": 1,
+                "theme": "KB Youth Poison Theme",
+                "cycle": "defensive",
+                "teaching_goal": "KB youth poison goal",
+                "coach_notes": "KB youth poison coach notes",
+                "sections": [
+                    {
+                        "name": "Ground Focus",
+                        "focus": "KB youth poison focus",
+                        "level_1": "KB youth poison level 1",
+                        "level_2": "KB youth poison level 2",
+                        "coach_notes": "KB youth poison section note",
+                    }
+                ],
+            }
+        ],
+    )
+    write_theme_map_page(
+        repo,
+        relative_path="kb/curriculum/adult-24-week-theme-map.md",
+        page_id="adult-24-week-theme-map",
+        title="Adult 24-Week Theme Map",
+        source_page_id="source-overview",
+        weeks=[
+            {
+                "week": 1,
+                "theme": "KB Adult Poison Theme",
+                "cycle": "defensive",
+                "teaching_goal": "KB adult poison goal",
+                "coach_notes": "KB adult poison coach notes",
+                "adult_specific_notes": "KB adult poison specific notes",
+                "sections": [
+                    {
+                        "name": "Ground Focus",
+                        "focus": "KB adult poison focus",
+                        "level_1": "KB adult poison level 1",
+                        "level_2": "KB adult poison level 2",
+                        "coach_notes": "KB adult poison section note",
+                    }
+                ],
+            }
+        ],
+    )
+    write_theme_map_page(
+        repo,
+        relative_path="kb/curriculum/tots-12-week-theme-map.md",
+        page_id="tots-12-week-theme-map",
+        title="Tots 12-Week Theme Map",
+        source_page_id="source-compendium",
+        weeks=[
+            {
+                "week": 1,
+                "cycle": "foundation",
+                "theme": "KB Tots Poison Theme",
+                "movement_theme": "KB tots poison movement",
+                "game": "KB tots poison game",
+                "coordination_focus": "KB tots poison focus",
+                "bjj_exposure": "KB tots poison exposure",
+                "coach_notes": "KB tots poison coach notes",
+            }
+        ],
+    )
+
+
 def seed_repo_with_sources_and_theme_maps(repo: Path) -> None:
     source_dir = repo / "kb" / "sources"
     write_page(
@@ -459,13 +562,31 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
     seed_minimal_framework_repo(repo)
+    write_poisoned_kb_week_maps(repo)
     write_generated_week_map_page(
         repo,
         program="youth",
         page_id="generated-youth-week-map",
         title="Youth Generated Week Map",
         source_kb_pages=["kb/curriculum/youth-24-week-curriculum-framework.md"],
-        weeks=build_youth_weeks(),
+        weeks=[
+            {
+                "week": 1,
+                "theme": "Generated Youth Sentinel Theme",
+                "cycle": "defensive",
+                "teaching_goal": "Generated youth sentinel goal",
+                "coach_notes": "Generated youth sentinel coach notes",
+                "sections": [
+                    {
+                        "name": "Ground Focus",
+                        "focus": "Generated youth sentinel focus",
+                        "level_1": "Generated youth sentinel level 1",
+                        "level_2": "Generated youth sentinel level 2",
+                        "coach_notes": "Generated youth sentinel section note",
+                    }
+                ],
+            }
+        ],
     )
     write_generated_week_map_page(
         repo,
@@ -473,7 +594,25 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
         page_id="generated-adult-week-map",
         title="Adult Generated Week Map",
         source_kb_pages=["kb/curriculum/adult-24-week-curriculum-framework.md"],
-        weeks=build_adult_weeks(),
+        weeks=[
+            {
+                "week": 1,
+                "theme": "Generated Adult Sentinel Theme",
+                "cycle": "defensive",
+                "teaching_goal": "Generated adult sentinel goal",
+                "coach_notes": "Generated adult sentinel coach notes",
+                "adult_specific_notes": "Generated adult sentinel specific notes",
+                "sections": [
+                    {
+                        "name": "Ground Focus",
+                        "focus": "Generated adult sentinel focus",
+                        "level_1": "Generated adult sentinel level 1",
+                        "level_2": "Generated adult sentinel level 2",
+                        "coach_notes": "Generated adult sentinel section note",
+                    }
+                ],
+            }
+        ],
     )
     write_generated_week_map_page(
         repo,
@@ -481,10 +620,20 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
         page_id="generated-tots-week-map",
         title="Tots Generated Week Map",
         source_kb_pages=["kb/curriculum/tots-12-week-curriculum-framework.md"],
-        weeks=build_tots_weeks(),
+        weeks=[
+            {
+                "week": 1,
+                "cycle": "foundation",
+                "theme": "Generated Tots Sentinel Theme",
+                "movement_theme": "Generated tots sentinel movement",
+                "game": "Generated tots sentinel game",
+                "coordination_focus": "Generated tots sentinel focus",
+                "bjj_exposure": "Generated tots sentinel exposure",
+                "coach_notes": "Generated tots sentinel coach notes",
+            }
+        ],
     )
     seed_repo_reports(repo)
-    remove_kb_week_maps(repo)
     write_stage2_job_file(repo, "weekly-curriculum")
 
     result = subprocess.run(
@@ -498,15 +647,20 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
 
     generated_week_map = repo / "generated" / "weekly-curriculum" / "week-maps" / "adult-24-week-theme-map.md"
     generated_week_map_text = generated_week_map.read_text(encoding="utf-8")
+    adult_curriculum_text = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md"
+    ).read_text(encoding="utf-8")
 
     assert generated_week_map.exists()
     assert "type: generated-curriculum-candidate" in generated_week_map_text
     assert "```json" in generated_week_map_text
     assert (repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md").exists()
-    assert "Adult Generated Week Map" in generated_week_map_text
+    assert "Generated Adult Sentinel Theme" in adult_curriculum_text
+    assert "Generated adult sentinel focus" in adult_curriculum_text
+    assert "Generated adult sentinel goal" in adult_curriculum_text
 
 
-def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path, monkeypatch):
+def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path):
     repo = tmp_path / "demo-repo"
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
@@ -515,21 +669,8 @@ def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(t
     remove_kb_week_maps(repo)
     write_stage2_job_file(repo, "weekly-curriculum")
 
-    monkeypatch.setattr(
-        curriculum,
-        "load_program_data",
-        lambda *_args, **_kwargs: pytest.fail("should read generated week maps instead of kb week maps"),
-    )
-
     with pytest.raises(FileNotFoundError, match="generated week map"):
-        curriculum.generate(
-            repo,
-            {"generator": "curriculum"},
-            {
-                "job_name": "weekly-curriculum",
-                "notes_sections": {"Instructions": "", "Q&A": ""},
-            },
-        )
+        curriculum.load_generated_week_map(repo, "weekly-curriculum", "adult")
 
 
 def test_generate_curriculum_outputs_include_level_sections_and_program_specific_notes(tmp_path):
