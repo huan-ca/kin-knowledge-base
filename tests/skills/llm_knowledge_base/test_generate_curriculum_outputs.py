@@ -14,6 +14,7 @@ if str(SKILL_SCRIPTS_FOR_IMPORTS) not in sys.path:
     sys.path.insert(0, str(SKILL_SCRIPTS_FOR_IMPORTS))
 
 from repo_generators import curriculum
+from run_generation import load_job_spec
 
 INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
 RUN_SCRIPT = Path("skills/llm-knowledge-base/scripts/run_generation.py").resolve()
@@ -658,19 +659,31 @@ def test_generate_curriculum_outputs_writes_generated_week_maps_and_uses_them(tm
     assert "Generated Adult Sentinel Theme" in adult_curriculum_text
     assert "Generated adult sentinel focus" in adult_curriculum_text
     assert "Generated adult sentinel goal" in adult_curriculum_text
+    assert "KB adult poison focus" not in adult_curriculum_text
 
 
-def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path):
+def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path, monkeypatch):
     repo = tmp_path / "demo-repo"
     repo.mkdir()
     subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
     seed_minimal_framework_repo(repo)
+    write_poisoned_kb_week_maps(repo)
     seed_repo_reports(repo)
-    remove_kb_week_maps(repo)
     write_stage2_job_file(repo, "weekly-curriculum")
+    job_spec, job_context = load_job_spec(repo, "weekly-curriculum")
+
+    generated_week_map_root = repo / "generated" / "weekly-curriculum" / "week-maps"
+    original_write_text = curriculum.write_text
+
+    def guarded_write_text(path: Path, content: str, overwrite: bool = False) -> None:
+        if path.is_relative_to(generated_week_map_root):
+            return
+        original_write_text(path, content, overwrite=overwrite)
+
+    monkeypatch.setattr(curriculum, "write_text", guarded_write_text)
 
     with pytest.raises(FileNotFoundError, match="generated week map"):
-        curriculum.load_generated_week_map(repo, "weekly-curriculum", "adult")
+        curriculum.generate(repo, job_spec, job_context)
 
 
 def test_generate_curriculum_outputs_include_level_sections_and_program_specific_notes(tmp_path):
