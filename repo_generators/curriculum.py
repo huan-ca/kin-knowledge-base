@@ -10,19 +10,25 @@ from common import ensure_dir, parse_frontmatter, write_text
 
 PROGRAM_CONFIG = {
     "youth": {
-        "page_path": "kb/curriculum/youth-24-week-theme-map.md",
+        "legacy_page_path": "kb/curriculum/youth-24-week-theme-map.md",
+        "generated_filename": "youth-24-week-theme-map.md",
         "class_length": "60 minutes",
         "program_title": "Youth",
+        "default_title": "Youth 24-Week Theme Map",
     },
     "adult": {
-        "page_path": "kb/curriculum/adult-24-week-theme-map.md",
+        "legacy_page_path": "kb/curriculum/adult-24-week-theme-map.md",
+        "generated_filename": "adult-24-week-theme-map.md",
         "class_length": "60 minutes",
         "program_title": "Adult",
+        "default_title": "Adult 24-Week Theme Map",
     },
     "tots": {
-        "page_path": "kb/curriculum/tots-12-week-theme-map.md",
+        "legacy_page_path": "kb/curriculum/tots-12-week-theme-map.md",
+        "generated_filename": "tots-12-week-theme-map.md",
         "class_length": "30 minutes",
         "program_title": "Tots",
+        "default_title": "Tots 12-Week Theme Map",
     },
 }
 
@@ -69,15 +75,45 @@ def extract_json_block(body: str) -> dict:
     return json.loads(payload)
 
 
-def load_program_data(repo_root: Path, program: str) -> tuple[dict, list[dict]]:
-    config = PROGRAM_CONFIG[program]
-    page_path = repo_root / config["page_path"]
-    metadata, body = parse_frontmatter(page_path.read_text(encoding="utf-8"))
+def load_week_map_page(page_path: Path) -> tuple[str, dict, list[dict]]:
+    text = page_path.read_text(encoding="utf-8")
+    metadata, body = parse_frontmatter(text)
     payload = extract_json_block(body)
     weeks = payload.get("weeks")
     if not isinstance(weeks, list):
         raise ValueError(f"weeks payload must be a list in {page_path}")
+    return text, metadata, weeks
+
+
+def generated_week_map_path(repo_root: Path, job_name: str, program: str) -> Path:
+    return repo_root / "generated" / job_name / "week-maps" / PROGRAM_CONFIG[program]["generated_filename"]
+
+
+def configured_kb_pages(job_spec: dict) -> list[str]:
+    inputs = job_spec.get("inputs", {})
+    kb_pages = inputs.get("kb_pages", [])
+    if not isinstance(kb_pages, list):
+        raise ValueError("job spec inputs.kb_pages must be a list")
+    return [str(page) for page in kb_pages]
+
+
+def source_basis(metadata: dict) -> str:
+    source_items = metadata.get("source_refs") or metadata.get("source_kb_pages") or []
+    if isinstance(source_items, list):
+        return ", ".join(str(item) for item in source_items) or "Not specified"
+    return str(source_items) or "Not specified"
+
+
+def load_bootstrap_week_data(program: str) -> tuple[dict, list[dict]]:
+    repo_root = Path(__file__).resolve().parents[1]
+    page_path = repo_root / PROGRAM_CONFIG[program]["legacy_page_path"]
+    if not page_path.exists():
+        raise FileNotFoundError(f"missing bootstrap week map: {page_path}")
+    _, metadata, weeks = load_week_map_page(page_path)
     return metadata, weeks
+
+
+BOOTSTRAP_WEEK_DATA = {program: load_bootstrap_week_data(program) for program in PROGRAM_CONFIG}
 
 
 def build_kb_corpus(repo_root: Path) -> str:
@@ -213,6 +249,114 @@ def write_new_facts(repo_root: Path, output_root: Path, job_name: str, notes_sec
     return output_paths, len(records)
 
 
+def render_generated_week_map(program: str, source_kb_pages: list[str], weeks: list[dict], metadata: dict | None = None) -> str:
+    metadata = metadata or {}
+    title = metadata.get("title", PROGRAM_CONFIG[program]["default_title"])
+    page_id = metadata.get("id", f"generated-{program}-week-map")
+    confidence = metadata.get("confidence", "0.95")
+
+    source_lines = source_kb_pages or []
+    warnings = metadata.get("warnings") or ["none"]
+    generation_notes = metadata.get("generation_notes") or ["two-stage curriculum generator artifact"]
+
+    lines = [
+        "---",
+        f"id: {page_id}",
+        "type: generated-curriculum-candidate",
+        f'title: "{title}"',
+        "status: active",
+        "source_kb_pages:",
+    ]
+    lines.extend(f"  - {page}" for page in source_lines)
+    lines.append("generation_notes:")
+    lines.extend(f"  - {note}" for note in generation_notes)
+    lines.append("warnings:")
+    lines.extend(f"  - {warning}" for warning in warnings)
+    lines.extend(
+        [
+            f"confidence: {confidence}",
+            "---",
+            f"# {title}",
+            "",
+            f"Candidate week map for {program}.",
+            "",
+            "```json",
+            json.dumps({"weeks": weeks}, indent=2),
+            "```",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def existing_generated_week_map(repo_root: Path, job_name: str, program: str) -> str | None:
+    page_path = generated_week_map_path(repo_root, job_name, program)
+    if not page_path.exists():
+        return None
+    return page_path.read_text(encoding="utf-8")
+
+
+def legacy_week_map_input(job_spec: dict, program: str) -> str | None:
+    legacy_path = PROGRAM_CONFIG[program]["legacy_page_path"]
+    if legacy_path in configured_kb_pages(job_spec):
+        return legacy_path
+    return None
+
+
+def synthesize_program_week_map(repo_root: Path, job_spec: dict, job_context: dict, program: str) -> str:
+    existing_text = existing_generated_week_map(repo_root, job_context["job_name"], program)
+    if existing_text is not None:
+        return existing_text
+
+    legacy_path = legacy_week_map_input(job_spec, program)
+    if legacy_path is not None:
+        _, metadata, weeks = load_week_map_page(repo_root / legacy_path)
+        return render_generated_week_map(
+            program,
+            [legacy_path],
+            weeks,
+            metadata={
+                "confidence": metadata.get("confidence", "0.95"),
+                "generation_notes": ["derived from legacy KB week-map input"],
+                "id": metadata.get("id", f"generated-{program}-week-map"),
+                "title": metadata.get("title", PROGRAM_CONFIG[program]["default_title"]),
+                "warnings": ["none"],
+            },
+        )
+
+    metadata, weeks = BOOTSTRAP_WEEK_DATA[program]
+    return render_generated_week_map(
+        program,
+        configured_kb_pages(job_spec),
+        weeks,
+        metadata={
+            "confidence": metadata.get("confidence", "0.95"),
+            "generation_notes": ["bootstrapped from the framework-stage curriculum baseline"],
+            "id": f"generated-{program}-week-map",
+            "title": metadata.get("title", PROGRAM_CONFIG[program]["default_title"]),
+            "warnings": ["none"],
+        },
+    )
+
+
+def write_generated_week_maps(repo_root: Path, job_spec: dict, job_context: dict) -> list[str]:
+    output_paths: list[str] = []
+    for program in PROGRAM_CONFIG:
+        page_path = generated_week_map_path(repo_root, job_context["job_name"], program)
+        page_text = synthesize_program_week_map(repo_root, job_spec, job_context, program)
+        write_text(page_path, page_text, overwrite=True)
+        output_paths.append(page_path.relative_to(repo_root).as_posix())
+    return output_paths
+
+
+def load_generated_program_data(repo_root: Path, job_name: str, program: str) -> tuple[dict, list[dict]]:
+    page_path = generated_week_map_path(repo_root, job_name, program)
+    if not page_path.exists():
+        raise FileNotFoundError(f"missing generated week map: {page_path.relative_to(repo_root).as_posix()}")
+    _, metadata, weeks = load_week_map_page(page_path)
+    return metadata, weeks
+
+
 def render_metadata_block(program: str, week: dict) -> list[str]:
     lines = [
         "## Metadata",
@@ -275,7 +419,7 @@ def render_youth_or_adult_curriculum(program: str, metadata: dict, week: dict) -
         f"- Cycle: {week.get('cycle', 'unspecified')}",
         f"- Teaching Goal: {week.get('teaching_goal', 'Not specified')}",
         f"- Class Length: {PROGRAM_CONFIG[program]['class_length']}",
-        f"- Source Basis: {', '.join(metadata.get('source_refs', [])) or 'Not specified'}",
+        f"- Source Basis: {source_basis(metadata)}",
         "",
         "## Coach Notes",
         week.get("coach_notes", "No coach notes provided."),
@@ -317,7 +461,7 @@ def render_tots_curriculum(metadata: dict, week: dict) -> str:
         "## Snapshot",
         f"- Theme: {week['theme']}",
         f"- Class Length: {PROGRAM_CONFIG['tots']['class_length']}",
-        f"- Source Basis: {', '.join(metadata.get('source_refs', [])) or 'Not specified'}",
+        f"- Source Basis: {source_basis(metadata)}",
         "",
         "## Movement Theme",
         week.get("movement_theme", "Not specified"),
@@ -488,9 +632,10 @@ def generate(repo_root: Path, job_spec: dict, job_context: dict) -> dict:
     reset_output_dir(output_root / "new-facts")
 
     output_paths: list[str] = []
+    output_paths.extend(write_generated_week_maps(repo_root, job_spec, job_context))
 
     for program in PROGRAM_CONFIG:
-        metadata, weeks = load_program_data(repo_root, program)
+        metadata, weeks = load_generated_program_data(repo_root, job_name, program)
         output_dir = ensure_dir(curriculum_root / program)
         for week in weeks:
             for output_type in OUTPUT_TYPES:
