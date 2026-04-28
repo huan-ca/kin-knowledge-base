@@ -85,10 +85,18 @@ Required fields:
 - `generation_notes`
 - `warnings`
 - `confidence`
+- `synthesis_mode`
+- `expert_review_required`
+- optional `kb_gap_refs`
 
 Suggested `type` value:
 
 - `generated-curriculum-candidate`
+
+Suggested synthesis metadata:
+
+- `synthesis_mode: heuristic`
+- `expert_review_required: true`
 
 ### Body
 
@@ -114,7 +122,75 @@ Each week entry should preserve the current deterministic renderer contract as m
 - optional `coach_notes`
 - optional `gaps`
 
+For heuristic synthesis, each week entry should also carry review-oriented metadata:
+
+- optional `theme_basis`
+- optional `takedown_basis`
+- optional `ground_basis`
+- optional `submission_basis`
+- optional `expert_review_notes`
+- optional `kb_gaps`
+
+Use a short basis vocabulary:
+
+- `source-backed`
+- `heuristic`
+- `editorial-normalization`
+
 This keeps Stage 2 mostly compatible with the current `repo_generators/curriculum.py` rendering path.
+
+## Heuristic Synthesis Mode
+
+The preferred interim solution is deterministic heuristic synthesis from framework KB pages rather than silent failure or hidden fallback to legacy theme maps.
+
+### Synthesis Rules
+
+- Youth and adult programs use 24 weeks.
+- Tots uses 12 weeks.
+- Youth and adult weeks alternate between offensive and defensive cycles in two-week groupings.
+- Every youth and adult week must include both a takedown component and a ground component.
+- Submission or finishing content should attach to the ground theme rather than become a detached third pillar.
+- Adult final-cycle content should reserve lower-body offense and defense emphasis for the last two weeks.
+- Tots should remain movement-led, game-heavy, and lighter on technical density than youth or adult.
+
+### Heuristic Status Marking
+
+Heuristic content must be marked explicitly so the generated files can be reviewed and promoted intentionally.
+
+At file level:
+
+- mark the artifact as heuristic via frontmatter
+- require expert review
+- include KB gap references when known
+
+At week or field level:
+
+- mark which values are heuristic versus source-backed
+- include `expert_review_notes` for places where a domain expert should confirm or replace the inferred sequence
+- include `kb_gaps` for the KB prerequisites that are still missing or under-specified
+
+The generated week-map files should therefore function as review packets, not just machine outputs.
+
+## Expert Review Workflow
+
+The generated week-map files are the primary domain-expert handoff artifact.
+
+The intended review loop is:
+
+1. Stage 1 generates candidate week maps under `generated/<job>/week-maps/` with heuristic markers.
+2. Stage 2 renders downstream curriculum files from those candidate maps.
+3. The generated lesson files carry a compact provisional marker such as:
+   - `Curriculum Status: heuristic candidate`
+   - `Expert Review Required: yes`
+4. The detailed review burden stays in the week-map candidate files, not in every downstream lesson file.
+5. A domain expert reviews and edits the candidate week-map files directly.
+6. If the results are approved, the finalized artifact is added to `raw/` manually and later re-ingested into `kb/`.
+
+This preserves the repository contract:
+
+- generated candidate curriculum stays in `generated/`
+- promotion back into source evidence remains deliberate and human-controlled
+- heuristic content remains visible rather than being mistaken for source-authored curriculum
 
 ## KB Inputs And Gap Handling
 
