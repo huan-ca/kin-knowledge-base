@@ -14,10 +14,13 @@ Introduce the theme: Mount And Knee-On-Belly Escape Chains. Tell the class the g
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Defensive reactions from mount and knee on belly into half guard or full guard recovery.
-Teach Level 1 as the base pattern: Bridge, frame, and recover a safe half guard.
-Layer Level 2 only after the room is stable: Chain bridge and elbow-knee reactions when the top player floats between mount and knee on belly.
-Repeat the coach emphasis: Escapes should preserve elbows and neck position before anything else.
+### Lesson: Defensive reactions from mount and knee on belly into half guard or full guard recovery
+
+- **Primary Focus**
+  - Coaching tip: "Escapes should preserve elbows and neck position before anything else"
+  - Level 1: Bridge, frame, and recover a safe half guard
+  - Level 2: Chain bridge and elbow-knee reactions when the top player floats between mount and knee on belly
+  - Outcome: Link major-pin escapes into repeatable chains that hold up under heavier pace
 
 ## Adult-Specific Notes
 Use alternating mount and knee-on-belly pressure so the bottom player must connect escapes dynamically.

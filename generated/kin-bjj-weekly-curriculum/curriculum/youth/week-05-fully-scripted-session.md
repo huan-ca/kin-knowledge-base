@@ -14,10 +14,13 @@ Introduce the theme: Open Guard Retention And Knee-Elbow Recovery. Tell the clas
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Open guard retention, hip turns, and knee-elbow recovery against passing pressure.
-Teach Level 1 as the base pattern: Recover one knee line and rebuild a square guard.
-Layer Level 2 only after the room is stable: Add a second leg pummel or angle change to recover a stronger guard family.
-Repeat the coach emphasis: Ecological framing works well here because students can react to real passing energy.
+### Lesson: Open guard retention, hip turns, and knee-elbow recovery against passing pressure
+
+- **Primary Focus**
+  - Coaching tip: "Ecological framing works well here because students can react to real passing energy"
+  - Level 1: Recover one knee line and rebuild a square guard
+  - Level 2: Add a second leg pummel or angle change to recover a stronger guard family
+  - Outcome: Show students how to keep their feet and knees in front of the passer and recover structure early
 
 ## Closing Script
 Recap the main idea, reinforce the best example from the room, and set the expectation for live application.

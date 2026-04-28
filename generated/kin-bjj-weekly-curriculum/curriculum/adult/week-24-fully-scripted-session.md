@@ -14,10 +14,13 @@ Introduce the theme: Lower-Body Defense: Hand Fighting, Escapes, And Counter-Att
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Lower-body submission defense through hand fighting, knee-line clearing, and safe positional recovery.
-Teach Level 1 as the base pattern: Recognize the entanglement, clear the knee line, and regain top or neutral position.
-Layer Level 2 only after the room is stable: Add a controlled counter-attack or passing follow-up once the danger is clearly removed.
-Repeat the coach emphasis: Defense wins first; countering only starts after the knee line is safe.
+### Lesson: Lower-body submission defense through hand fighting, knee-line clearing, and safe positional recovery
+
+- **Primary Focus**
+  - Coaching tip: "Defense wins first; countering only starts after the knee line is safe"
+  - Level 1: Recognize the entanglement, clear the knee line, and regain top or neutral position
+  - Level 2: Add a controlled counter-attack or passing follow-up once the danger is clearly removed
+  - Outcome: Finish the adult cycle with practical leg-lock defense, escape priorities, and safe countering concepts
 
 ## Adult-Specific Notes
 Compare the defensive priorities across IBJJF-style restrictions and looser rulesets without overcomplicating the week.

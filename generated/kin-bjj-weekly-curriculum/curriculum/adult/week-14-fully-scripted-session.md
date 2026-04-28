@@ -14,10 +14,13 @@ Introduce the theme: Back Survival, Hand Fighting, And Rear-Escape Chains. Tell 
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Back defense, two-on-one hand fighting, and escaping to safe top or guard positions.
-Teach Level 1 as the base pattern: Clear the choking threat and escape one hook line.
-Layer Level 2 only after the room is stable: Chain the first escape into a turn or top-position recovery before the attacker resets.
-Repeat the coach emphasis: The neck is always the first emergency.
+### Lesson: Back defense, two-on-one hand fighting, and escaping to safe top or guard positions
+
+- **Primary Focus**
+  - Coaching tip: "The neck is always the first emergency"
+  - Level 1: Clear the choking threat and escape one hook line
+  - Level 2: Chain the first escape into a turn or top-position recovery before the attacker resets
+  - Outcome: Organize adult back defense around hand fighting, shoulder line, and hook removal
 
 ## Adult-Specific Notes
 Adults can handle more detailed hook management and seatbelt-breaking mechanics, but the order of priorities stays simple.

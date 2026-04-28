@@ -14,10 +14,17 @@ Introduce the theme: Rear Mount Control To Strangle Finish. Tell the class the g
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Rear mount control, hook management, and clean rear-strangle mechanics.
-Teach Level 1 as the base pattern: Stabilize rear mount and complete the finish with proper hand placement.
-Layer Level 2 only after the room is stable: Switch sides or trap a defensive hand before re-entering the finish.
-Repeat the coach emphasis: Adults should feel how control reduces the need for squeezing.
+### Lesson: Rear mount control, hook management, and clean rear-strangle mechanics
+
+- **Primary Focus**
+  - Coaching tip: "Adults should feel how control reduces the need for squeezing"
+  - Level 1: Stabilize rear mount and complete the finish with proper hand placement
+  - Level 2: Switch sides or trap a defensive hand before re-entering the finish
+  - Outcome: Turn rear control into a high-percentage finishing system built on patient control and clean mechanics
+
+- **CLA/Situational Rolling Options**:
+  - Start from the core position in Rear mount control, hook management, and clean rear-strangle mechanics and work until stabilize rear mount and complete the finish with proper hand placement or the position resets.
+  - Start from a successful first exchange and continue until switch sides or trap a defensive hand before re-entering the finish or the defender escapes.
 
 ## Adult-Specific Notes
 Use realistic hand-fighting reactions before releasing students into live finishing rounds.

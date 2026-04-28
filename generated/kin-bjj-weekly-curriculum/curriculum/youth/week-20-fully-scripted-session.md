@@ -14,10 +14,15 @@ Introduce the theme: Double Leg And Body-Lock Entries To Passing Finish. Tell th
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Double leg or body-lock entry leading to stable top position and first pass.
-Teach Level 1 as the base pattern: Finish the takedown and stabilize in half guard top or headquarters.
-Layer Level 2 only after the room is stable: Continue directly into a knee-cut or pressure pass before the guard resets.
-Repeat the coach emphasis: Use posture and shoulder pressure after the finish so the top player does not get stuck.
+### Lesson: Double leg or body-lock entry leading to stable top position and first pass
+
+- **Takedown**
+  - Coaching tip: "Use posture and shoulder pressure after the finish so the top player does not get stuck"
+  - Level 1: Finish the takedown and stabilize in half guard top or headquarters
+  - Outcome: Blend wrestling-style takedown entries with immediate passing and settling behavior on the ground
+
+- **Ground: Passing Finish**
+  - Level 2: Continue directly into a knee-cut or pressure pass before the guard resets
 
 ## Closing Script
 Recap the main idea, reinforce the best example from the room, and set the expectation for live application.

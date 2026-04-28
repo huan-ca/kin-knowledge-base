@@ -14,10 +14,17 @@ Introduce the theme: Headquarters Passing And Knee-Cut Entry. Tell the class the
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Headquarters posture, leg stapling, and knee-cut passing.
-Teach Level 1 as the base pattern: Stabilize headquarters and complete one clean knee-cut to side control.
-Layer Level 2 only after the room is stable: Use a reaction from the defender to chain knee-cut into a second pass direction.
-Repeat the coach emphasis: Passing is complete only when hips and chest are settled.
+### Lesson: Headquarters posture, leg stapling, and knee-cut passing
+
+- **Primary Focus**
+  - Coaching tip: "Passing is complete only when hips and chest are settled"
+  - Level 1: Stabilize headquarters and complete one clean knee-cut to side control
+  - Level 2: Use a reaction from the defender to chain knee-cut into a second pass direction
+  - Outcome: Connect headquarters structure to a controlled passing lane that finishes with chest pressure
+
+- **CLA/Situational Rolling Options**:
+  - Start from the core position in Headquarters posture, leg stapling, and knee-cut passing and work until stabilize headquarters and complete one clean knee-cut to side control or the position resets.
+  - Start from a successful first exchange and continue until use a reaction from the defender to chain knee-cut into a second pass direction or the defender escapes.
 
 ## Adult-Specific Notes
 Build some rounds from headquarters with progressive resistance before allowing full passing.

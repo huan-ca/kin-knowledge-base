@@ -14,10 +14,19 @@ Introduce the theme: Armbar And Triangle Defense. Tell the class the goal is Tea
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Defensive posture and escape routes against armbar and triangle attempts.
-Teach Level 1 as the base pattern: Recognize the threat early and use one clean posture or stack escape.
-Layer Level 2 only after the room is stable: Chain the first defense into a safe pass or neutral reset before the attacker reconnects.
-Repeat the coach emphasis: Safety and tap timing should be discussed every class this week.
+### Lesson: Defensive posture and escape routes against armbar and triangle attempts
+
+- **Ground**
+  - Coaching tip: "Safety and tap timing should be discussed every class this week"
+  - Level 1: Recognize the threat early and use one clean posture or stack escape
+
+- **Submission: Armbar**
+  - Level 2: Chain the first defense into a safe pass or neutral reset before the attacker reconnects
+  - Outcome: Teach submission awareness without panic by focusing on posture, stack direction, and early exits
+
+- **CLA/Situational Rolling Options**:
+  - Start from the core position in Defensive posture and escape routes against armbar and triangle attempts and work until recognize the threat early and use one clean posture or stack escape or the position resets.
+  - Start from a successful first exchange and continue until chain the first defense into a safe pass or neutral reset before the attacker reconnects or the defender escapes.
 
 ## Closing Script
 Recap the main idea, reinforce the best example from the room, and set the expectation for live application.

@@ -14,10 +14,15 @@ Introduce the theme: North-South Control And Transition Attacks. Tell the class 
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: North-south control, spin transitions, and submission entry timing.
-Teach Level 1 as the base pattern: Stabilize north-south and connect to one clean attack route.
-Layer Level 2 only after the room is stable: Chain north-south to side control or kimura-style attack windows if the first route closes.
-Repeat the coach emphasis: The chest stays connected even while rotating.
+### Lesson: North-south control, spin transitions, and submission entry timing
+
+- **Ground: Side Control (Top)**
+  - Coaching tip: "The chest stays connected even while rotating"
+  - Level 1: Stabilize north-south and connect to one clean attack route
+
+- **Submission: Kimura**
+  - Level 2: Chain north-south to side control or kimura-style attack windows if the first route closes
+  - Outcome: Use north-south as both a control point and a route to chained attacks
 
 ## Adult-Specific Notes
 Allow more exploration of attack branches once the core north-south control is stable.

@@ -14,10 +14,19 @@ Introduce the theme: Inside Reaps, Ouchi, And Osoto To Top Control. Tell the cla
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Inside trips and outer reaps that land directly into side control or scarf-hold pressure.
-Teach Level 1 as the base pattern: Hit one clean takedown and settle into top control before the partner scrambles.
-Layer Level 2 only after the room is stable: Chain the first off-balance into a second re-attack when the partner steps out.
-Repeat the coach emphasis: Finish the throw and settle immediately.
+### Lesson: Inside trips and outer reaps that land directly into side control or scarf-hold pressure
+
+- **Takedown**
+  - Coaching tip: "Finish the throw and settle immediately"
+  - Level 1: Hit one clean takedown and settle into top control before the partner scrambles
+  - Outcome: Tie basic takedown families to immediate top stabilization and pin awareness
+
+- **Ground: Side Control (Top)**
+  - Level 2: Chain the first off-balance into a second re-attack when the partner steps out
+
+- **CLA/Situational Rolling Options**:
+  - Start from the core position in Inside trips and outer reaps that land directly into side control or scarf-hold pressure and work until hit one clean takedown and settle into top control before the partner scrambles or the position resets.
+  - Start from a successful first exchange and continue until chain the first off-balance into a second re-attack when the partner steps out or the defender escapes.
 
 ## Adult-Specific Notes
 Adults can handle more hand-fighting and setup detail, especially around kuzushi and head position.

@@ -14,10 +14,13 @@ Introduce the theme: Toreando And Leg-Drag Passing Chains. Tell the class the go
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Passing around the legs with toreando and leg-drag concepts.
-Teach Level 1 as the base pattern: Use angle and grips to clear the feet and secure side control.
-Layer Level 2 only after the room is stable: Switch from toreando to leg drag when the defender squares back in.
-Repeat the coach emphasis: The finish should lock the knees together or pin the hips before advancing.
+### Lesson: Passing around the legs with toreando and leg-drag concepts
+
+- **Primary Focus**
+  - Coaching tip: "The finish should lock the knees together or pin the hips before advancing"
+  - Level 1: Use angle and grips to clear the feet and secure side control
+  - Level 2: Switch from toreando to leg drag when the defender squares back in
+  - Outcome: Grow passing options around the legs while still demanding strong finishing control
 
 ## Adult-Specific Notes
 Use realistic open-guard grips so the passer must solve actual frames rather than scripted legs.

@@ -14,10 +14,15 @@ Introduce the theme: Side Control Control To Americana. Tell the class the goal 
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Side control pressure, far-side isolation, and americana mechanics.
-Teach Level 1 as the base pattern: Secure side control and finish the americana with clean elbow positioning.
-Layer Level 2 only after the room is stable: Flow from the americana threat into a straight-arm or mount transition when the partner defends.
-Repeat the coach emphasis: Top pressure should make the isolation easier, not compensate for weak grips.
+### Lesson: Side control pressure, far-side isolation, and americana mechanics
+
+- **Ground: Side Control (Top)**
+  - Coaching tip: "Top pressure should make the isolation easier, not compensate for weak grips"
+  - Level 1: Secure side control and finish the americana with clean elbow positioning
+
+- **Submission: Americana**
+  - Level 2: Flow from the americana threat into a straight-arm or mount transition when the partner defends
+  - Outcome: Use top control to build one reliable attack route instead of a loose collection of submissions
 
 ## Adult-Specific Notes
 Adults can explore follow-up transitions when the americana defense is stubborn, but the base attack stays primary.

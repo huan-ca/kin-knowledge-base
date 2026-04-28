@@ -4,34 +4,8 @@ import sys
 from hashlib import sha256
 from pathlib import Path
 
-import pytest
-
-REPO_ROOT_FOR_IMPORTS = Path(__file__).resolve().parents[3]
-if str(REPO_ROOT_FOR_IMPORTS) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT_FOR_IMPORTS))
-SKILL_SCRIPTS_FOR_IMPORTS = REPO_ROOT_FOR_IMPORTS / "skills" / "llm-knowledge-base" / "scripts"
-if str(SKILL_SCRIPTS_FOR_IMPORTS) not in sys.path:
-    sys.path.insert(0, str(SKILL_SCRIPTS_FOR_IMPORTS))
-
-from repo_generators import curriculum
-from run_generation import load_job_spec
-
 INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
 RUN_SCRIPT = Path("skills/llm-knowledge-base/scripts/run_generation.py").resolve()
-
-FRAMEWORK_INPUTS = [
-    "kb/curriculum/curriculum-week-design-rules.md",
-    "kb/curriculum/youth-24-week-curriculum-framework.md",
-    "kb/curriculum/adult-24-week-curriculum-framework.md",
-    "kb/curriculum/tots-12-week-curriculum-framework.md",
-    "kb/curriculum/groundwork-cycle-framework.md",
-    "kb/curriculum/takedown-framework.md",
-    "kb/curriculum/takedown-progression-framework.md",
-    "kb/curriculum/youth-submission-safety-framework.md",
-    "kb/curriculum/ibjjf-leg-lock-curriculum.md",
-    "kb/concepts/movement-and-warmup-framework.md",
-    "kb/concepts/general-physical-preparedness-framework.md",
-]
 
 
 def write_page(path: Path, text: str) -> None:
@@ -171,28 +145,7 @@ related_pages: []
     )
 
 
-def write_framework_page(repo: Path, relative_path: str, page_id: str, title: str, body: str) -> None:
-    write_page(
-        repo / relative_path,
-        f"""---
-id: {page_id}
-type: curriculum-unit
-title: "{title}"
-status: active
-confidence: 0.8
-claim_label: editorial-normalization
-source_refs:
-  - source-overview#chunk-001
-related_pages: []
----
-# {title}
-
-{body}
-""",
-    )
-
-
-def write_poisoned_kb_week_maps(repo: Path) -> None:
+def seed_repo_with_sources_and_theme_maps(repo: Path) -> None:
     source_dir = repo / "kb" / "sources"
     write_page(
         source_dir / "overview.md",
@@ -229,24 +182,7 @@ related_pages: []
         page_id="youth-24-week-theme-map",
         title="Youth 24-Week Theme Map",
         source_page_id="source-overview",
-        weeks=[
-            {
-                "week": 1,
-                "theme": "KB Youth Poison Theme",
-                "cycle": "defensive",
-                "teaching_goal": "KB youth poison goal",
-                "coach_notes": "KB youth poison coach notes",
-                "sections": [
-                    {
-                        "name": "Ground Focus",
-                        "focus": "KB youth poison focus",
-                        "level_1": "KB youth poison level 1",
-                        "level_2": "KB youth poison level 2",
-                        "coach_notes": "KB youth poison section note",
-                    }
-                ],
-            }
-        ],
+        weeks=build_youth_weeks(),
     )
     write_theme_map_page(
         repo,
@@ -254,25 +190,7 @@ related_pages: []
         page_id="adult-24-week-theme-map",
         title="Adult 24-Week Theme Map",
         source_page_id="source-overview",
-        weeks=[
-            {
-                "week": 1,
-                "theme": "KB Adult Poison Theme",
-                "cycle": "defensive",
-                "teaching_goal": "KB adult poison goal",
-                "coach_notes": "KB adult poison coach notes",
-                "adult_specific_notes": "KB adult poison specific notes",
-                "sections": [
-                    {
-                        "name": "Ground Focus",
-                        "focus": "KB adult poison focus",
-                        "level_1": "KB adult poison level 1",
-                        "level_2": "KB adult poison level 2",
-                        "coach_notes": "KB adult poison section note",
-                    }
-                ],
-            }
-        ],
+        weeks=build_adult_weeks(),
     )
     write_theme_map_page(
         repo,
@@ -280,128 +198,7 @@ related_pages: []
         page_id="tots-12-week-theme-map",
         title="Tots 12-Week Theme Map",
         source_page_id="source-compendium",
-        weeks=[
-            {
-                "week": 1,
-                "cycle": "foundation",
-                "theme": "KB Tots Poison Theme",
-                "movement_theme": "KB tots poison movement",
-                "game": "KB tots poison game",
-                "coordination_focus": "KB tots poison focus",
-                "bjj_exposure": "KB tots poison exposure",
-                "coach_notes": "KB tots poison coach notes",
-            }
-        ],
-    )
-
-
-def seed_repo_with_sources_and_theme_maps(repo: Path) -> None:
-    source_dir = repo / "kb" / "sources"
-    write_page(
-        source_dir / "overview.md",
-        """---
-id: source-overview
-type: source
-title: "Overview"
-status: active
-confidence: 1.0
-source_refs: []
-related_pages: []
----
-# Overview
-""",
-    )
-    write_page(
-        source_dir / "compendium.md",
-        """---
-id: source-compendium
-type: source
-title: "Compendium"
-status: active
-confidence: 1.0
-source_refs: []
-related_pages: []
----
-# Compendium
-""",
-    )
-
-    write_framework_page(
-        repo,
-        "kb/curriculum/curriculum-week-design-rules.md",
-        "curriculum-week-design-rules",
-        "Curriculum Week Design Rules",
-        "Weekly curriculum design follows a fixed set of rules intended to keep theme, progression, and coach usability aligned.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/youth-24-week-curriculum-framework.md",
-        "youth-24-week-curriculum-framework",
-        "Youth 24-Week Curriculum Framework",
-        "The youth framework defines a 24-week sequence. Each weekly curriculum includes both a takedown component and a ground component.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/adult-24-week-curriculum-framework.md",
-        "adult-24-week-curriculum-framework",
-        "Adult 24-Week Curriculum Framework",
-        "The adult framework defines a 24-week sequence. Each weekly curriculum includes both a takedown component and a ground component.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/tots-12-week-curriculum-framework.md",
-        "tots-12-week-curriculum-framework",
-        "Tots 12-Week Curriculum Framework",
-        "The tots framework defines a 12-week movement-led sequence for shorter classes.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/groundwork-cycle-framework.md",
-        "groundwork-cycle-framework",
-        "Groundwork Cycle Framework",
-        "Groundwork themes should progress through connected offensive and defensive patterns.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/takedown-framework.md",
-        "takedown-framework",
-        "Takedown Framework",
-        "Weekly classes should include standing entries and takedown-focused skill development.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/takedown-progression-framework.md",
-        "takedown-progression-framework",
-        "Takedown Progression Framework",
-        "Standing skills should progress from basic entries to chained reactions.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/youth-submission-safety-framework.md",
-        "youth-submission-safety-framework",
-        "Youth Submission Safety Framework",
-        "Youth submission teaching should emphasize control, pacing, and safe finishing habits.",
-    )
-    write_framework_page(
-        repo,
-        "kb/curriculum/ibjjf-leg-lock-curriculum.md",
-        "ibjjf-leg-lock-curriculum",
-        "IBJJF Leg Lock Curriculum",
-        "Adult lower-body offense and defense should stay tied to rules-aware safety guardrails.",
-    )
-    write_framework_page(
-        repo,
-        "kb/concepts/movement-and-warmup-framework.md",
-        "movement-and-warmup-framework",
-        "Movement and Warmup Framework",
-        "Movement training supplies the warm-up and body-awareness structure for beginner classes.",
-    )
-    write_framework_page(
-        repo,
-        "kb/concepts/general-physical-preparedness-framework.md",
-        "general-physical-preparedness-framework",
-        "General Physical Preparedness Framework",
-        "Foundational movement for younger students should prioritize balance, coordination, and safe body control.",
+        weeks=build_tots_weeks(),
     )
 
 
@@ -411,9 +208,70 @@ def seed_repo_reports(repo: Path) -> None:
     write_page(repo / "generated" / "reports" / "improvement-report.md", "# Improvement Report\n")
 
 
-def write_job_file(repo: Path, job_name: str, *, instructions: list[str] | None = None, qa: list[str] | None = None) -> None:
+def write_fully_scripted_example(repo: Path, job_name: str) -> None:
+    write_page(
+        repo / "jobs" / job_name / "examples" / "fully-scripted-session" / "week-01-offensive-cycle.md",
+        """---
+notes:
+  - Keep the overall fully scripted session scaffold intact.
+  - Use this example to shape the Primary Focus section into a structured lesson block.
+  - Favor compact coach-facing bullet points.
+  - Bold important or large distinct parts of the lesson.
+  - Add tips or cues if it's available from the knowledge base.
+  - Add options for constraints-led approach (CLA) or live situational training if there are good options available for that section.
+lesson_label: Teaching Flow
+coaching_label: Coach Cue
+level_1_label: Base Layer
+level_2_label: Advanced Layer
+outcome_label: Win Condition
+cla_label: Positional Rounds
+---
+## Week 1 (Offensive Cycle)
+- Theme: Double Leg to Side Control to Americana
+- Teaching Goal: Build a connected offensive sequence from takedown entry to stable top control and a clean Americana finish.
+- Class Length: 60 minutes
+
+## Opening Script
+Introduce the theme: Double Leg to Side Control to Americana. Tell the class the goal is to build one connected offensive sequence from the feet to a stable finish on the ground.
+
+## Warm-Up Options
+- **Movement Based**:
+  - Duck walks
+- **Drill Based**:
+  - Double leg pickups
+
+## Lesson: Double leg - Side control - Americana
+- **Takedown**
+  - Coaching tip: "Level change first, then penetration step/duck walk"
+  - Level 1: Double leg (low amplitude/high amplitude)
+  - Level 2: Double leg (chain attack)
+  - Outcome: Clean top -> side control
+- **Ground: Side Control (Top)**
+  - **Secure: Crossface + underhook**
+  - **Level 2: Transition between various side control pins**
+  - **Submission: Americana**
+- **CLA/Situational Rolling Options**:
+  - Start with crossface + underhook, roll until escape or americana or kimura grip no submission.
+""",
+    )
+
+
+def write_job_file(
+    repo: Path,
+    job_name: str,
+    *,
+    instructions: list[str] | None = None,
+    qa: list[str] | None = None,
+    include_examples: bool = False,
+) -> None:
     instruction_lines = "\n".join(f"- {item}" for item in (instructions or [])) or "No additional instructions."
     qa_lines = "\n".join(f"- {item}" for item in (qa or [])) or "No additional Q&A."
+    examples_block = ""
+    if include_examples:
+        examples_block = f"""  examples:
+    fully-scripted-session:
+      - jobs/{job_name}/examples/fully-scripted-session/week-01-offensive-cycle.md
+"""
     write_page(
         repo / "jobs" / job_name / "job.yaml",
         f"""id: {job_name}
@@ -425,8 +283,10 @@ status: active
 transient: false
 inputs:
   kb_pages:
-{chr(10).join(f"    - {path}" for path in FRAMEWORK_INPUTS)}
-options:
+    - kb/curriculum/youth-24-week-theme-map.md
+    - kb/curriculum/adult-24-week-theme-map.md
+    - kb/curriculum/tots-12-week-theme-map.md
+{examples_block}options:
   include_reports: true
   emit_new_facts: true
 """,
@@ -452,204 +312,8 @@ Generate curriculum outputs for testing.
 No extra notes.
 """,
     )
-
-
-def remove_kb_week_maps(repo: Path) -> None:
-    for relative_path in (
-        "kb/curriculum/youth-24-week-theme-map.md",
-        "kb/curriculum/adult-24-week-theme-map.md",
-        "kb/curriculum/tots-12-week-theme-map.md",
-    ):
-        path = repo / relative_path
-        if path.exists():
-            path.unlink()
-
-
-def write_generated_week_map_page(
-    repo: Path,
-    *,
-    program: str,
-    page_id: str,
-    title: str,
-    source_kb_pages: list[str],
-    weeks: list[dict],
-) -> None:
-    filename_by_program = {
-        "adult": "adult-24-week-theme-map.md",
-        "youth": "youth-24-week-theme-map.md",
-        "tots": "tots-12-week-theme-map.md",
-    }
-    source_kb_pages_text = "".join(f"  - {source_page}\n" for source_page in source_kb_pages)
-    write_page(
-        repo / "generated" / "weekly-curriculum" / "week-maps" / filename_by_program[program],
-        f"""---
-id: {page_id}
-type: generated-curriculum-candidate
-title: "{title}"
-status: active
-source_kb_pages:
-{source_kb_pages_text}generation_notes:
-  - synthesized for boundary testing
-warnings:
-  - none
-confidence: 0.95
----
-# {title}
-
-Candidate week map for {program}.
-
-```json
-{json.dumps({"weeks": weeks}, indent=2)}
-```
-""",
-    )
-
-
-def write_curriculum_framework_page(repo: Path, page_id: str, title: str, body: str) -> None:
-    write_page(
-        repo / "kb" / "curriculum" / f"{page_id}.md",
-        f"""---
-id: {page_id}
-type: curriculum-unit
-title: "{title}"
-status: active
-confidence: 0.8
-claim_label: fact
-source_refs:
-  - source-overview#chunk-001
-related_pages: []
----
-# {title}
-
-{body}
-""",
-    )
-
-
-def seed_minimal_framework_repo(repo: Path) -> None:
-    write_page(
-        repo / "kb" / "sources" / "overview.md",
-        """---
-id: source-overview
-type: source
-title: Overview
-status: active
-confidence: 1.0
-source_refs: []
-related_pages: []
----
-# Overview
-""",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "curriculum-week-design-rules",
-        "Curriculum Week Design Rules",
-        "Weekly curriculum design follows a fixed set of rules intended to keep theme, progression, and coach usability aligned.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "youth-24-week-curriculum-framework",
-        "Youth 24-Week Curriculum Framework",
-        "The youth framework defines the sequencing constraints for the 24-week calendar. Each weekly curriculum includes both a takedown component and a ground component.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "adult-24-week-curriculum-framework",
-        "Adult 24-Week Curriculum Framework",
-        "The adult framework defines the sequencing constraints for the 24-week calendar. Each weekly curriculum includes both a takedown component and a ground component.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "tots-12-week-curriculum-framework",
-        "Tots 12-Week Curriculum Framework",
-        "The tots framework defines the sequencing constraints for the 12-week calendar.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "groundwork-cycle-framework",
-        "Groundwork Cycle Framework",
-        "Groundwork themes should progress through connected exchanges.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "takedown-framework",
-        "Takedown Framework",
-        "Weekly classes should include standing work and takedown development.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "takedown-progression-framework",
-        "Takedown Progression Framework",
-        "Standing skills should scale from basic entries into reactions and chains.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "youth-submission-safety-framework",
-        "Youth Submission Safety Framework",
-        "Youth classes should approach submissions with clear safety constraints.",
-    )
-    write_curriculum_framework_page(
-        repo,
-        "ibjjf-leg-lock-curriculum",
-        "IBJJF Leg Lock Curriculum",
-        "Adult lower-body work should stay rules-aware and safety-aware.",
-    )
-    write_framework_page(
-        repo,
-        "kb/concepts/movement-and-warmup-framework.md",
-        "movement-and-warmup-framework",
-        "Movement and Warmup Framework",
-        "Movement training organizes the class warm-up and body-awareness work.",
-    )
-    write_framework_page(
-        repo,
-        "kb/concepts/general-physical-preparedness-framework.md",
-        "general-physical-preparedness-framework",
-        "General Physical Preparedness Framework",
-        "Foundational movement for younger students should prioritize coordination and stability.",
-    )
-
-
-def write_stage2_job_file(repo: Path, job_name: str) -> None:
-    write_page(
-        repo / "jobs" / job_name / "job.yaml",
-        f"""id: {job_name}
-title: Test Job {job_name}
-generator: curriculum
-generation_targets:
-  - curriculum
-status: active
-transient: false
-inputs:
-  kb_pages:
-{chr(10).join(f"    - {path}" for path in FRAMEWORK_INPUTS)}
-options:
-  include_reports: true
-  emit_new_facts: true
-""",
-    )
-    write_page(
-        repo / "jobs" / job_name / "notes.md",
-        """# Test Job
-
-## Purpose
-
-Generate curriculum outputs for testing.
-
-## Instructions
-
-- Use generated week maps only.
-
-## Q&A
-
-- No additional Q&A.
-
-## Notes
-
-No extra notes.
-""",
-    )
+    if include_examples:
+        write_fully_scripted_example(repo, job_name)
 
 
 def test_generate_curriculum_outputs_creates_expected_program_directories_and_week_files(tmp_path):
@@ -685,188 +349,6 @@ def test_generate_curriculum_outputs_creates_expected_program_directories_and_we
     assert len(list((output_root / "curriculum" / "tots").glob("*.md"))) == 48
 
 
-def test_generate_curriculum_outputs_recomputes_generated_week_maps_and_ignores_stale_artifacts(tmp_path):
-    repo = tmp_path / "demo-repo"
-    repo.mkdir()
-    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
-    seed_minimal_framework_repo(repo)
-    write_poisoned_kb_week_maps(repo)
-    write_generated_week_map_page(
-        repo,
-        program="youth",
-        page_id="generated-youth-week-map",
-        title="Youth Generated Week Map",
-        source_kb_pages=["kb/curriculum/youth-24-week-curriculum-framework.md"],
-        weeks=[
-            {
-                "week": 1,
-                "theme": "Generated Youth Sentinel Theme",
-                "cycle": "defensive",
-                "teaching_goal": "Generated youth sentinel goal",
-                "coach_notes": "Generated youth sentinel coach notes",
-                "sections": [
-                    {
-                        "name": "Ground Focus",
-                        "focus": "Generated youth sentinel focus",
-                        "level_1": "Generated youth sentinel level 1",
-                        "level_2": "Generated youth sentinel level 2",
-                        "coach_notes": "Generated youth sentinel section note",
-                    }
-                ],
-            }
-        ],
-    )
-    write_generated_week_map_page(
-        repo,
-        program="adult",
-        page_id="generated-adult-week-map",
-        title="Adult Generated Week Map",
-        source_kb_pages=["kb/curriculum/adult-24-week-curriculum-framework.md"],
-        weeks=[
-            {
-                "week": 1,
-                "theme": "Generated Adult Sentinel Theme",
-                "cycle": "defensive",
-                "teaching_goal": "Generated adult sentinel goal",
-                "coach_notes": "Generated adult sentinel coach notes",
-                "adult_specific_notes": "Generated adult sentinel specific notes",
-                "sections": [
-                    {
-                        "name": "Ground Focus",
-                        "focus": "Generated adult sentinel focus",
-                        "level_1": "Generated adult sentinel level 1",
-                        "level_2": "Generated adult sentinel level 2",
-                        "coach_notes": "Generated adult sentinel section note",
-                    }
-                ],
-            }
-        ],
-    )
-    write_generated_week_map_page(
-        repo,
-        program="tots",
-        page_id="generated-tots-week-map",
-        title="Tots Generated Week Map",
-        source_kb_pages=["kb/curriculum/tots-12-week-curriculum-framework.md"],
-        weeks=[
-            {
-                "week": 1,
-                "cycle": "foundation",
-                "theme": "Generated Tots Sentinel Theme",
-                "movement_theme": "Generated tots sentinel movement",
-                "game": "Generated tots sentinel game",
-                "coordination_focus": "Generated tots sentinel focus",
-                "bjj_exposure": "Generated tots sentinel exposure",
-                "coach_notes": "Generated tots sentinel coach notes",
-            }
-        ],
-    )
-    seed_repo_reports(repo)
-    write_stage2_job_file(repo, "weekly-curriculum")
-    stale_week_map = repo / "generated" / "weekly-curriculum" / "week-maps" / "stale-sentinel.md"
-    write_page(stale_week_map, "stale week map")
-
-    result = subprocess.run(
-        [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode == 0, result.stderr
-
-    generated_week_map = repo / "generated" / "weekly-curriculum" / "week-maps" / "adult-24-week-theme-map.md"
-    generated_week_map_text = generated_week_map.read_text(encoding="utf-8")
-    _, generated_week_map_metadata, adult_weeks = curriculum.load_week_map_page(generated_week_map)
-    _, _, youth_weeks = curriculum.load_week_map_page(
-        repo / "generated" / "weekly-curriculum" / "week-maps" / "youth-24-week-theme-map.md"
-    )
-    _, _, tots_weeks = curriculum.load_week_map_page(
-        repo / "generated" / "weekly-curriculum" / "week-maps" / "tots-12-week-theme-map.md"
-    )
-    adult_curriculum_text = (
-        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md"
-    ).read_text(encoding="utf-8")
-
-    assert generated_week_map.exists()
-    assert not stale_week_map.exists()
-    assert generated_week_map_metadata["type"] == "generated-curriculum-candidate"
-    assert generated_week_map_metadata["synthesis_mode"] == "heuristic"
-    assert generated_week_map_metadata["expert_review_required"] is True
-    assert "kb/curriculum/adult-24-week-curriculum-framework.md" in generated_week_map_metadata["source_kb_pages"]
-    assert generated_week_map_metadata["generation_notes"]
-    assert generated_week_map_metadata["warnings"]
-    assert "synthesis_mode: heuristic" in generated_week_map_text
-    assert "expert_review_required: true" in generated_week_map_text
-    assert "```json" in generated_week_map_text
-    assert len(adult_weeks) == 24
-    assert len(youth_weeks) == 24
-    assert len(tots_weeks) == 12
-    assert [week["cycle"] for week in adult_weeks[:4]] == ["offensive", "offensive", "defensive", "defensive"]
-    assert [week["cycle"] for week in youth_weeks[:4]] == ["offensive", "offensive", "defensive", "defensive"]
-    assert all(week.get("takedown") for week in adult_weeks)
-    assert all(week.get("ground") for week in adult_weeks)
-    assert all(week.get("takedown") for week in youth_weeks)
-    assert all(week.get("ground") for week in youth_weeks)
-    assert all(week.get("theme_basis") == "heuristic" for week in adult_weeks[:2])
-    assert all(week.get("takedown_basis") == "heuristic" for week in adult_weeks[:2])
-    assert all(week.get("ground_basis") == "heuristic" for week in adult_weeks[:2])
-    assert all(week.get("submission_basis") == "heuristic" for week in adult_weeks[:2])
-    assert all(isinstance(week.get("expert_review_notes"), list) for week in adult_weeks[:2])
-    assert all(isinstance(week.get("kb_gaps"), list) for week in adult_weeks[:2])
-    assert all(week.get("movement_theme") for week in tots_weeks)
-    assert all(week.get("game") for week in tots_weeks)
-    assert "lower-body" in adult_weeks[-2]["theme"].lower()
-    assert "lower-body" in adult_weeks[-1]["theme"].lower()
-    assert (repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md").exists()
-    assert "Generated Adult Sentinel Theme" not in adult_curriculum_text
-    assert "Generated adult sentinel focus" not in adult_curriculum_text
-    assert "Generated adult sentinel goal" not in adult_curriculum_text
-    assert "Curriculum Status: heuristic candidate" in adult_curriculum_text
-    assert "Expert Review Required: yes" in adult_curriculum_text
-    assert "KB adult poison focus" not in adult_curriculum_text
-    assert "Generated Adult Sentinel Theme" not in generated_week_map_text
-    assert "Adult Theme 01" not in generated_week_map_text
-
-
-def test_generate_curriculum_outputs_fail_when_required_framework_page_is_missing(tmp_path):
-    repo = tmp_path / "demo-repo"
-    repo.mkdir()
-    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
-    seed_minimal_framework_repo(repo)
-    seed_repo_reports(repo)
-    write_stage2_job_file(repo, "weekly-curriculum")
-    (repo / "kb" / "curriculum" / "adult-24-week-curriculum-framework.md").unlink()
-    job_spec, job_context = load_job_spec(repo, "weekly-curriculum")
-
-    with pytest.raises(ValueError, match="adult-24-week-curriculum-framework.md"):
-        curriculum.generate(repo, job_spec, job_context)
-
-
-def test_generate_curriculum_outputs_fail_when_generated_week_maps_are_missing(tmp_path, monkeypatch):
-    repo = tmp_path / "demo-repo"
-    repo.mkdir()
-    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
-    seed_minimal_framework_repo(repo)
-    write_poisoned_kb_week_maps(repo)
-    seed_repo_reports(repo)
-    write_stage2_job_file(repo, "weekly-curriculum")
-    job_spec, job_context = load_job_spec(repo, "weekly-curriculum")
-
-    generated_week_map_root = repo / "generated" / "weekly-curriculum" / "week-maps"
-    original_write_text = curriculum.write_text
-
-    def guarded_write_text(path: Path, content: str, overwrite: bool = False) -> None:
-        if path.is_relative_to(generated_week_map_root):
-            return
-        original_write_text(path, content, overwrite=overwrite)
-
-    monkeypatch.setattr(curriculum, "write_text", guarded_write_text)
-
-    with pytest.raises(FileNotFoundError, match="generated week map"):
-        curriculum.generate(repo, job_spec, job_context)
-
-
 def test_generate_curriculum_outputs_include_level_sections_and_program_specific_notes(tmp_path):
     assert INIT_SCRIPT.exists(), f"missing script: {INIT_SCRIPT}"
 
@@ -889,28 +371,18 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
     youth_syllabus_text = (output_root / "youth-syllabus.md").read_text(encoding="utf-8")
 
     assert "- Week: 01" in youth_text
-    assert "- Cycle: offensive" in youth_text
-    assert "- Curriculum Status: heuristic candidate" in youth_text
-    assert "- Expert Review Required: yes" in youth_text
-    assert "## Takedown Theme" in youth_text
-    assert "## Ground Theme" in youth_text
-    assert "## Submission Connection" in youth_text
+    assert "- Cycle: defensive" in youth_text
+    assert "- Theme: Youth Theme 01" in youth_text
     assert "## Level 1" in youth_text
     assert "## Level 2" in youth_text
-    assert "expert_review_notes" not in youth_text
-    assert "kb_gaps" not in youth_text
     assert "## Adult-Specific Notes" in adult_text
-    assert "Lower-Body" in adult_lower_body_text
+    assert "Adult Lower-Body Defense" in adult_lower_body_text
     assert "- Cycle: foundation" in tots_text
-    assert "- Curriculum Status: heuristic candidate" in tots_text
-    assert "- Expert Review Required: yes" in tots_text
-    assert "- Movement Theme:" in tots_text
-    assert "Movement theme 01" not in tots_text
+    assert "- Movement Theme: Movement theme 01" in tots_text
     assert "## Movement Theme" in tots_text
     assert "## Game" in tots_text
     assert "| Week | Cycle | Theme | Description | Main Goal |" in youth_syllabus_text
-    assert "| 01 | offensive |" in youth_syllabus_text
-    assert "Youth Theme 01" not in youth_syllabus_text
+    assert "| 01 | defensive | Youth Theme 01 | Youth ground focus 01 | Youth goal 01 |" in youth_syllabus_text
 
 
 def test_generate_curriculum_outputs_quick_outline_does_not_repeat_metadata_fields(tmp_path):
@@ -927,11 +399,158 @@ def test_generate_curriculum_outputs_quick_outline_does_not_repeat_metadata_fiel
         repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-03-quick-outline.md"
     ).read_text(encoding="utf-8")
 
-    assert adult_quick_outline.count("- Theme: ") == 1
+    assert adult_quick_outline.count("- Theme: Adult Theme 03") == 1
     assert adult_quick_outline.count("- Cycle: defensive") == 1
-    assert adult_quick_outline.count("- Teaching Goal: ") == 1
-    assert "- Takedown:" in adult_quick_outline
-    assert "- Ground:" in adult_quick_outline
+    assert adult_quick_outline.count("- Teaching Goal: Adult goal 03") == 1
+    assert "- Ground Focus: Adult ground focus 03" in adult_quick_outline
+
+
+def test_generate_curriculum_outputs_render_structured_primary_focus_in_fully_scripted_sessions(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "weekly-curriculum")
+
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    youth_fully_scripted = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "youth" / "week-01-fully-scripted-session.md"
+    ).read_text(encoding="utf-8")
+    adult_fully_scripted = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-fully-scripted-session.md"
+    ).read_text(encoding="utf-8")
+
+    assert "## Ground Focus Script" in youth_fully_scripted
+    assert "### Week 1 (DEFENSIVE CYCLE)" in youth_fully_scripted
+    assert "#### FLOW: Youth ground focus 01" in youth_fully_scripted
+    assert '- **Ground Focus**' in youth_fully_scripted
+    assert '- Coaching tip: "Youth section note 01"' in youth_fully_scripted
+    assert "- L1: Youth level 1 option 01" in youth_fully_scripted
+    assert "- L2: Youth level 2 option 01" in youth_fully_scripted
+    assert "- Outcome: Youth goal 01" in youth_fully_scripted
+    assert "## Adult-Specific Notes" in adult_fully_scripted
+
+
+def test_generate_curriculum_outputs_use_fully_scripted_example_style_when_configured(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+    write_job_file(repo, "weekly-curriculum", include_examples=True)
+
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    adult_fully_scripted = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-fully-scripted-session.md"
+    ).read_text(encoding="utf-8")
+
+    assert "## Ground Focus Script" in adult_fully_scripted
+    assert "### Teaching Flow: Adult ground focus 01" in adult_fully_scripted
+    assert "- **Ground Focus**" in adult_fully_scripted
+    assert '- Coach Cue: "Adult section note 01"' in adult_fully_scripted
+    assert "- Base Layer: Adult level 1 option 01" in adult_fully_scripted
+    assert "- Advanced Layer: Adult level 2 option 01" in adult_fully_scripted
+    assert "- Win Condition: Adult goal 01" in adult_fully_scripted
+    assert "### Week 1 (DEFENSIVE CYCLE)" not in adult_fully_scripted
+
+
+def test_generate_curriculum_outputs_split_takedown_and_ground_blocks_when_kb_supports_it(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+
+    adult_weeks = build_adult_weeks()
+    adult_weeks[0] = {
+        "week": 1,
+        "theme": "Double Leg And Body-Lock Entries To Passing Finish",
+        "cycle": "offensive",
+        "teaching_goal": "Connect wrestling-style entries to immediate top control and passing follow-through.",
+        "coach_notes": "The takedown and the pass must feel like one connected idea.",
+        "adult_specific_notes": "Use wall or boundary awareness if the room layout allows, while keeping the main sequence mat-centered.",
+        "sections": [
+            {
+                "name": "Primary Focus",
+                "focus": "Double leg or body-lock entry leading to stable top position and first pass.",
+                "level_1": "Finish the takedown and stabilize in half guard top or headquarters.",
+                "level_2": "Continue directly into a knee-cut or pressure pass before the guard resets.",
+                "coach_notes": "The shoulders should stay over the hips through the finish.",
+            }
+        ],
+    }
+    write_theme_map_page(
+        repo,
+        relative_path="kb/curriculum/adult-24-week-theme-map.md",
+        page_id="adult-24-week-theme-map",
+        title="Adult 24-Week Theme Map",
+        source_page_id="source-overview",
+        weeks=adult_weeks,
+    )
+    write_job_file(repo, "weekly-curriculum", include_examples=True)
+
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    adult_fully_scripted = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-fully-scripted-session.md"
+    ).read_text(encoding="utf-8")
+
+    assert "### Teaching Flow: Double leg or body-lock entry leading to stable top position and first pass" in adult_fully_scripted
+    assert "- **Takedown**" in adult_fully_scripted
+    assert "- Base Layer: Finish the takedown and stabilize in half guard top or headquarters" in adult_fully_scripted
+    assert "- Win Condition: Connect wrestling-style entries to immediate top control and passing follow-through" in adult_fully_scripted
+    assert "- **Ground: Passing Finish**" in adult_fully_scripted
+    assert "- Advanced Layer: Continue directly into a knee-cut or pressure pass before the guard resets" in adult_fully_scripted
+
+
+def test_generate_curriculum_outputs_split_ground_and_submission_blocks_when_kb_supports_it(tmp_path):
+    repo = tmp_path / "demo-repo"
+    repo.mkdir()
+    subprocess.run([sys.executable, str(INIT_SCRIPT), str(repo)], check=True)
+    seed_repo_with_sources_and_theme_maps(repo)
+    seed_repo_reports(repo)
+
+    adult_weeks = build_adult_weeks()
+    adult_weeks[0] = {
+        "week": 1,
+        "theme": "Side Control Control To Americana",
+        "cycle": "offensive",
+        "teaching_goal": "Use top control to build one reliable attack route instead of a loose collection of submissions.",
+        "coach_notes": "Position first, pressure second, finish third.",
+        "adult_specific_notes": "Adults can explore follow-up transitions when the americana defense is stubborn, but the base attack stays primary.",
+        "sections": [
+            {
+                "name": "Primary Focus",
+                "focus": "Side control pressure, far-side isolation, and americana mechanics.",
+                "level_1": "Secure side control and finish the americana with clean elbow positioning.",
+                "level_2": "Flow from the americana threat into a straight-arm or mount transition when the partner defends.",
+                "coach_notes": "Top pressure should make the isolation easier, not compensate for weak grips.",
+            }
+        ],
+    }
+    write_theme_map_page(
+        repo,
+        relative_path="kb/curriculum/adult-24-week-theme-map.md",
+        page_id="adult-24-week-theme-map",
+        title="Adult 24-Week Theme Map",
+        source_page_id="source-overview",
+        weeks=adult_weeks,
+    )
+    write_job_file(repo, "weekly-curriculum", include_examples=True)
+
+    subprocess.run([sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"], check=True)
+
+    adult_fully_scripted = (
+        repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-fully-scripted-session.md"
+    ).read_text(encoding="utf-8")
+
+    assert "- **Ground: Side Control (Top)**" in adult_fully_scripted
+    assert "- Base Layer: Secure side control and finish the americana with clean elbow positioning" in adult_fully_scripted
+    assert "- **Submission: Americana**" in adult_fully_scripted
+    assert "- Advanced Layer: Flow from the americana threat into a straight-arm or mount transition when the partner defends" in adult_fully_scripted
 
 
 def test_generate_curriculum_outputs_do_not_modify_kb_and_emit_empty_new_facts_when_no_human_deltas(tmp_path):

@@ -14,10 +14,15 @@ Introduce the theme: Closed Guard Submission Chains. Tell the class the goal is 
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Closed guard armbar and triangle pathway with safe finishing mechanics.
-Teach Level 1 as the base pattern: Attack the straight armbar or triangle after clearing posture.
-Layer Level 2 only after the room is stable: Chain armbar to triangle or back to posture-breaking if the first attack stalls.
-Repeat the coach emphasis: Keep pressure directional and controlled; do not allow jumping into finishes.
+### Lesson: Closed guard armbar and triangle pathway with safe finishing mechanics
+
+- **Ground: Closed Guard**
+  - Coaching tip: "Keep pressure directional and controlled; do not allow jumping into finishes"
+  - Level 1: Attack the straight armbar or triangle after clearing posture
+
+- **Submission: Armbar**
+  - Level 2: Chain armbar to triangle or back to posture-breaking if the first attack stalls
+  - Outcome: Connect closed guard control to one clean submission chain that matches youth safety standards
 
 ## Closing Script
 Recap the main idea, reinforce the best example from the room, and set the expectation for live application.

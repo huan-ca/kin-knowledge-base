@@ -3,8 +3,13 @@
     "curriculum"
   ],
   "generator": "curriculum",
-  "git_commit": "f507f4db67084a6db69d61031b9baada29b24a2e",
+  "git_commit": "e2533efb59bf2575c3dc0c9becfc1f3104528f1e",
   "inputs": {
+    "examples": {
+      "fully-scripted-session": [
+        "jobs/kin-bjj-weekly-curriculum/examples/fully-scripted-session/week-01-offensive-cycle.md"
+      ]
+    },
     "kb_pages": [
       "kb/curriculum/youth-24-week-theme-map.md",
       "kb/curriculum/adult-24-week-theme-map.md",

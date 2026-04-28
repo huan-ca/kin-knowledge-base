@@ -32,6 +32,37 @@ def parse_markdown_sections(body: str) -> dict[str, str]:
     return {key: "\n".join(lines).strip() for key, lines in sections.items()}
 
 
+def load_job_examples(repo_root: Path, job_spec: dict) -> dict[str, list[dict]]:
+    inputs = job_spec.get("inputs", {})
+    if not isinstance(inputs, dict):
+        return {}
+
+    raw_examples = inputs.get("examples", {})
+    if not isinstance(raw_examples, dict):
+        return {}
+
+    examples: dict[str, list[dict]] = {}
+    for output_type, path_list in raw_examples.items():
+        if not isinstance(path_list, list):
+            raise ValueError(f"job input examples for {output_type} must be a list")
+
+        loaded_docs: list[dict] = []
+        for relative_path in path_list:
+            example_path = repo_root / relative_path
+            if not example_path.exists():
+                raise ValueError(f"missing example file: {example_path}")
+            metadata, body = parse_frontmatter(example_path.read_text(encoding="utf-8"))
+            loaded_docs.append(
+                {
+                    "path": example_path.relative_to(repo_root).as_posix(),
+                    "metadata": metadata,
+                    "body": body.strip(),
+                }
+            )
+        examples[output_type] = loaded_docs
+    return examples
+
+
 def load_job_spec(repo_root: Path, job_name: str, default_generator: str | None = None) -> tuple[dict, dict]:
     job_root = repo_root / "jobs" / job_name
     job_yaml_path = job_root / "job.yaml"
@@ -66,6 +97,7 @@ def load_job_spec(repo_root: Path, job_name: str, default_generator: str | None 
         "job_yaml_path": job_yaml_path,
         "notes_path": notes_path if notes_path.exists() else None,
         "notes_sections": notes_sections,
+        "examples": load_job_examples(repo_root, job_spec),
     }
 
 

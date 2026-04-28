@@ -14,10 +14,17 @@ Introduce the theme: Open Guard Retention And Knee-Elbow Recovery. Tell the clas
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Open guard retention, hip turns, and knee-elbow recovery against passing pressure.
-Teach Level 1 as the base pattern: Recover one knee line and rebuild a square guard.
-Layer Level 2 only after the room is stable: Add a second leg pummel or angle change to recover a stronger guard family.
-Repeat the coach emphasis: Feet, knees, and frames should reconnect before the passer settles hips.
+### Lesson: Open guard retention, hip turns, and knee-elbow recovery against passing pressure
+
+- **Primary Focus**
+  - Coaching tip: "Feet, knees, and frames should reconnect before the passer settles hips"
+  - Level 1: Recover one knee line and rebuild a square guard
+  - Level 2: Add a second leg pummel or angle change to recover a stronger guard family
+  - Outcome: Sharpen retention and recovery mechanics against pressure and movement passing
+
+- **CLA/Situational Rolling Options**:
+  - Start from the core position in Open guard retention, hip turns, and knee-elbow recovery against passing pressure and work until recover one knee line and rebuild a square guard or the position resets.
+  - Start from a successful first exchange and continue until add a second leg pummel or angle change to recover a stronger guard family or the defender escapes.
 
 ## Adult-Specific Notes
 Use mixed passing styles so students must recover against both pressure and angle.

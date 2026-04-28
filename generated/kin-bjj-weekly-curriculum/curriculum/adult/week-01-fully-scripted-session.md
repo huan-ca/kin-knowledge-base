@@ -14,10 +14,17 @@ Introduce the theme: Early Escape Frames From Mount And Side Control. Tell the c
 Use a brief, topic-aware warm-up and set the expectation that the class will build one connected theme.
 
 ## Primary Focus Script
-Show the core idea first: Early-stage escape structure from mount and side control.
-Teach Level 1 as the base pattern: Bridge, frame, and recover half guard or closed guard.
-Layer Level 2 only after the room is stable: Chain the first bridge into a second direction change when the top player posts.
-Repeat the coach emphasis: Keep elbow-knee connection tight before adding speed.
+### Lesson: Early-stage escape structure from mount and side control
+
+- **Primary Focus**
+  - Coaching tip: "Keep elbow-knee connection tight before adding speed"
+  - Level 1: Bridge, frame, and recover half guard or closed guard
+  - Level 2: Chain the first bridge into a second direction change when the top player posts
+  - Outcome: Reinforce calm survival habits and first-stage escapes from the most common major pins
+
+- **CLA/Situational Rolling Options**:
+  - Start from the core position in Early-stage escape structure from mount and side control and work until bridge, frame, and recover half guard or closed guard or the position resets.
+  - Start from a successful first exchange and continue until chain the first bridge into a second direction change when the top player posts or the defender escapes.
 
 ## Adult-Specific Notes
 Use heavier pressure and more realistic posting reactions than the youth room once mechanics are established.
