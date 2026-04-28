@@ -327,6 +327,36 @@ def render_syllabus(program: str, weeks: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def render_adult_or_youth_lesson_blocks(week: dict) -> list[str]:
+    ground_label = week["ground"].split(".", 1)[0]
+    submission_label = week["submission"].split(".", 1)[0]
+    blocks = [
+        "- **Takedown**",
+        f"  - Coaching Tip: {week['coach_focus']}",
+        f"  - Level 1: {week['takedown']}",
+        "  - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.",
+        f"  - Outcome: Finish to a clean top position that leads into {ground_label.lower()}",
+        f"- **Ground: {ground_label}**",
+        f"  - Secure: {week['ground']}",
+        "  - Level 2: Add a simple transition or pressure-retention task before the finish.",
+    ]
+    if week["cycle"] == "offensive":
+        blocks.extend(
+            [
+                f"- **Submission: {submission_label}**",
+                f"  - Cue: {week['submission']}",
+            ]
+        )
+    blocks.extend(
+        [
+            "- **Situational Options**",
+            f"  - {week['situational']}",
+            "  - Run short rounds with a fast reset after the first clean win condition or escape.",
+        ]
+    )
+    return blocks
+
+
 def render_adult_or_youth_lesson(week: dict) -> str:
     title = PROGRAM_RULES[week["program"]]["title"]
     return "\n".join(
@@ -346,24 +376,12 @@ def render_adult_or_youth_lesson(week: dict) -> str:
             f"  - {week['warmup_drill']}",
             "",
             f"## Lesson: {week['theme']}",
-            "- **Takedown**",
-            f"  - Coaching Tip: {week['coach_focus']}",
-            f"  - Level 1: {week['takedown']}",
-            "  - Level 2: Add timing, angle change, or chain-attack follow-up without increasing chaos.",
-            f"  - Outcome: Finish to a clean top position that leads into {week['ground'].split('.', 1)[0].lower()}",
-            "- **Ground**",
-            f"  - Secure: {week['ground']}",
-            "  - Level 2: Add a simple transition or pressure-retention task before the finish.",
-            f"  - Submission / Win Condition: {week['submission']}",
+            *render_adult_or_youth_lesson_blocks(week),
             "",
             "## Coach Notes",
             f"- {title} framing: {'Use adult pacing and decision-making language.' if week['program'] == 'adult' else 'Use short cues, clear boundaries, and positive self-defence framing.'}",
             f"- {week['coach_focus']}",
             "- Keep the room moving with short explanation windows and clear reset points.",
-            "",
-            "## Situational Options",
-            f"- {week['situational']}",
-            "- Run short rounds with a fast reset after the first clean win condition or escape.",
             "",
             "## Closing Script",
             f"- Recap the theme: {week['theme']}.",
