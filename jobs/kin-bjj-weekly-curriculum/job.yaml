@@ -9,12 +9,15 @@ inputs:
   kb_pages:
     - kb/curriculum/curriculum-week-design-rules.md
     - kb/curriculum/youth-24-week-curriculum-framework.md
+    - kb/curriculum/adult-24-week-curriculum-framework.md
+    - kb/curriculum/tots-12-week-curriculum-framework.md
     - kb/curriculum/groundwork-cycle-framework.md
     - kb/curriculum/takedown-framework.md
     - kb/curriculum/takedown-progression-framework.md
     - kb/curriculum/youth-submission-safety-framework.md
     - kb/curriculum/ibjjf-leg-lock-curriculum.md
     - kb/concepts/movement-and-warmup-framework.md
+    - kb/concepts/general-physical-preparedness-framework.md
   examples:
     fully-scripted-session:
       - jobs/kin-bjj-weekly-curriculum/examples/fully-scripted-session/week-01-offensive-cycle.md

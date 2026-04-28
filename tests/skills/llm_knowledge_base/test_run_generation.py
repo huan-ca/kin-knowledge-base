@@ -6,21 +6,27 @@ INIT_SCRIPT = Path("skills/llm-knowledge-base/scripts/init_repo.py").resolve()
 RUN_SCRIPT = Path("skills/llm-knowledge-base/scripts/run_generation.py").resolve()
 LEGACY_SCRIPT = Path("skills/llm-knowledge-base/scripts/generate_curriculum_outputs.py").resolve()
 
+FRAMEWORK_INPUTS = [
+    "kb/curriculum/curriculum-week-design-rules.md",
+    "kb/curriculum/youth-24-week-curriculum-framework.md",
+    "kb/curriculum/adult-24-week-curriculum-framework.md",
+    "kb/curriculum/tots-12-week-curriculum-framework.md",
+    "kb/curriculum/groundwork-cycle-framework.md",
+    "kb/curriculum/takedown-framework.md",
+    "kb/curriculum/takedown-progression-framework.md",
+    "kb/curriculum/youth-submission-safety-framework.md",
+    "kb/curriculum/ibjjf-leg-lock-curriculum.md",
+    "kb/concepts/movement-and-warmup-framework.md",
+    "kb/concepts/general-physical-preparedness-framework.md",
+]
+
 
 def write_page(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
 
 
-def write_theme_map_page(
-    repo: Path,
-    *,
-    relative_path: str,
-    page_id: str,
-    title: str,
-    source_page_id: str,
-    weeks_json: str,
-) -> None:
+def write_framework_page(repo: Path, relative_path: str, page_id: str, title: str, body: str) -> None:
     write_page(
         repo / relative_path,
         f"""---
@@ -28,19 +34,15 @@ id: {page_id}
 type: curriculum-unit
 title: "{title}"
 status: active
-confidence: 0.65
+confidence: 0.8
 claim_label: editorial-normalization
 source_refs:
-  - {source_page_id}#chunk-001
+  - source-overview#chunk-001
 related_pages: []
 ---
 # {title}
 
-## Structured Week Data
-
-```json
-{weeks_json}
-```
+{body}
 """,
     )
 
@@ -75,85 +77,82 @@ related_pages: []
 """,
     )
 
-    youth_weeks = """{
-  "weeks": [
-    {
-      "week": 1,
-      "theme": "Youth Theme 01",
-      "cycle": "defensive",
-      "teaching_goal": "Youth goal 01",
-      "coach_notes": "Youth coach note 01",
-      "sections": [
-        {
-          "name": "Ground Focus",
-          "focus": "Youth ground focus 01",
-          "level_1": "Youth level 1 option 01",
-          "level_2": "Youth level 2 option 01",
-          "coach_notes": "Youth section note 01"
-        }
-      ]
-    }
-  ]
-}"""
-    adult_weeks = """{
-  "weeks": [
-    {
-      "week": 1,
-      "theme": "Adult Theme 01",
-      "cycle": "defensive",
-      "teaching_goal": "Adult goal 01",
-      "coach_notes": "Adult coach note 01",
-      "adult_specific_notes": "Adult-specific note 01",
-      "sections": [
-        {
-          "name": "Ground Focus",
-          "focus": "Adult ground focus 01",
-          "level_1": "Adult level 1 option 01",
-          "level_2": "Adult level 2 option 01",
-          "coach_notes": "Adult section note 01"
-        }
-      ]
-    }
-  ]
-}"""
-    tots_weeks = """{
-  "weeks": [
-    {
-      "week": 1,
-      "cycle": "foundation",
-      "theme": "Tots Theme 01",
-      "movement_theme": "Movement theme 01",
-      "game": "Game 01",
-      "coordination_focus": "Coordination focus 01",
-      "bjj_exposure": "BJJ exposure 01",
-      "coach_notes": "Tots coach note 01"
-    }
-  ]
-}"""
-
-    write_theme_map_page(
+    write_framework_page(
         repo,
-        relative_path="kb/curriculum/youth-24-week-theme-map.md",
-        page_id="youth-24-week-theme-map",
-        title="Youth 24-Week Theme Map",
-        source_page_id="source-overview",
-        weeks_json=youth_weeks,
+        "kb/curriculum/curriculum-week-design-rules.md",
+        "curriculum-week-design-rules",
+        "Curriculum Week Design Rules",
+        "Weekly curriculum design follows a fixed set of rules intended to keep theme, progression, and coach usability aligned.",
     )
-    write_theme_map_page(
+    write_framework_page(
         repo,
-        relative_path="kb/curriculum/adult-24-week-theme-map.md",
-        page_id="adult-24-week-theme-map",
-        title="Adult 24-Week Theme Map",
-        source_page_id="source-overview",
-        weeks_json=adult_weeks,
+        "kb/curriculum/youth-24-week-curriculum-framework.md",
+        "youth-24-week-curriculum-framework",
+        "Youth 24-Week Curriculum Framework",
+        "The youth framework defines a 24-week sequence. Each weekly curriculum includes both a takedown component and a ground component.",
     )
-    write_theme_map_page(
+    write_framework_page(
         repo,
-        relative_path="kb/curriculum/tots-12-week-theme-map.md",
-        page_id="tots-12-week-theme-map",
-        title="Tots 12-Week Theme Map",
-        source_page_id="source-compendium",
-        weeks_json=tots_weeks,
+        "kb/curriculum/adult-24-week-curriculum-framework.md",
+        "adult-24-week-curriculum-framework",
+        "Adult 24-Week Curriculum Framework",
+        "The adult framework defines a 24-week sequence. Each weekly curriculum includes both a takedown component and a ground component.",
+    )
+    write_framework_page(
+        repo,
+        "kb/curriculum/tots-12-week-curriculum-framework.md",
+        "tots-12-week-curriculum-framework",
+        "Tots 12-Week Curriculum Framework",
+        "The tots framework defines a 12-week movement-led sequence for shorter classes.",
+    )
+    write_framework_page(
+        repo,
+        "kb/curriculum/groundwork-cycle-framework.md",
+        "groundwork-cycle-framework",
+        "Groundwork Cycle Framework",
+        "Groundwork themes should progress through connected exchanges.",
+    )
+    write_framework_page(
+        repo,
+        "kb/curriculum/takedown-framework.md",
+        "takedown-framework",
+        "Takedown Framework",
+        "Weekly classes should include standing work and takedown development.",
+    )
+    write_framework_page(
+        repo,
+        "kb/curriculum/takedown-progression-framework.md",
+        "takedown-progression-framework",
+        "Takedown Progression Framework",
+        "Standing skills should scale from basic entries into reactions and chains.",
+    )
+    write_framework_page(
+        repo,
+        "kb/curriculum/youth-submission-safety-framework.md",
+        "youth-submission-safety-framework",
+        "Youth Submission Safety Framework",
+        "Youth submission teaching should emphasize safe pacing and control.",
+    )
+    write_framework_page(
+        repo,
+        "kb/curriculum/ibjjf-leg-lock-curriculum.md",
+        "ibjjf-leg-lock-curriculum",
+        "IBJJF Leg Lock Curriculum",
+        "Adult lower-body work should stay rules-aware and safety-aware.",
+    )
+    write_framework_page(
+        repo,
+        "kb/concepts/movement-and-warmup-framework.md",
+        "movement-and-warmup-framework",
+        "Movement and Warmup Framework",
+        "Movement training supplies the warm-up and body-awareness structure for beginner classes.",
+    )
+    write_framework_page(
+        repo,
+        "kb/concepts/general-physical-preparedness-framework.md",
+        "general-physical-preparedness-framework",
+        "General Physical Preparedness Framework",
+        "Foundational movement for younger students should prioritize balance, coordination, and safe body control.",
     )
 
 
@@ -175,9 +174,7 @@ status: active
 transient: false
 inputs:
   kb_pages:
-    - kb/curriculum/youth-24-week-theme-map.md
-    - kb/curriculum/adult-24-week-theme-map.md
-    - kb/curriculum/tots-12-week-theme-map.md
+{chr(10).join(f"    - {path}" for path in FRAMEWORK_INPUTS)}
 options:
   include_reports: true
   emit_new_facts: true
@@ -193,7 +190,7 @@ Generate curriculum outputs for testing.
 
 ## Instructions
 
-- Use the KB week maps.
+- Use the framework KB pages.
 
 ## Q&A
 

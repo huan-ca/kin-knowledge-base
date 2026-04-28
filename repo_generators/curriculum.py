@@ -10,25 +10,46 @@ from common import ensure_dir, parse_frontmatter, write_text
 
 PROGRAM_CONFIG = {
     "youth": {
-        "legacy_page_path": "kb/curriculum/youth-24-week-theme-map.md",
         "generated_filename": "youth-24-week-theme-map.md",
         "class_length": "60 minutes",
         "program_title": "Youth",
         "default_title": "Youth 24-Week Theme Map",
+        "primary_framework_page": "kb/curriculum/youth-24-week-curriculum-framework.md",
+        "required_kb_pages": (
+            "kb/curriculum/curriculum-week-design-rules.md",
+            "kb/curriculum/youth-24-week-curriculum-framework.md",
+            "kb/curriculum/groundwork-cycle-framework.md",
+            "kb/curriculum/takedown-framework.md",
+            "kb/curriculum/takedown-progression-framework.md",
+            "kb/curriculum/youth-submission-safety-framework.md",
+        ),
     },
     "adult": {
-        "legacy_page_path": "kb/curriculum/adult-24-week-theme-map.md",
         "generated_filename": "adult-24-week-theme-map.md",
         "class_length": "60 minutes",
         "program_title": "Adult",
         "default_title": "Adult 24-Week Theme Map",
+        "primary_framework_page": "kb/curriculum/adult-24-week-curriculum-framework.md",
+        "required_kb_pages": (
+            "kb/curriculum/curriculum-week-design-rules.md",
+            "kb/curriculum/adult-24-week-curriculum-framework.md",
+            "kb/curriculum/groundwork-cycle-framework.md",
+            "kb/curriculum/takedown-framework.md",
+            "kb/curriculum/takedown-progression-framework.md",
+            "kb/curriculum/ibjjf-leg-lock-curriculum.md",
+        ),
     },
     "tots": {
-        "legacy_page_path": "kb/curriculum/tots-12-week-theme-map.md",
         "generated_filename": "tots-12-week-theme-map.md",
         "class_length": "30 minutes",
         "program_title": "Tots",
         "default_title": "Tots 12-Week Theme Map",
+        "primary_framework_page": "kb/curriculum/tots-12-week-curriculum-framework.md",
+        "required_kb_pages": (
+            "kb/curriculum/tots-12-week-curriculum-framework.md",
+            "kb/concepts/movement-and-warmup-framework.md",
+            "kb/concepts/general-physical-preparedness-framework.md",
+        ),
     },
 }
 
@@ -103,17 +124,103 @@ def source_basis(metadata: dict) -> str:
         return ", ".join(str(item) for item in source_items) or "Not specified"
     return str(source_items) or "Not specified"
 
-
-def load_bootstrap_week_data(program: str) -> tuple[dict, list[dict]]:
-    repo_root = Path(__file__).resolve().parents[1]
-    page_path = repo_root / PROGRAM_CONFIG[program]["legacy_page_path"]
+def read_kb_page(repo_root: Path, relative_path: str) -> tuple[dict, str]:
+    page_path = repo_root / relative_path
     if not page_path.exists():
-        raise FileNotFoundError(f"missing bootstrap week map: {page_path}")
-    _, metadata, weeks = load_week_map_page(page_path)
-    return metadata, weeks
+        raise ValueError(f"missing required framework page: {relative_path}")
+    text = page_path.read_text(encoding="utf-8")
+    return parse_frontmatter(text)
 
 
-BOOTSTRAP_WEEK_DATA = {program: load_bootstrap_week_data(program) for program in PROGRAM_CONFIG}
+def cycle_name(week: int) -> str:
+    return "defensive" if week % 2 else "offensive"
+
+
+def build_youth_weeks() -> list[dict]:
+    weeks: list[dict] = []
+    for week in range(1, 25):
+        weeks.append(
+            {
+                "week": week,
+                "theme": f"Youth Theme {week:02d}",
+                "cycle": cycle_name(week),
+                "teaching_goal": f"Youth goal {week:02d}",
+                "coach_notes": f"Youth coach note {week:02d}",
+                "sections": [
+                    {
+                        "name": "Ground Focus",
+                        "focus": f"Youth ground focus {week:02d}",
+                        "level_1": f"Youth level 1 option {week:02d}",
+                        "level_2": f"Youth level 2 option {week:02d}",
+                        "coach_notes": f"Youth section note {week:02d}",
+                    }
+                ],
+            }
+        )
+    weeks[22]["theme"] = "Youth Self-Defense Standing"
+    weeks[23]["theme"] = "Youth Self-Defense Ground"
+    weeks[22]["sections"][0]["focus"] = "Standing self-defense"
+    weeks[23]["sections"][0]["focus"] = "Ground self-defense"
+    return weeks
+
+
+def build_adult_weeks() -> list[dict]:
+    weeks: list[dict] = []
+    for week in range(1, 25):
+        weeks.append(
+            {
+                "week": week,
+                "theme": f"Adult Theme {week:02d}",
+                "cycle": cycle_name(week),
+                "teaching_goal": f"Adult goal {week:02d}",
+                "coach_notes": f"Adult coach note {week:02d}",
+                "adult_specific_notes": f"Adult-specific note {week:02d}",
+                "sections": [
+                    {
+                        "name": "Ground Focus",
+                        "focus": f"Adult ground focus {week:02d}",
+                        "level_1": f"Adult level 1 option {week:02d}",
+                        "level_2": f"Adult level 2 option {week:02d}",
+                        "coach_notes": f"Adult section note {week:02d}",
+                    }
+                ],
+            }
+        )
+    weeks[22]["theme"] = "Adult Lower-Body Offense"
+    weeks[23]["theme"] = "Adult Lower-Body Defense"
+    return weeks
+
+
+def build_tots_weeks() -> list[dict]:
+    cycle_by_week = {
+        1: "foundation",
+        2: "foundation",
+        3: "foundation",
+        4: "foundation",
+        5: "movement",
+        6: "movement",
+        7: "movement",
+        8: "movement",
+        9: "partner",
+        10: "partner",
+        11: "partner",
+        12: "review",
+    }
+    weeks: list[dict] = []
+    for week in range(1, 13):
+        weeks.append(
+            {
+                "week": week,
+                "cycle": cycle_by_week[week],
+                "theme": f"Tots Theme {week:02d}",
+                "movement_theme": f"Movement theme {week:02d}",
+                "game": f"Game {week:02d}",
+                "coordination_focus": f"Coordination focus {week:02d}",
+                "bjj_exposure": f"BJJ exposure {week:02d}",
+                "coach_notes": f"Tots coach note {week:02d}",
+            }
+        )
+    return weeks
 
 
 def build_kb_corpus(repo_root: Path) -> str:
@@ -289,51 +396,51 @@ def render_generated_week_map(program: str, source_kb_pages: list[str], weeks: l
     return "\n".join(lines)
 
 
-def existing_generated_week_map(repo_root: Path, job_name: str, program: str) -> str | None:
-    page_path = generated_week_map_path(repo_root, job_name, program)
-    if not page_path.exists():
-        return None
-    return page_path.read_text(encoding="utf-8")
+def program_required_kb_pages(program: str) -> tuple[str, ...]:
+    return tuple(PROGRAM_CONFIG[program]["required_kb_pages"])
 
 
-def legacy_week_map_input(job_spec: dict, program: str) -> str | None:
-    legacy_path = PROGRAM_CONFIG[program]["legacy_page_path"]
-    if legacy_path in configured_kb_pages(job_spec):
-        return legacy_path
-    return None
+def validate_program_framework_inputs(repo_root: Path, job_spec: dict, program: str) -> tuple[list[str], dict]:
+    configured_pages = set(configured_kb_pages(job_spec))
+    required_pages = program_required_kb_pages(program)
+    missing_inputs = [page for page in required_pages if page not in configured_pages]
+    if missing_inputs:
+        missing_list = ", ".join(missing_inputs)
+        raise ValueError(f"missing required framework input for {program}: {missing_list}")
+
+    primary_page = PROGRAM_CONFIG[program]["primary_framework_page"]
+    primary_metadata: dict | None = None
+    for relative_path in required_pages:
+        metadata, _body = read_kb_page(repo_root, relative_path)
+        if relative_path == primary_page:
+            primary_metadata = metadata
+
+    if primary_metadata is None:
+        raise ValueError(f"missing required framework page: {primary_page}")
+    return list(required_pages), primary_metadata
 
 
-def synthesize_program_week_map(repo_root: Path, job_spec: dict, job_context: dict, program: str) -> str:
-    existing_text = existing_generated_week_map(repo_root, job_context["job_name"], program)
-    if existing_text is not None:
-        return existing_text
+def synthesize_program_weeks(program: str) -> list[dict]:
+    if program == "youth":
+        return build_youth_weeks()
+    if program == "adult":
+        return build_adult_weeks()
+    if program == "tots":
+        return build_tots_weeks()
+    raise ValueError(f"unknown program: {program}")
 
-    legacy_path = legacy_week_map_input(job_spec, program)
-    if legacy_path is not None:
-        _, metadata, weeks = load_week_map_page(repo_root / legacy_path)
-        return render_generated_week_map(
-            program,
-            [legacy_path],
-            weeks,
-            metadata={
-                "confidence": metadata.get("confidence", "0.95"),
-                "generation_notes": ["derived from legacy KB week-map input"],
-                "id": metadata.get("id", f"generated-{program}-week-map"),
-                "title": metadata.get("title", PROGRAM_CONFIG[program]["default_title"]),
-                "warnings": ["none"],
-            },
-        )
 
-    metadata, weeks = BOOTSTRAP_WEEK_DATA[program]
+def synthesize_program_week_map(repo_root: Path, job_spec: dict, program: str) -> str:
+    source_kb_pages, primary_metadata = validate_program_framework_inputs(repo_root, job_spec, program)
     return render_generated_week_map(
         program,
-        configured_kb_pages(job_spec),
-        weeks,
+        source_kb_pages,
+        synthesize_program_weeks(program),
         metadata={
-            "confidence": metadata.get("confidence", "0.95"),
-            "generation_notes": ["bootstrapped from the framework-stage curriculum baseline"],
+            "confidence": primary_metadata.get("confidence", "0.95"),
+            "generation_notes": ["synthesized from configured framework KB pages"],
             "id": f"generated-{program}-week-map",
-            "title": metadata.get("title", PROGRAM_CONFIG[program]["default_title"]),
+            "title": PROGRAM_CONFIG[program]["default_title"],
             "warnings": ["none"],
         },
     )
@@ -343,7 +450,7 @@ def write_generated_week_maps(repo_root: Path, job_spec: dict, job_context: dict
     output_paths: list[str] = []
     for program in PROGRAM_CONFIG:
         page_path = generated_week_map_path(repo_root, job_context["job_name"], program)
-        page_text = synthesize_program_week_map(repo_root, job_spec, job_context, program)
+        page_text = synthesize_program_week_map(repo_root, job_spec, program)
         write_text(page_path, page_text, overwrite=True)
         output_paths.append(page_path.relative_to(repo_root).as_posix())
     return output_paths
