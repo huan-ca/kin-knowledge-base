@@ -1,26 +1,4 @@
 {
-  "adult-24-week-theme-map": {
-    "path": "kb/curriculum/adult-24-week-theme-map.md",
-    "related_pages": [
-      "youth-24-week-theme-map",
-      "ibjjf-leg-lock-curriculum",
-      "curriculum-week-design-rules"
-    ],
-    "source_refs": [
-      "source-high-level-overview#chunk-001",
-      "source-high-level-overview#chunk-003",
-      "source-high-level-overview#chunk-004",
-      "source-high-level-overview#chunk-005",
-      "source-high-level-overview#chunk-006",
-      "source-high-level-overview#chunk-007",
-      "source-kin-bjj-compendium#chunk-013",
-      "source-kin-bjj-compendium#chunk-014",
-      "source-kin-bjj-compendium#chunk-016",
-      "source-kin-bjj-compendium#chunk-017",
-      "source-kin-bjj-compendium#chunk-018"
-    ],
-    "type": "curriculum-unit"
-  },
   "announcements-and-student-recognition": {
     "path": "kb/procedures/announcements-and-student-recognition.md",
     "related_pages": [],
@@ -65,14 +43,16 @@
     ],
     "type": "class-type"
   },
-  "curriculum-week-design-rules": {
-    "path": "kb/curriculum/curriculum-week-design-rules.md",
+  "double-leg-side-control-americana-example-lesson": {
+    "path": "kb/lessons/double-leg-side-control-americana-example-lesson.md",
     "related_pages": [],
     "source_refs": [
-      "source-high-level-overview#chunk-006",
-      "source-high-level-overview#chunk-007"
+      "source-example-scripted-lesson-plan-adult#chunk-001",
+      "source-example-scripted-lesson-plan-adult#chunk-002",
+      "source-example-scripted-lesson-plan-youth#chunk-001",
+      "source-example-scripted-lesson-plan-youth#chunk-003"
     ],
-    "type": "curriculum-unit"
+    "type": "lesson"
   },
   "drilling-methodology": {
     "path": "kb/procedures/drilling-methodology.md",
@@ -91,6 +71,25 @@
     ],
     "type": "concept"
   },
+  "example-lesson-warmup-option-pattern": {
+    "path": "kb/procedures/example-lesson-warmup-option-pattern.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-example-scripted-lesson-plan-adult#chunk-002",
+      "source-example-scripted-lesson-plan-youth#chunk-003",
+      "source-example-scripted-lesson-plan-tots#chunk-003"
+    ],
+    "type": "procedure"
+  },
+  "example-situational-start-pattern": {
+    "path": "kb/procedures/example-situational-start-pattern.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-example-scripted-lesson-plan-adult#chunk-002",
+      "source-example-scripted-lesson-plan-youth#chunk-003"
+    ],
+    "type": "procedure"
+  },
   "foundational-youth-values": {
     "path": "kb/values/foundational-youth-values.md",
     "related_pages": [],
@@ -99,6 +98,15 @@
       "source-kin-bjj-kids-lesson-plan-structure#chunk-005"
     ],
     "type": "value"
+  },
+  "four-layers-of-bjj-skill-development": {
+    "path": "kb/concepts/four-layers-of-bjj-skill-development.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-the-four-layers-of-bjj-skills-development#chunk-001",
+      "source-the-four-layers-of-bjj-skills-development#chunk-006"
+    ],
+    "type": "concept"
   },
   "future-black-belt-program": {
     "path": "kb/programs/future-black-belt-program.md",
@@ -125,14 +133,6 @@
     ],
     "type": "concept"
   },
-  "groundwork-cycle-framework": {
-    "path": "kb/curriculum/groundwork-cycle-framework.md",
-    "related_pages": [],
-    "source_refs": [
-      "source-high-level-overview#chunk-003"
-    ],
-    "type": "curriculum-unit"
-  },
   "guard-framework": {
     "path": "kb/position/guard-framework.md",
     "related_pages": [],
@@ -142,20 +142,19 @@
     ],
     "type": "position"
   },
-  "ibjjf-leg-lock-curriculum": {
-    "path": "kb/curriculum/ibjjf-leg-lock-curriculum.md",
-    "related_pages": [],
-    "source_refs": [
-      "source-kin-bjj-compendium#chunk-018",
-      "source-high-level-overview#chunk-005"
-    ],
-    "type": "curriculum-unit"
-  },
   "ibjjf-points-and-advantages-basics": {
     "path": "kb/concepts/ibjjf-points-and-advantages-basics.md",
     "related_pages": [],
     "source_refs": [
       "source-kin-bjj-compendium#chunk-014"
+    ],
+    "type": "concept"
+  },
+  "intuition-through-pattern-recognition": {
+    "path": "kb/concepts/intuition-through-pattern-recognition.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-the-four-layers-of-bjj-skills-development#chunk-005"
     ],
     "type": "concept"
   },
@@ -220,6 +219,14 @@
     ],
     "type": "concept"
   },
+  "muscle-memory-through-repetition": {
+    "path": "kb/concepts/muscle-memory-through-repetition.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-the-four-layers-of-bjj-skills-development#chunk-003"
+    ],
+    "type": "concept"
+  },
   "north-south-system": {
     "path": "kb/position/north-south-system.md",
     "related_pages": [],
@@ -236,11 +243,7 @@
   },
   "open-question-week-by-week-curriculum-sequence": {
     "path": "kb/open-questions/week-by-week-curriculum-sequence.md",
-    "related_pages": [
-      "youth-24-week-theme-map",
-      "adult-24-week-theme-map",
-      "tots-12-week-theme-map"
-    ],
+    "related_pages": [],
     "source_refs": [
       "source-high-level-overview#chunk-006",
       "source-high-level-overview#chunk-007",
@@ -262,6 +265,14 @@
     "source_refs": [
       "source-kin-bjj-compendium#chunk-016",
       "source-kin-bjj-compendium#chunk-017"
+    ],
+    "type": "concept"
+  },
+  "principles-connect-techniques": {
+    "path": "kb/concepts/principles-connect-techniques.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-the-four-layers-of-bjj-skills-development#chunk-004"
     ],
     "type": "concept"
   },
@@ -290,6 +301,16 @@
     ],
     "type": "procedure"
   },
+  "scripted-youth-and-adult-example-differentiation": {
+    "path": "kb/open-questions/scripted-youth-and-adult-example-differentiation.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-example-scripted-lesson-plan-adult#chunk-001",
+      "source-example-scripted-lesson-plan-youth#chunk-001",
+      "source-example-scripted-lesson-plan-youth#chunk-002"
+    ],
+    "type": "open-question"
+  },
   "side-control-system": {
     "path": "kb/position/side-control-system.md",
     "related_pages": [],
@@ -297,6 +318,24 @@
       "source-kin-bjj-compendium#chunk-017"
     ],
     "type": "position"
+  },
+  "source-example-scripted-lesson-plan-adult": {
+    "path": "kb/sources/example-scripted-lesson-plan-adult.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
+  },
+  "source-example-scripted-lesson-plan-tots": {
+    "path": "kb/sources/example-scripted-lesson-plan-tots.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
+  },
+  "source-example-scripted-lesson-plan-youth": {
+    "path": "kb/sources/example-scripted-lesson-plan-youth.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
   },
   "source-high-level-overview": {
     "path": "kb/sources/high-level-overview.md",
@@ -312,6 +351,12 @@
   },
   "source-kin-bjj-kids-lesson-plan-structure": {
     "path": "kb/sources/kin-bjj-kids-lesson-plan-structure.md",
+    "related_pages": [],
+    "source_refs": [],
+    "type": "source"
+  },
+  "source-the-four-layers-of-bjj-skills-development": {
+    "path": "kb/sources/the-four-layers-of-bjj-skills-development.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
@@ -342,23 +387,6 @@
     ],
     "type": "program"
   },
-  "takedown-framework": {
-    "path": "kb/curriculum/takedown-framework.md",
-    "related_pages": [],
-    "source_refs": [
-      "source-kin-bjj-compendium#chunk-018",
-      "source-high-level-overview#chunk-002"
-    ],
-    "type": "curriculum-unit"
-  },
-  "takedown-progression-framework": {
-    "path": "kb/curriculum/takedown-progression-framework.md",
-    "related_pages": [],
-    "source_refs": [
-      "source-high-level-overview#chunk-002"
-    ],
-    "type": "curriculum-unit"
-  },
   "technical-lesson-delivery-model": {
     "path": "kb/procedures/technical-lesson-delivery-model.md",
     "related_pages": [],
@@ -368,24 +396,23 @@
     ],
     "type": "procedure"
   },
-  "tots-12-week-theme-map": {
-    "path": "kb/curriculum/tots-12-week-theme-map.md",
-    "related_pages": [
-      "kids-age-and-duration-guidelines",
-      "class-structure-principles",
-      "movement-and-warmup-framework",
-      "games-instructional-use"
-    ],
+  "techniques-as-recipe-book": {
+    "path": "kb/concepts/techniques-as-recipe-book.md",
+    "related_pages": [],
     "source_refs": [
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-001",
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-002",
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-004",
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-006",
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-011",
-      "source-kin-bjj-compendium#chunk-006",
-      "source-kin-bjj-compendium#chunk-010"
+      "source-the-four-layers-of-bjj-skills-development#chunk-002"
     ],
-    "type": "curriculum-unit"
+    "type": "concept"
+  },
+  "tots-week-1-mat-rules-base-ready-stance-example": {
+    "path": "kb/lessons/tots-week-1-mat-rules-base-ready-stance-example.md",
+    "related_pages": [],
+    "source_refs": [
+      "source-example-scripted-lesson-plan-tots#chunk-001",
+      "source-example-scripted-lesson-plan-tots#chunk-002",
+      "source-example-scripted-lesson-plan-tots#chunk-003"
+    ],
+    "type": "lesson"
   },
   "turtle-system": {
     "path": "kb/position/turtle-system.md",
@@ -412,40 +439,6 @@
     ],
     "type": "procedure"
   },
-  "youth-24-week-curriculum-framework": {
-    "path": "kb/curriculum/youth-24-week-curriculum-framework.md",
-    "related_pages": [],
-    "source_refs": [
-      "source-high-level-overview#chunk-001",
-      "source-high-level-overview#chunk-006",
-      "source-high-level-overview#chunk-007"
-    ],
-    "type": "curriculum-unit"
-  },
-  "youth-24-week-theme-map": {
-    "path": "kb/curriculum/youth-24-week-theme-map.md",
-    "related_pages": [
-      "youth-24-week-curriculum-framework",
-      "curriculum-week-design-rules",
-      "groundwork-cycle-framework",
-      "youth-submission-safety-framework"
-    ],
-    "source_refs": [
-      "source-high-level-overview#chunk-001",
-      "source-high-level-overview#chunk-003",
-      "source-high-level-overview#chunk-004",
-      "source-high-level-overview#chunk-005",
-      "source-high-level-overview#chunk-006",
-      "source-high-level-overview#chunk-007",
-      "source-kin-bjj-compendium#chunk-010",
-      "source-kin-bjj-compendium#chunk-016",
-      "source-kin-bjj-compendium#chunk-017",
-      "source-kin-bjj-compendium#chunk-018",
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-003",
-      "source-kin-bjj-kids-lesson-plan-structure#chunk-007"
-    ],
-    "type": "curriculum-unit"
-  },
   "youth-class-template-60-minutes": {
     "path": "kb/class-types/youth-class-template-60-minutes.md",
     "related_pages": [],
@@ -454,13 +447,5 @@
       "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
     ],
     "type": "class-type"
-  },
-  "youth-submission-safety-framework": {
-    "path": "kb/curriculum/youth-submission-safety-framework.md",
-    "related_pages": [],
-    "source_refs": [
-      "source-kin-bjj-compendium#chunk-018"
-    ],
-    "type": "curriculum-unit"
   }
 }

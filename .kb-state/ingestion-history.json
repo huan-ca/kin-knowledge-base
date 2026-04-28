@@ -39,6 +39,26 @@
         "removed": 0,
         "unchanged": 3
       }
+    },
+    {
+      "batch_id": "batch-20260428T044832Z",
+      "scanned_at": "2026-04-28T04:48:32.430344+00:00",
+      "summary": {
+        "changed": 0,
+        "new": 4,
+        "removed": 0,
+        "unchanged": 3
+      }
+    },
+    {
+      "batch_id": "batch-20260428T050532Z",
+      "scanned_at": "2026-04-28T05:05:32.725412+00:00",
+      "summary": {
+        "changed": 0,
+        "new": 3,
+        "removed": 3,
+        "unchanged": 4
+      }
     }
   ]
 }
