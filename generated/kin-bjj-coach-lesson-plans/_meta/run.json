@@ -3,7 +3,7 @@
     "lesson-plan"
   ],
   "generator": "coach_lesson_plans",
-  "git_commit": "c00105fd3a854f942e4b4190e18de919da4ecfa2",
+  "git_commit": "5078eabab31bde86521fa698af181050b490ac92",
   "inputs": {
     "kb_pages": [
       "kb/sources/high-level-overview.md",
