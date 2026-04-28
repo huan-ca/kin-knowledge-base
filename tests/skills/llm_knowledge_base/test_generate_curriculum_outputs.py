@@ -763,6 +763,8 @@ def test_generate_curriculum_outputs_recomputes_generated_week_maps_and_ignores_
     )
     seed_repo_reports(repo)
     write_stage2_job_file(repo, "weekly-curriculum")
+    stale_week_map = repo / "generated" / "weekly-curriculum" / "week-maps" / "stale-sentinel.md"
+    write_page(stale_week_map, "stale week map")
 
     result = subprocess.run(
         [sys.executable, str(RUN_SCRIPT), str(repo), "--job-name", "weekly-curriculum"],
@@ -775,22 +777,56 @@ def test_generate_curriculum_outputs_recomputes_generated_week_maps_and_ignores_
 
     generated_week_map = repo / "generated" / "weekly-curriculum" / "week-maps" / "adult-24-week-theme-map.md"
     generated_week_map_text = generated_week_map.read_text(encoding="utf-8")
+    _, generated_week_map_metadata, adult_weeks = curriculum.load_week_map_page(generated_week_map)
+    _, _, youth_weeks = curriculum.load_week_map_page(
+        repo / "generated" / "weekly-curriculum" / "week-maps" / "youth-24-week-theme-map.md"
+    )
+    _, _, tots_weeks = curriculum.load_week_map_page(
+        repo / "generated" / "weekly-curriculum" / "week-maps" / "tots-12-week-theme-map.md"
+    )
     adult_curriculum_text = (
         repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md"
     ).read_text(encoding="utf-8")
 
     assert generated_week_map.exists()
-    assert "type: generated-curriculum-candidate" in generated_week_map_text
+    assert not stale_week_map.exists()
+    assert generated_week_map_metadata["type"] == "generated-curriculum-candidate"
+    assert generated_week_map_metadata["synthesis_mode"] == "heuristic"
+    assert generated_week_map_metadata["expert_review_required"] is True
+    assert "kb/curriculum/adult-24-week-curriculum-framework.md" in generated_week_map_metadata["source_kb_pages"]
+    assert generated_week_map_metadata["generation_notes"]
+    assert generated_week_map_metadata["warnings"]
+    assert "synthesis_mode: heuristic" in generated_week_map_text
+    assert "expert_review_required: true" in generated_week_map_text
     assert "```json" in generated_week_map_text
+    assert len(adult_weeks) == 24
+    assert len(youth_weeks) == 24
+    assert len(tots_weeks) == 12
+    assert [week["cycle"] for week in adult_weeks[:4]] == ["offensive", "offensive", "defensive", "defensive"]
+    assert [week["cycle"] for week in youth_weeks[:4]] == ["offensive", "offensive", "defensive", "defensive"]
+    assert all(week.get("takedown") for week in adult_weeks)
+    assert all(week.get("ground") for week in adult_weeks)
+    assert all(week.get("takedown") for week in youth_weeks)
+    assert all(week.get("ground") for week in youth_weeks)
+    assert all(week.get("theme_basis") == "heuristic" for week in adult_weeks[:2])
+    assert all(week.get("takedown_basis") == "heuristic" for week in adult_weeks[:2])
+    assert all(week.get("ground_basis") == "heuristic" for week in adult_weeks[:2])
+    assert all(week.get("submission_basis") == "heuristic" for week in adult_weeks[:2])
+    assert all(isinstance(week.get("expert_review_notes"), list) for week in adult_weeks[:2])
+    assert all(isinstance(week.get("kb_gaps"), list) for week in adult_weeks[:2])
+    assert all(week.get("movement_theme") for week in tots_weeks)
+    assert all(week.get("game") for week in tots_weeks)
+    assert "lower-body" in adult_weeks[-2]["theme"].lower()
+    assert "lower-body" in adult_weeks[-1]["theme"].lower()
     assert (repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-01-curriculum.md").exists()
     assert "Generated Adult Sentinel Theme" not in adult_curriculum_text
     assert "Generated adult sentinel focus" not in adult_curriculum_text
     assert "Generated adult sentinel goal" not in adult_curriculum_text
-    assert "Adult Theme 01" in adult_curriculum_text
-    assert "Adult ground focus 01" in adult_curriculum_text
+    assert "Curriculum Status: heuristic candidate" in adult_curriculum_text
+    assert "Expert Review Required: yes" in adult_curriculum_text
     assert "KB adult poison focus" not in adult_curriculum_text
     assert "Generated Adult Sentinel Theme" not in generated_week_map_text
-    assert "Adult Theme 01" in generated_week_map_text
+    assert "Adult Theme 01" not in generated_week_map_text
 
 
 def test_generate_curriculum_outputs_fail_when_required_framework_page_is_missing(tmp_path):
@@ -853,18 +889,28 @@ def test_generate_curriculum_outputs_include_level_sections_and_program_specific
     youth_syllabus_text = (output_root / "youth-syllabus.md").read_text(encoding="utf-8")
 
     assert "- Week: 01" in youth_text
-    assert "- Cycle: defensive" in youth_text
-    assert "- Theme: Youth Theme 01" in youth_text
+    assert "- Cycle: offensive" in youth_text
+    assert "- Curriculum Status: heuristic candidate" in youth_text
+    assert "- Expert Review Required: yes" in youth_text
+    assert "## Takedown Theme" in youth_text
+    assert "## Ground Theme" in youth_text
+    assert "## Submission Connection" in youth_text
     assert "## Level 1" in youth_text
     assert "## Level 2" in youth_text
+    assert "expert_review_notes" not in youth_text
+    assert "kb_gaps" not in youth_text
     assert "## Adult-Specific Notes" in adult_text
-    assert "Adult Lower-Body Defense" in adult_lower_body_text
+    assert "Lower-Body" in adult_lower_body_text
     assert "- Cycle: foundation" in tots_text
-    assert "- Movement Theme: Movement theme 01" in tots_text
+    assert "- Curriculum Status: heuristic candidate" in tots_text
+    assert "- Expert Review Required: yes" in tots_text
+    assert "- Movement Theme:" in tots_text
+    assert "Movement theme 01" not in tots_text
     assert "## Movement Theme" in tots_text
     assert "## Game" in tots_text
     assert "| Week | Cycle | Theme | Description | Main Goal |" in youth_syllabus_text
-    assert "| 01 | defensive | Youth Theme 01 | Youth ground focus 01 | Youth goal 01 |" in youth_syllabus_text
+    assert "| 01 | offensive |" in youth_syllabus_text
+    assert "Youth Theme 01" not in youth_syllabus_text
 
 
 def test_generate_curriculum_outputs_quick_outline_does_not_repeat_metadata_fields(tmp_path):
@@ -881,10 +927,11 @@ def test_generate_curriculum_outputs_quick_outline_does_not_repeat_metadata_fiel
         repo / "generated" / "weekly-curriculum" / "curriculum" / "adult" / "week-03-quick-outline.md"
     ).read_text(encoding="utf-8")
 
-    assert adult_quick_outline.count("- Theme: Adult Theme 03") == 1
+    assert adult_quick_outline.count("- Theme: ") == 1
     assert adult_quick_outline.count("- Cycle: defensive") == 1
-    assert adult_quick_outline.count("- Teaching Goal: Adult goal 03") == 1
-    assert "- Ground Focus: Adult ground focus 03" in adult_quick_outline
+    assert adult_quick_outline.count("- Teaching Goal: ") == 1
+    assert "- Takedown:" in adult_quick_outline
+    assert "- Ground:" in adult_quick_outline
 
 
 def test_generate_curriculum_outputs_do_not_modify_kb_and_emit_empty_new_facts_when_no_human_deltas(tmp_path):
