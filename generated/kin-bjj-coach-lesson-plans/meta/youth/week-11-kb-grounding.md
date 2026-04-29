@@ -2,7 +2,7 @@
 
 ## KB-Grounded Inputs
 - Preserved lesson-format examples provide the markdown shape for the lesson file.
-- KB source and procedure pages support class structure, warm-up framing, and coach-note style.
+- Guard, escape, submission, class-structure, and lesson-delivery KB pages provide coaching detail for openings, warm-ups, technical emphasis, and safety notes.
 
 ## Inferred Content
 - The exact week-11 sequence for youth is heuristic rather than source-authored.
@@ -19,6 +19,14 @@
 - kb/lessons/double-leg-side-control-americana-example-lesson.md
 - kb/lessons/tots-week-1-mat-rules-base-ready-stance-example.md
 - kb/concepts/four-layers-of-bjj-skill-development.md
+- kb/concepts/escape-framework.md
+- kb/concepts/movement-and-warmup-framework.md
+- kb/concepts/submission-framework.md
+- kb/position/guard-framework.md
+- kb/position/side-control-system.md
+- kb/class-types/class-structure-principles.md
+- kb/class-types/competition-training-session-framework.md
 - kb/procedures/technical-lesson-delivery-model.md
 - kb/procedures/example-lesson-warmup-option-pattern.md
 - kb/procedures/example-situational-start-pattern.md
+- kb/programs/kids-youth-development-program.md
