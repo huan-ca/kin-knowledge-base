@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Foundational movement training is used to build transferable body awareness for later technique layers.
 
-## Key Details
+## Detailed Notes
 - The source names shrimping, breakfalls, bridging, sit outs, core drills, takedown drills, guard drills, and scramble drills as core categories.
 - Additional movement subcategories include dive rolls, base drills, grip fighting, inside position, and wedges.
 - These patterns can be hidden inside games and relays to preserve engagement.

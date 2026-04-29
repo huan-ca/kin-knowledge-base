@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 North-south is framed as a heavy-pressure pin that neutralizes hips and opens direct transition and choke pathways.
 
-## Key Details
+## Detailed Notes
 - Control is built through chest-to-face pressure, over-under or double-under anchoring, sprawled hips, and head control.
 - Attacks include north-south choke, paper cutter choke, kimura, and spinning armbar.
 - Transitions include side control, back takes, and high mount entries.

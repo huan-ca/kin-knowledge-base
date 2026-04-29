@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Intuition is the layer where repeated training experience becomes quick real-time decision-making and pattern recognition on the mat.
 
-## Key Details
+## Detailed Notes
 - The source describes intuition as sensing openings, balance changes, and transition timing without conscious step-by-step analysis.
 - Intuition develops slowly as deliberate lessons become more automatic.
 - Live rounds provide the repeated information that builds this internal map of the game.

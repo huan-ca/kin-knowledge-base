@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Rear mount is framed as one of the most dominant positions because it maximizes offense while minimizing the opponent’s counters.
 
-## Key Details
+## Detailed Notes
 - Control is built through seatbelt, double hooks, or body lock.
 - Attack options include rear naked choke, sliding collar choke, rear triangle, and armbar.
 - Advance options include truck transitions, mount transitions, and technical mount pathways.

@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Mount is treated as a dominant top position with multiple stabilization layers and a high submission density.
 
-## Key Details
+## Detailed Notes
 - The source distinguishes low mount, high mount, technical mount, grapevine mount, and double-unders mount.
 - Attack options include cross collar choke, armbar, mounted triangle, ezekiel, and americana.
 - Mount transitions include back exposure reactions, knee-on-belly mobility, and S-mount isolation.

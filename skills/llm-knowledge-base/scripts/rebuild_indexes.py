@@ -120,6 +120,14 @@ def validate_page_metadata(
     if not isinstance(related_pages, list):
         raise ValueError(f"related_pages must be a list in {relative_path}")
 
+    domain_tags = metadata.get("domain_tags", [])
+    if not isinstance(domain_tags, list):
+        raise ValueError(f"domain_tags must be a list in {relative_path}")
+
+    keywords = metadata.get("keywords", [])
+    if not isinstance(keywords, list):
+        raise ValueError(f"keywords must be a list in {relative_path}")
+
     raw_confidence = metadata.get("confidence")
     try:
         confidence = float(raw_confidence)
@@ -149,6 +157,8 @@ def validate_page_metadata(
         "claim_label": claim_label,
         "source_refs": source_refs,
         "related_pages": related_pages,
+        "domain_tags": domain_tags,
+        "keywords": keywords,
     }
 
 
@@ -324,6 +334,34 @@ def render_improvement_report(pages: list[dict]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_kb_manifest(pages: list[dict]) -> dict:
+    page_counts: dict[str, int] = {}
+    for page in pages:
+        page_counts[page["type"]] = page_counts.get(page["type"], 0) + 1
+
+    manifest_pages = [
+        {
+            "id": page["id"],
+            "type": page["type"],
+            "title": page["title"],
+            "status": page["status"],
+            "confidence": page["confidence"],
+            "path": page["path"],
+            "claim_label": page["claim_label"],
+            "source_refs": page["source_refs"],
+            "related_pages": page["related_pages"],
+            "domain_tags": page["domain_tags"],
+            "keywords": page["keywords"],
+        }
+        for page in sorted(pages, key=lambda item: item["id"])
+    ]
+
+    return {
+        "page_counts": dict(sorted(page_counts.items())),
+        "pages": manifest_pages,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Rebuild derived indexes and reports from kb markdown pages.")
     parser.add_argument("repo_root", help="Path to the repo root.")
@@ -343,6 +381,7 @@ def main() -> None:
     write_text(reports_dir / "gap-report.md", render_gap_report(pages), overwrite=True)
     write_text(reports_dir / "conflict-report.md", render_conflict_report(pages), overwrite=True)
     write_text(reports_dir / "improvement-report.md", render_improvement_report(pages), overwrite=True)
+    write_json(repo_root / "generated" / "kb-manifest.json", build_kb_manifest(pages))
 
     link_map = {
         page["id"]: {
@@ -350,6 +389,8 @@ def main() -> None:
             "related_pages": page["related_pages"],
             "source_refs": page["source_refs"],
             "type": page["type"],
+            "domain_tags": page["domain_tags"],
+            "keywords": page["keywords"],
         }
         for page in pages
     }

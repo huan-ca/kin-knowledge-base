@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 The compendium treats top positions through recurring criteria: secure or control, advance or transition, attack or submission, and related escape logic for the bottom player.
 
-## Key Details
+## Detailed Notes
 - The broad progression is survive, control, escape, guard, pass, and submit.
 - Major top systems covered include side control, mount, rear mount, north-south, knee on belly, and turtle.
 - This framework is intended to help curriculum writers organize each position consistently.

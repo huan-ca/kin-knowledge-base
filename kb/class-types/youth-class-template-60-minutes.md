@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 The youth class template is a repeatable 60-minute structure used as the default delivery model for ages 8 to 13.
 
-## Key Details
+## Detailed Notes
 - The class opens with bow in, announcements, and welcoming students.
 - Warm ups are short and topic-aware.
 - Takedown instruction and drilling come before ground instruction and drilling.

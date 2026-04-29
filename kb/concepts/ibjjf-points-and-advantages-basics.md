@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 The curriculum uses the IBJJF point system as a strategic teaching baseline because many events follow that ruleset.
 
-## Key Details
+## Detailed Notes
 - Takedowns and knee ride score 2 points.
 - Guard pass scores 3 points.
 - Mount and rear mount score 4 points.

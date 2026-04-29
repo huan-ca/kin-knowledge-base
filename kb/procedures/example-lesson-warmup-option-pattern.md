@@ -16,7 +16,7 @@ related_pages: []
 ## Definition
 The new scripted lesson-plan examples use warm-ups that stay tightly related to the lesson theme while varying by audience and class density.
 
-## Key Details
+## Detailed Notes
 - The adult and youth examples group warm-up ideas into movement-based, drill-based, and CLA-based options instead of a single required script.
 - The adult and youth movement options include duck walks, breakfalls, and bear crawls with backsteps.
 - The adult and youth drill options include double-leg pickups and penetration-step work that directly support the takedown theme.

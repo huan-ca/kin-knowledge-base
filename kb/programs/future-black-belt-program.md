@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 The future black belt program is an advanced youth pathway for students who want more commitment, more training, and a stronger competitive or developmental track.
 
-## Key Details
+## Detailed Notes
 - The program is described as a longer-term option when time and space permit.
 - Students may receive additional classes or open mat access.
 - A different colored gi is used as a visible commitment marker.

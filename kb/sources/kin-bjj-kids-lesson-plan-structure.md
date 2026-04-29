@@ -1,14 +1,17 @@
 ---
 id: source-kin-bjj-kids-lesson-plan-structure
 type: source
-title: "KIN BJJ kids lesson plan structure.md"
+title: "KIN BJJ Kids Lesson Plan Structure"
 status: active
 confidence: 1.0
 source_refs: []
 related_pages: []
+domain_tags: [source, youth-program, class-delivery, operations]
+keywords: [kids lesson plan structure, youth class format, drilling, games, life skills, mat safety]
+summary: Operations-facing source for kids and youth class structure, warm-ups, life-skills chats, games, drilling, competition training, physical preparation, mat safety, and recognition practices.
 ingestion_batch: batch-20260426T003151Z
 ---
-# KIN BJJ kids lesson plan structure.md
+# KIN BJJ Kids Lesson Plan Structure
 
 ## Artifact
 - Path: `raw/KIN BJJ kids lesson plan structure.md`
@@ -16,6 +19,13 @@ ingestion_batch: batch-20260426T003151Z
 
 ## Summary
 This source is an operations-facing teaching guide for kids classes. It expands class structure, life-skills conversations, games, drilling, competition-session design, physical preparation, mat safety, community building, and closing procedures.
+
+## Major Coverage Areas
+- Age bands, class durations, and the rough youth class timeline.
+- Warm-up philosophy, life-skills instruction, and games as teaching tools.
+- Technique presentation, drilling progression, and coaching behavior.
+- Competition-class intensity and structure.
+- General physical preparedness and basic safety operations on the mat.
 
 ## Extracted Claims
 - Tots classes target ages 4 to 7 and youth classes target ages 8 to 13, with students assessed individually. (`chunk-001`)

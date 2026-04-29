@@ -1,0 +1,1017 @@
+{
+  "page_counts": {
+    "class-type": 4,
+    "concept": 14,
+    "lesson": 2,
+    "open-question": 3,
+    "policy": 3,
+    "position": 8,
+    "procedure": 9,
+    "program": 3,
+    "source": 7,
+    "value": 1
+  },
+  "pages": [
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "announcements-and-student-recognition",
+      "keywords": [],
+      "path": "kb/procedures/announcements-and-student-recognition.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-013",
+        "source-kin-bjj-compendium#chunk-009"
+      ],
+      "status": "active",
+      "title": "Announcements and Student Recognition",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [
+        "strategy",
+        "competition",
+        "teaching"
+      ],
+      "id": "basic-bjj-match-strategy",
+      "keywords": [
+        "basic bjj match strategy",
+        "points strategy",
+        "top game plan",
+        "guard game plan"
+      ],
+      "path": "kb/concepts/basic-bjj-match-strategy.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-013",
+        "source-kin-bjj-compendium#chunk-014"
+      ],
+      "status": "active",
+      "title": "Basic BJJ Match Strategy",
+      "type": "concept"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.9,
+      "domain_tags": [
+        "class-structure",
+        "youth-program",
+        "operations"
+      ],
+      "id": "class-structure-principles",
+      "keywords": [
+        "class structure principles",
+        "kids class order",
+        "firm not rigid coaching"
+      ],
+      "path": "kb/class-types/class-structure-principles.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-006",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-004"
+      ],
+      "status": "active",
+      "title": "Class Structure Principles",
+      "type": "class-type"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "community-and-recognition-principles",
+      "keywords": [],
+      "path": "kb/concepts/community-and-recognition-principles.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-013",
+        "source-kin-bjj-compendium#chunk-009"
+      ],
+      "status": "active",
+      "title": "Community and Recognition Principles",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "competition-training-session-framework",
+      "keywords": [],
+      "path": "kb/class-types/competition-training-session-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-010"
+      ],
+      "status": "active",
+      "title": "Competition Training Session Framework",
+      "type": "class-type"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.6,
+      "domain_tags": [],
+      "id": "double-leg-side-control-americana-example-lesson",
+      "keywords": [],
+      "path": "kb/lessons/double-leg-side-control-americana-example-lesson.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-example-scripted-lesson-plan-adult#chunk-001",
+        "source-example-scripted-lesson-plan-adult#chunk-002",
+        "source-example-scripted-lesson-plan-youth#chunk-001",
+        "source-example-scripted-lesson-plan-youth#chunk-003"
+      ],
+      "status": "active",
+      "title": "Double Leg to Side Control to Americana Example Lesson",
+      "type": "lesson"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.9,
+      "domain_tags": [
+        "drilling",
+        "pedagogy",
+        "training-method"
+      ],
+      "id": "drilling-methodology",
+      "keywords": [
+        "drilling methodology",
+        "progressive resistance",
+        "objective drills",
+        "reset drills"
+      ],
+      "path": "kb/procedures/drilling-methodology.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-008",
+        "source-kin-bjj-compendium#chunk-010"
+      ],
+      "status": "active",
+      "title": "Drilling Methodology",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [
+        "escapes",
+        "survival",
+        "youth-priority"
+      ],
+      "id": "escape-framework",
+      "keywords": [
+        "escape framework",
+        "survival first",
+        "frames and re-guard",
+        "reversal logic"
+      ],
+      "path": "kb/concepts/escape-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Escape Framework",
+      "type": "concept"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.65,
+      "domain_tags": [],
+      "id": "example-lesson-warmup-option-pattern",
+      "keywords": [],
+      "path": "kb/procedures/example-lesson-warmup-option-pattern.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-example-scripted-lesson-plan-adult#chunk-002",
+        "source-example-scripted-lesson-plan-youth#chunk-003",
+        "source-example-scripted-lesson-plan-tots#chunk-003"
+      ],
+      "status": "active",
+      "title": "Example Lesson Warm-Up Option Pattern",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.7,
+      "domain_tags": [],
+      "id": "example-situational-start-pattern",
+      "keywords": [],
+      "path": "kb/procedures/example-situational-start-pattern.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-example-scripted-lesson-plan-adult#chunk-002",
+        "source-example-scripted-lesson-plan-youth#chunk-003"
+      ],
+      "status": "active",
+      "title": "Example Situational Start Pattern",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.9,
+      "domain_tags": [
+        "values",
+        "youth-program",
+        "culture"
+      ],
+      "id": "foundational-youth-values",
+      "keywords": [
+        "foundational youth values",
+        "respect discipline perseverance humility",
+        "life skills"
+      ],
+      "path": "kb/values/foundational-youth-values.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-002",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-005"
+      ],
+      "status": "active",
+      "title": "Foundational Youth Values",
+      "type": "value"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.8,
+      "domain_tags": [
+        "pedagogy",
+        "skill-development",
+        "coaching"
+      ],
+      "id": "four-layers-of-bjj-skill-development",
+      "keywords": [
+        "four layers of bjj skill development",
+        "techniques muscle memory principles intuition",
+        "coaching model"
+      ],
+      "path": "kb/concepts/four-layers-of-bjj-skill-development.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-the-four-layers-of-bjj-skills-development#chunk-001",
+        "source-the-four-layers-of-bjj-skills-development#chunk-006"
+      ],
+      "status": "active",
+      "title": "Four Layers of BJJ Skill Development",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "future-black-belt-program",
+      "keywords": [],
+      "path": "kb/programs/future-black-belt-program.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-005"
+      ],
+      "status": "active",
+      "title": "Future Black Belt Program",
+      "type": "program"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "games-instructional-use",
+      "keywords": [],
+      "path": "kb/procedures/games-instructional-use.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-006",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-005"
+      ],
+      "status": "active",
+      "title": "Games as Instructional Tools",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "general-physical-preparedness-framework",
+      "keywords": [],
+      "path": "kb/concepts/general-physical-preparedness-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-011"
+      ],
+      "status": "active",
+      "title": "General Physical Preparedness Framework",
+      "type": "concept"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [
+        "guard",
+        "offense-defense",
+        "bottom-game"
+      ],
+      "id": "guard-framework",
+      "keywords": [
+        "guard framework",
+        "retention and recovery",
+        "sweeps and submissions",
+        "bottom position"
+      ],
+      "path": "kb/position/guard-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017",
+        "source-kin-bjj-compendium#chunk-018"
+      ],
+      "status": "active",
+      "title": "Guard Framework",
+      "type": "position"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "ibjjf-points-and-advantages-basics",
+      "keywords": [],
+      "path": "kb/concepts/ibjjf-points-and-advantages-basics.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-014"
+      ],
+      "status": "active",
+      "title": "IBJJF Points and Advantages Basics",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "intuition-through-pattern-recognition",
+      "keywords": [],
+      "path": "kb/concepts/intuition-through-pattern-recognition.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-the-four-layers-of-bjj-skills-development#chunk-005"
+      ],
+      "status": "active",
+      "title": "Intuition Through Pattern Recognition",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.9,
+      "domain_tags": [],
+      "id": "kids-age-and-duration-guidelines",
+      "keywords": [],
+      "path": "kb/class-types/kids-age-and-duration-guidelines.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-007",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-001",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-002"
+      ],
+      "status": "active",
+      "title": "Kids Age and Duration Guidelines",
+      "type": "class-type"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.9,
+      "domain_tags": [
+        "program",
+        "youth-development",
+        "values"
+      ],
+      "id": "kids-youth-development-program",
+      "keywords": [
+        "kids youth development program",
+        "character building through bjj",
+        "youth academy program"
+      ],
+      "path": "kb/programs/kids-youth-development-program.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-001",
+        "source-kin-bjj-compendium#chunk-002"
+      ],
+      "status": "active",
+      "title": "Kids Youth Development Program",
+      "type": "program"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "knee-on-belly-system",
+      "keywords": [],
+      "path": "kb/position/knee-on-belly-system.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Knee on Belly System",
+      "type": "position"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "life-skills-chat-framework",
+      "keywords": [],
+      "path": "kb/procedures/life-skills-chat-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-005",
+        "source-kin-bjj-compendium#chunk-001"
+      ],
+      "status": "active",
+      "title": "Life Skills Chat Framework",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.9,
+      "domain_tags": [
+        "safety",
+        "operations",
+        "youth"
+      ],
+      "id": "mat-safety-program",
+      "keywords": [
+        "mat safety program",
+        "partner safety",
+        "first aid readiness",
+        "beginner exposure limits"
+      ],
+      "path": "kb/policies/mat-safety-program.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-011",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-012"
+      ],
+      "status": "active",
+      "title": "Mat Safety Program",
+      "type": "policy"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "mount-system",
+      "keywords": [],
+      "path": "kb/position/mount-system.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Mount System",
+      "type": "position"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "movement-and-warmup-framework",
+      "keywords": [],
+      "path": "kb/concepts/movement-and-warmup-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-015"
+      ],
+      "status": "active",
+      "title": "Movement and Warmup Framework",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "muscle-memory-through-repetition",
+      "keywords": [],
+      "path": "kb/concepts/muscle-memory-through-repetition.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-the-four-layers-of-bjj-skills-development#chunk-003"
+      ],
+      "status": "active",
+      "title": "Muscle Memory Through Repetition",
+      "type": "concept"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "north-south-system",
+      "keywords": [],
+      "path": "kb/position/north-south-system.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "North-South System",
+      "type": "position"
+    },
+    {
+      "claim_label": null,
+      "confidence": 0.2,
+      "domain_tags": [],
+      "id": "open-question-supplementary-programs-need-full-build-outs",
+      "keywords": [],
+      "path": "kb/open-questions/supplementary-programs-need-full-build-outs.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "unresolved",
+      "title": "Supplementary Programs Need Full Build-Outs",
+      "type": "open-question"
+    },
+    {
+      "claim_label": null,
+      "confidence": 0.4,
+      "domain_tags": [],
+      "id": "open-question-week-by-week-curriculum-sequence",
+      "keywords": [],
+      "path": "kb/open-questions/week-by-week-curriculum-sequence.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-high-level-overview#chunk-006",
+        "source-high-level-overview#chunk-007",
+        "source-kin-bjj-compendium#chunk-016"
+      ],
+      "status": "unresolved",
+      "title": "Week-by-Week Curriculum Sequence Is Proposed Rather Than Source-Authored",
+      "type": "open-question"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "passing-framework",
+      "keywords": [],
+      "path": "kb/position/passing-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-018"
+      ],
+      "status": "active",
+      "title": "Passing Framework",
+      "type": "position"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "positional-control-framework",
+      "keywords": [],
+      "path": "kb/concepts/positional-control-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-016",
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Positional Control Framework",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "principles-connect-techniques",
+      "keywords": [],
+      "path": "kb/concepts/principles-connect-techniques.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-the-four-layers-of-bjj-skills-development#chunk-004"
+      ],
+      "status": "active",
+      "title": "Principles Connect Techniques",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.9,
+      "domain_tags": [],
+      "id": "promotions-model-4a",
+      "keywords": [],
+      "path": "kb/policies/promotions-model-4a.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-009"
+      ],
+      "status": "active",
+      "title": "Kids Promotions 4A Model",
+      "type": "policy"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "rear-mount-system",
+      "keywords": [],
+      "path": "kb/position/rear-mount-system.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Rear Mount System",
+      "type": "position"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "roll-call-and-welcome-procedure",
+      "keywords": [],
+      "path": "kb/procedures/roll-call-and-welcome-procedure.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-009",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
+      ],
+      "status": "active",
+      "title": "Roll Call and Welcome Procedure",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "open-question",
+      "confidence": 0.2,
+      "domain_tags": [],
+      "id": "scripted-youth-and-adult-example-differentiation",
+      "keywords": [],
+      "path": "kb/open-questions/scripted-youth-and-adult-example-differentiation.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-example-scripted-lesson-plan-adult#chunk-001",
+        "source-example-scripted-lesson-plan-youth#chunk-001",
+        "source-example-scripted-lesson-plan-youth#chunk-002"
+      ],
+      "status": "active",
+      "title": "Scripted Youth and Adult Example Differentiation",
+      "type": "open-question"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.8,
+      "domain_tags": [
+        "side-control",
+        "pinning",
+        "transitions"
+      ],
+      "id": "side-control-system",
+      "keywords": [
+        "side control system",
+        "crossface underhook",
+        "kesa gatame",
+        "north south transitions"
+      ],
+      "path": "kb/position/side-control-system.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Side Control System",
+      "type": "position"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "example",
+        "lesson-format",
+        "adult"
+      ],
+      "id": "source-example-scripted-lesson-plan-adult",
+      "keywords": [
+        "adult scripted lesson plan example",
+        "coach-facing format",
+        "offensive cycle lesson"
+      ],
+      "path": "kb/sources/example-scripted-lesson-plan-adult.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "Example Scripted Lesson Plan Adult",
+      "type": "source"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "example",
+        "lesson-format",
+        "tots"
+      ],
+      "id": "source-example-scripted-lesson-plan-tots",
+      "keywords": [
+        "tots scripted lesson plan example",
+        "movement based lesson format",
+        "playful class script"
+      ],
+      "path": "kb/sources/example-scripted-lesson-plan-tots.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "Example Scripted Lesson Plan Tots",
+      "type": "source"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "example",
+        "lesson-format",
+        "youth"
+      ],
+      "id": "source-example-scripted-lesson-plan-youth",
+      "keywords": [
+        "youth scripted lesson plan example",
+        "coach-facing format",
+        "youth class script"
+      ],
+      "path": "kb/sources/example-scripted-lesson-plan-youth.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "Example Scripted Lesson Plan Youth",
+      "type": "source"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "curriculum-brief",
+        "sequencing"
+      ],
+      "id": "source-high-level-overview",
+      "keywords": [
+        "high level overview",
+        "curriculum brief",
+        "offensive defensive cycles",
+        "weekly structure"
+      ],
+      "path": "kb/sources/high-level-overview.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "High Level Overview",
+      "type": "source"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "compendium",
+        "curriculum",
+        "technique-systems"
+      ],
+      "id": "source-kin-bjj-compendium",
+      "keywords": [
+        "kin bjj compendium",
+        "curriculum source",
+        "positions",
+        "guards",
+        "passing",
+        "takedowns",
+        "submissions"
+      ],
+      "path": "kb/sources/kin-bjj-compendium.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "KIN BJJ Compendium",
+      "type": "source"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "youth-program",
+        "class-delivery",
+        "operations"
+      ],
+      "id": "source-kin-bjj-kids-lesson-plan-structure",
+      "keywords": [
+        "kids lesson plan structure",
+        "youth class format",
+        "drilling",
+        "games",
+        "life skills",
+        "mat safety"
+      ],
+      "path": "kb/sources/kin-bjj-kids-lesson-plan-structure.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "KIN BJJ Kids Lesson Plan Structure",
+      "type": "source"
+    },
+    {
+      "claim_label": null,
+      "confidence": 1.0,
+      "domain_tags": [
+        "source",
+        "pedagogy",
+        "skill-development"
+      ],
+      "id": "source-the-four-layers-of-bjj-skills-development",
+      "keywords": [
+        "four layers of bjj skill development",
+        "techniques",
+        "muscle memory",
+        "principles",
+        "intuition"
+      ],
+      "path": "kb/sources/the-four-layers-of-bjj-skills-development.md",
+      "related_pages": [],
+      "source_refs": [],
+      "status": "active",
+      "title": "The Four Layers of BJJ Skills Development",
+      "type": "source"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.9,
+      "domain_tags": [],
+      "id": "sparring-guidelines",
+      "keywords": [],
+      "path": "kb/policies/sparring-guidelines.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-012",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-012"
+      ],
+      "status": "active",
+      "title": "Kids Sparring Guidelines",
+      "type": "policy"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.85,
+      "domain_tags": [
+        "submissions",
+        "finishing",
+        "safety"
+      ],
+      "id": "submission-framework",
+      "keywords": [
+        "submission framework",
+        "finishing layer",
+        "tap mechanics",
+        "chokes and joint locks"
+      ],
+      "path": "kb/concepts/submission-framework.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-018"
+      ],
+      "status": "active",
+      "title": "Submission Framework",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "supplementary-youth-programs",
+      "keywords": [],
+      "path": "kb/programs/supplementary-youth-programs.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-003",
+        "source-kin-bjj-compendium#chunk-004"
+      ],
+      "status": "active",
+      "title": "Supplementary Youth Programs",
+      "type": "program"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.9,
+      "domain_tags": [
+        "lesson-delivery",
+        "coaching",
+        "youth-classes"
+      ],
+      "id": "technical-lesson-delivery-model",
+      "keywords": [
+        "technical lesson delivery model",
+        "short demonstrations",
+        "progressive resistance teaching"
+      ],
+      "path": "kb/procedures/technical-lesson-delivery-model.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-011",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-007"
+      ],
+      "status": "active",
+      "title": "Technical Lesson Delivery Model",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "techniques-as-recipe-book",
+      "keywords": [],
+      "path": "kb/concepts/techniques-as-recipe-book.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-the-four-layers-of-bjj-skills-development#chunk-002"
+      ],
+      "status": "active",
+      "title": "Techniques as the Recipe Book Layer",
+      "type": "concept"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "tots-week-1-mat-rules-base-ready-stance-example",
+      "keywords": [],
+      "path": "kb/lessons/tots-week-1-mat-rules-base-ready-stance-example.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-example-scripted-lesson-plan-tots#chunk-001",
+        "source-example-scripted-lesson-plan-tots#chunk-002",
+        "source-example-scripted-lesson-plan-tots#chunk-003"
+      ],
+      "status": "active",
+      "title": "Tots Week 1 Mat Rules, Base, And Ready Stance Example",
+      "type": "lesson"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.8,
+      "domain_tags": [],
+      "id": "turtle-system",
+      "keywords": [],
+      "path": "kb/position/turtle-system.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-017"
+      ],
+      "status": "active",
+      "title": "Turtle System",
+      "type": "position"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.85,
+      "domain_tags": [],
+      "id": "uke-and-tori-drilling-roles",
+      "keywords": [],
+      "path": "kb/concepts/uke-and-tori-drilling-roles.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-009"
+      ],
+      "status": "active",
+      "title": "Uke and Tori Drilling Roles",
+      "type": "concept"
+    },
+    {
+      "claim_label": "editorial-normalization",
+      "confidence": 0.9,
+      "domain_tags": [],
+      "id": "warm-up-philosophy",
+      "keywords": [],
+      "path": "kb/procedures/warm-up-philosophy.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-010",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
+      ],
+      "status": "active",
+      "title": "Warm-Up Philosophy",
+      "type": "procedure"
+    },
+    {
+      "claim_label": "fact",
+      "confidence": 0.9,
+      "domain_tags": [],
+      "id": "youth-class-template-60-minutes",
+      "keywords": [],
+      "path": "kb/class-types/youth-class-template-60-minutes.md",
+      "related_pages": [],
+      "source_refs": [
+        "source-kin-bjj-compendium#chunk-008",
+        "source-kin-bjj-kids-lesson-plan-structure#chunk-003"
+      ],
+      "status": "active",
+      "title": "Youth 60-Minute Class Template",
+      "type": "class-type"
+    }
+  ]
+}

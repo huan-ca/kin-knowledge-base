@@ -12,7 +12,7 @@ related_pages: []
 ---
 # Week-by-Week Curriculum Sequence Is Proposed Rather Than Source-Authored
 
-## Missing Information
+## Gaps
 - The source set still does not provide a directly authored week-by-week curriculum calendar, so any full sequence remains an editorial normalization or generated candidate rather than source-authored evidence.
 
 ## Why It Matters

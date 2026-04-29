@@ -9,17 +9,31 @@ source_refs:
 - source-{{ source_slug }}#chunk-001
 related_pages: []
 domain_tags: []
+keywords: []
 ---
 # {{ title }}
 
-## Canonical Statement
-[State the claim without exceeding the available evidence.]
+## Definition
+[State the claim conservatively and directly.]
 
-## Supporting Evidence
-- [Quoted or paraphrased support tied to a source chunk]
+## Detailed Notes
+- [Preserve distinctions, supporting detail, and context from the source]
+- [Add additional usable detail instead of compressing everything into one sentence]
+
+<!-- ## Operational Implications
+- [Only include when the page affects how someone should act, teach, or structure work]
+-->
+
+<!-- ## Examples or Variants
+- [Only include when examples, forms, or program/age variants materially improve understanding]
+-->
+
+<!-- ## Constraints or Safety Notes
+- [Only include when limits, cautions, safety concerns, or sequencing boundaries matter]
+-->
 
 ## Related Pages
 - [[related-page]]
 
-## Missing Information
-- [What is still unknown]
+## Gaps
+- [What remains unclear or under-specified]

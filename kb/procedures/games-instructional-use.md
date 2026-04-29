@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 Games are used as motivation and instructional delivery tools rather than as random filler.
 
-## Key Details
+## Detailed Notes
 - BJJ-specific games are preferred.
 - Games can reward attention and reinforce lesson themes.
 - Challenge-based drill games can track rep quality, effort, and engagement.

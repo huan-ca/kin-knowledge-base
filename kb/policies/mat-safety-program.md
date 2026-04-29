@@ -9,19 +9,26 @@ source_refs:
 - source-kin-bjj-kids-lesson-plan-structure#chunk-011
 - source-kin-bjj-kids-lesson-plan-structure#chunk-012
 related_pages: []
+domain_tags: [safety, operations, youth]
+keywords: [mat safety program, partner safety, first aid readiness, beginner exposure limits]
+summary: Safety policy page describing the gym’s expected supervision, partner-care norms, and progressive exposure rules for kids and beginners.
 ---
 # Mat Safety Program
 
 ## Definition
 Mat safety is treated as a core operating responsibility of the gym and not just a side note before sparring.
 
-## Key Details
-- Coaches and assistant coaches should continuously scan for crowding, escalation, and unsafe behavior.
-- At least one coach should be trained in first aid.
-- Coaches should know first-aid-kit location and emergency muster points.
-- Students are taught that their training partner is the most important person in the gym.
-- The tap must always be honored.
-- Exposure to takedowns and submissions is limited for beginners until they are ready.
+## Detailed Notes
+- The sources position safety as an active operational system rather than a short speech before sparring.
+- Coaches and assistant coaches are expected to scan the room for crowding, unsafe behavior, emotional escalation, and mismatches in pace or maturity.
+- Basic emergency readiness matters: at least one coach should have first-aid training, and staff should know where the kit and muster points are.
+- Partner-care is treated as a cultural rule. Students are explicitly taught that the person they train with is the most important person in the room because mutual care is what makes training possible.
+- Tap mechanics are part of safety culture. The tap must always be honored without argument or delay.
+- Exposure to higher-risk areas such as takedowns and submissions should be progressive for beginners rather than immediate and unmanaged.
+
+## Constraints or Safety Notes
+- The sources name safety expectations clearly, but they stop short of a formal incident-reporting protocol or written return-to-training process.
+- Coaches still need local judgment around age, behavior, size mismatch, and emotional regulation in each class.
 
 ## Gaps
 - The source names safety norms but does not define a formal incident-reporting workflow.

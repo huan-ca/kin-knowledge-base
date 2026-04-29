@@ -1,14 +1,17 @@
 ---
 id: source-kin-bjj-compendium
 type: source
-title: "KIN BJJ Compendium.md"
+title: "KIN BJJ Compendium"
 status: active
 confidence: 1.0
 source_refs: []
 related_pages: []
+domain_tags: [source, compendium, curriculum, technique-systems]
+keywords: [kin bjj compendium, curriculum source, positions, guards, passing, takedowns, submissions]
+summary: Core compendium source covering youth program goals, teaching systems, movement training, competition basics, position families, guard families, passing, takedowns, submissions, and safety constraints.
 ingestion_batch: batch-20260426T003151Z
 ---
-# KIN BJJ Compendium.md
+# KIN BJJ Compendium
 
 ## Artifact
 - Path: `raw/KIN BJJ Compendium.md`
@@ -16,6 +19,13 @@ ingestion_batch: batch-20260426T003151Z
 
 ## Summary
 This source is the main BJJ gym knowledge document. It covers youth program purpose, values, supplementary programs, future black belt programming, class structure, promotions, warmups, lesson delivery, sparring, competition rules, match strategy, movement drills, positional systems, guard systems, passing, takedowns, submissions, and youth safety constraints.
+
+## Major Coverage Areas
+- Program philosophy and value formation for youth development.
+- Delivery systems such as class structure, lesson presentation, drilling, sparring, and warm-ups.
+- Competition-oriented material including points, advantages, penalties, and simple match logic.
+- Technical systems for dominant pins, escapes, guard families, passing, submissions, and takedown families.
+- Age and safety constraints, especially for youth classes and beginner exposure.
 
 ## Extracted Claims
 - The youth program should build foundational skills and values, using BJJ to develop children physically, mentally, and emotionally. (`chunk-001`)

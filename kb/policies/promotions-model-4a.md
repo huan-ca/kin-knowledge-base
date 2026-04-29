@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Kids promotions are based on a multi-factor model rather than just technical wins or attendance alone.
 
-## Key Details
+## Detailed Notes
 - Stripes are awarded at roughly every 20 classes.
 - Belt promotions are handled by the head coach or black belt.
 - The evaluation model is Attendance, Ability, Attitude, and Assistance.

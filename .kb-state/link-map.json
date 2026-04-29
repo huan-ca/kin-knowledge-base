@@ -1,5 +1,7 @@
 {
   "announcements-and-student-recognition": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/announcements-and-student-recognition.md",
     "related_pages": [],
     "source_refs": [
@@ -9,6 +11,17 @@
     "type": "procedure"
   },
   "basic-bjj-match-strategy": {
+    "domain_tags": [
+      "strategy",
+      "competition",
+      "teaching"
+    ],
+    "keywords": [
+      "basic bjj match strategy",
+      "points strategy",
+      "top game plan",
+      "guard game plan"
+    ],
     "path": "kb/concepts/basic-bjj-match-strategy.md",
     "related_pages": [],
     "source_refs": [
@@ -18,6 +31,16 @@
     "type": "concept"
   },
   "class-structure-principles": {
+    "domain_tags": [
+      "class-structure",
+      "youth-program",
+      "operations"
+    ],
+    "keywords": [
+      "class structure principles",
+      "kids class order",
+      "firm not rigid coaching"
+    ],
     "path": "kb/class-types/class-structure-principles.md",
     "related_pages": [],
     "source_refs": [
@@ -27,6 +50,8 @@
     "type": "class-type"
   },
   "community-and-recognition-principles": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/community-and-recognition-principles.md",
     "related_pages": [],
     "source_refs": [
@@ -36,6 +61,8 @@
     "type": "concept"
   },
   "competition-training-session-framework": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/class-types/competition-training-session-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -44,6 +71,8 @@
     "type": "class-type"
   },
   "double-leg-side-control-americana-example-lesson": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/lessons/double-leg-side-control-americana-example-lesson.md",
     "related_pages": [],
     "source_refs": [
@@ -55,6 +84,17 @@
     "type": "lesson"
   },
   "drilling-methodology": {
+    "domain_tags": [
+      "drilling",
+      "pedagogy",
+      "training-method"
+    ],
+    "keywords": [
+      "drilling methodology",
+      "progressive resistance",
+      "objective drills",
+      "reset drills"
+    ],
     "path": "kb/procedures/drilling-methodology.md",
     "related_pages": [],
     "source_refs": [
@@ -64,6 +104,17 @@
     "type": "procedure"
   },
   "escape-framework": {
+    "domain_tags": [
+      "escapes",
+      "survival",
+      "youth-priority"
+    ],
+    "keywords": [
+      "escape framework",
+      "survival first",
+      "frames and re-guard",
+      "reversal logic"
+    ],
     "path": "kb/concepts/escape-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -72,6 +123,8 @@
     "type": "concept"
   },
   "example-lesson-warmup-option-pattern": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/example-lesson-warmup-option-pattern.md",
     "related_pages": [],
     "source_refs": [
@@ -82,6 +135,8 @@
     "type": "procedure"
   },
   "example-situational-start-pattern": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/example-situational-start-pattern.md",
     "related_pages": [],
     "source_refs": [
@@ -91,6 +146,16 @@
     "type": "procedure"
   },
   "foundational-youth-values": {
+    "domain_tags": [
+      "values",
+      "youth-program",
+      "culture"
+    ],
+    "keywords": [
+      "foundational youth values",
+      "respect discipline perseverance humility",
+      "life skills"
+    ],
     "path": "kb/values/foundational-youth-values.md",
     "related_pages": [],
     "source_refs": [
@@ -100,6 +165,16 @@
     "type": "value"
   },
   "four-layers-of-bjj-skill-development": {
+    "domain_tags": [
+      "pedagogy",
+      "skill-development",
+      "coaching"
+    ],
+    "keywords": [
+      "four layers of bjj skill development",
+      "techniques muscle memory principles intuition",
+      "coaching model"
+    ],
     "path": "kb/concepts/four-layers-of-bjj-skill-development.md",
     "related_pages": [],
     "source_refs": [
@@ -109,6 +184,8 @@
     "type": "concept"
   },
   "future-black-belt-program": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/programs/future-black-belt-program.md",
     "related_pages": [],
     "source_refs": [
@@ -117,6 +194,8 @@
     "type": "program"
   },
   "games-instructional-use": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/games-instructional-use.md",
     "related_pages": [],
     "source_refs": [
@@ -126,6 +205,8 @@
     "type": "procedure"
   },
   "general-physical-preparedness-framework": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/general-physical-preparedness-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -134,6 +215,17 @@
     "type": "concept"
   },
   "guard-framework": {
+    "domain_tags": [
+      "guard",
+      "offense-defense",
+      "bottom-game"
+    ],
+    "keywords": [
+      "guard framework",
+      "retention and recovery",
+      "sweeps and submissions",
+      "bottom position"
+    ],
     "path": "kb/position/guard-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -143,6 +235,8 @@
     "type": "position"
   },
   "ibjjf-points-and-advantages-basics": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/ibjjf-points-and-advantages-basics.md",
     "related_pages": [],
     "source_refs": [
@@ -151,6 +245,8 @@
     "type": "concept"
   },
   "intuition-through-pattern-recognition": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/intuition-through-pattern-recognition.md",
     "related_pages": [],
     "source_refs": [
@@ -159,6 +255,8 @@
     "type": "concept"
   },
   "kids-age-and-duration-guidelines": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/class-types/kids-age-and-duration-guidelines.md",
     "related_pages": [],
     "source_refs": [
@@ -169,6 +267,16 @@
     "type": "class-type"
   },
   "kids-youth-development-program": {
+    "domain_tags": [
+      "program",
+      "youth-development",
+      "values"
+    ],
+    "keywords": [
+      "kids youth development program",
+      "character building through bjj",
+      "youth academy program"
+    ],
     "path": "kb/programs/kids-youth-development-program.md",
     "related_pages": [],
     "source_refs": [
@@ -178,6 +286,8 @@
     "type": "program"
   },
   "knee-on-belly-system": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/position/knee-on-belly-system.md",
     "related_pages": [],
     "source_refs": [
@@ -186,6 +296,8 @@
     "type": "position"
   },
   "life-skills-chat-framework": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/life-skills-chat-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -195,6 +307,17 @@
     "type": "procedure"
   },
   "mat-safety-program": {
+    "domain_tags": [
+      "safety",
+      "operations",
+      "youth"
+    ],
+    "keywords": [
+      "mat safety program",
+      "partner safety",
+      "first aid readiness",
+      "beginner exposure limits"
+    ],
     "path": "kb/policies/mat-safety-program.md",
     "related_pages": [],
     "source_refs": [
@@ -204,6 +327,8 @@
     "type": "policy"
   },
   "mount-system": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/position/mount-system.md",
     "related_pages": [],
     "source_refs": [
@@ -212,6 +337,8 @@
     "type": "position"
   },
   "movement-and-warmup-framework": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/movement-and-warmup-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -220,6 +347,8 @@
     "type": "concept"
   },
   "muscle-memory-through-repetition": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/muscle-memory-through-repetition.md",
     "related_pages": [],
     "source_refs": [
@@ -228,6 +357,8 @@
     "type": "concept"
   },
   "north-south-system": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/position/north-south-system.md",
     "related_pages": [],
     "source_refs": [
@@ -236,12 +367,16 @@
     "type": "position"
   },
   "open-question-supplementary-programs-need-full-build-outs": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/open-questions/supplementary-programs-need-full-build-outs.md",
     "related_pages": [],
     "source_refs": [],
     "type": "open-question"
   },
   "open-question-week-by-week-curriculum-sequence": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/open-questions/week-by-week-curriculum-sequence.md",
     "related_pages": [],
     "source_refs": [
@@ -252,6 +387,8 @@
     "type": "open-question"
   },
   "passing-framework": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/position/passing-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -260,6 +397,8 @@
     "type": "position"
   },
   "positional-control-framework": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/positional-control-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -269,6 +408,8 @@
     "type": "concept"
   },
   "principles-connect-techniques": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/principles-connect-techniques.md",
     "related_pages": [],
     "source_refs": [
@@ -277,6 +418,8 @@
     "type": "concept"
   },
   "promotions-model-4a": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/policies/promotions-model-4a.md",
     "related_pages": [],
     "source_refs": [
@@ -285,6 +428,8 @@
     "type": "policy"
   },
   "rear-mount-system": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/position/rear-mount-system.md",
     "related_pages": [],
     "source_refs": [
@@ -293,6 +438,8 @@
     "type": "position"
   },
   "roll-call-and-welcome-procedure": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/roll-call-and-welcome-procedure.md",
     "related_pages": [],
     "source_refs": [
@@ -302,6 +449,8 @@
     "type": "procedure"
   },
   "scripted-youth-and-adult-example-differentiation": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/open-questions/scripted-youth-and-adult-example-differentiation.md",
     "related_pages": [],
     "source_refs": [
@@ -312,6 +461,17 @@
     "type": "open-question"
   },
   "side-control-system": {
+    "domain_tags": [
+      "side-control",
+      "pinning",
+      "transitions"
+    ],
+    "keywords": [
+      "side control system",
+      "crossface underhook",
+      "kesa gatame",
+      "north south transitions"
+    ],
     "path": "kb/position/side-control-system.md",
     "related_pages": [],
     "source_refs": [
@@ -320,48 +480,135 @@
     "type": "position"
   },
   "source-example-scripted-lesson-plan-adult": {
+    "domain_tags": [
+      "source",
+      "example",
+      "lesson-format",
+      "adult"
+    ],
+    "keywords": [
+      "adult scripted lesson plan example",
+      "coach-facing format",
+      "offensive cycle lesson"
+    ],
     "path": "kb/sources/example-scripted-lesson-plan-adult.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "source-example-scripted-lesson-plan-tots": {
+    "domain_tags": [
+      "source",
+      "example",
+      "lesson-format",
+      "tots"
+    ],
+    "keywords": [
+      "tots scripted lesson plan example",
+      "movement based lesson format",
+      "playful class script"
+    ],
     "path": "kb/sources/example-scripted-lesson-plan-tots.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "source-example-scripted-lesson-plan-youth": {
+    "domain_tags": [
+      "source",
+      "example",
+      "lesson-format",
+      "youth"
+    ],
+    "keywords": [
+      "youth scripted lesson plan example",
+      "coach-facing format",
+      "youth class script"
+    ],
     "path": "kb/sources/example-scripted-lesson-plan-youth.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "source-high-level-overview": {
+    "domain_tags": [
+      "source",
+      "curriculum-brief",
+      "sequencing"
+    ],
+    "keywords": [
+      "high level overview",
+      "curriculum brief",
+      "offensive defensive cycles",
+      "weekly structure"
+    ],
     "path": "kb/sources/high-level-overview.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "source-kin-bjj-compendium": {
+    "domain_tags": [
+      "source",
+      "compendium",
+      "curriculum",
+      "technique-systems"
+    ],
+    "keywords": [
+      "kin bjj compendium",
+      "curriculum source",
+      "positions",
+      "guards",
+      "passing",
+      "takedowns",
+      "submissions"
+    ],
     "path": "kb/sources/kin-bjj-compendium.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "source-kin-bjj-kids-lesson-plan-structure": {
+    "domain_tags": [
+      "source",
+      "youth-program",
+      "class-delivery",
+      "operations"
+    ],
+    "keywords": [
+      "kids lesson plan structure",
+      "youth class format",
+      "drilling",
+      "games",
+      "life skills",
+      "mat safety"
+    ],
     "path": "kb/sources/kin-bjj-kids-lesson-plan-structure.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "source-the-four-layers-of-bjj-skills-development": {
+    "domain_tags": [
+      "source",
+      "pedagogy",
+      "skill-development"
+    ],
+    "keywords": [
+      "four layers of bjj skill development",
+      "techniques",
+      "muscle memory",
+      "principles",
+      "intuition"
+    ],
     "path": "kb/sources/the-four-layers-of-bjj-skills-development.md",
     "related_pages": [],
     "source_refs": [],
     "type": "source"
   },
   "sparring-guidelines": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/policies/sparring-guidelines.md",
     "related_pages": [],
     "source_refs": [
@@ -371,6 +618,17 @@
     "type": "policy"
   },
   "submission-framework": {
+    "domain_tags": [
+      "submissions",
+      "finishing",
+      "safety"
+    ],
+    "keywords": [
+      "submission framework",
+      "finishing layer",
+      "tap mechanics",
+      "chokes and joint locks"
+    ],
     "path": "kb/concepts/submission-framework.md",
     "related_pages": [],
     "source_refs": [
@@ -379,6 +637,8 @@
     "type": "concept"
   },
   "supplementary-youth-programs": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/programs/supplementary-youth-programs.md",
     "related_pages": [],
     "source_refs": [
@@ -388,6 +648,16 @@
     "type": "program"
   },
   "technical-lesson-delivery-model": {
+    "domain_tags": [
+      "lesson-delivery",
+      "coaching",
+      "youth-classes"
+    ],
+    "keywords": [
+      "technical lesson delivery model",
+      "short demonstrations",
+      "progressive resistance teaching"
+    ],
     "path": "kb/procedures/technical-lesson-delivery-model.md",
     "related_pages": [],
     "source_refs": [
@@ -397,6 +667,8 @@
     "type": "procedure"
   },
   "techniques-as-recipe-book": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/techniques-as-recipe-book.md",
     "related_pages": [],
     "source_refs": [
@@ -405,6 +677,8 @@
     "type": "concept"
   },
   "tots-week-1-mat-rules-base-ready-stance-example": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/lessons/tots-week-1-mat-rules-base-ready-stance-example.md",
     "related_pages": [],
     "source_refs": [
@@ -415,6 +689,8 @@
     "type": "lesson"
   },
   "turtle-system": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/position/turtle-system.md",
     "related_pages": [],
     "source_refs": [
@@ -423,6 +699,8 @@
     "type": "position"
   },
   "uke-and-tori-drilling-roles": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/concepts/uke-and-tori-drilling-roles.md",
     "related_pages": [],
     "source_refs": [
@@ -431,6 +709,8 @@
     "type": "concept"
   },
   "warm-up-philosophy": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/procedures/warm-up-philosophy.md",
     "related_pages": [],
     "source_refs": [
@@ -440,6 +720,8 @@
     "type": "procedure"
   },
   "youth-class-template-60-minutes": {
+    "domain_tags": [],
+    "keywords": [],
     "path": "kb/class-types/youth-class-template-60-minutes.md",
     "related_pages": [],
     "source_refs": [

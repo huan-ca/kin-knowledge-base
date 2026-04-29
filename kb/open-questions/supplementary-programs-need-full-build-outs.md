@@ -9,7 +9,7 @@ related_pages: []
 ---
 # Supplementary Programs Need Full Build-Outs
 
-## Missing Information
+## Gaps
 - The self defence, ambassadors, future coaches, and head start programs are named, but their full curricula and operating details are not yet defined in the KB.
 
 ## Why It Matters

@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Muscle memory is the layer that turns a technique from intellectual knowledge into repeatable physical performance through mat time and repetition.
 
-## Key Details
+## Detailed Notes
 - The source ties muscle-memory development to drilling, positional training, repetition, and live rolling.
 - Movement quality, balance, timing, and grip feel improve as the body learns the pattern.
 - The source includes hard-to-verbalize qualities such as pressure, rhythm, weight distribution, and feel inside this layer.

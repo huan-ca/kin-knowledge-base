@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Both roles in drilling are active responsibilities. The person receiving the technique is not passive dead weight and should provide realistic, scaled behavior.
 
-## Key Details
+## Detailed Notes
 - Uke should provide realistic movement patterns.
 - Resistance should be scaled intentionally, often using a simple dial reference.
 - Coaches should explicitly teach that both students are responsible for making the drill useful.

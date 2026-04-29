@@ -16,7 +16,7 @@ related_pages: []
 ## Definition
 The gym separates kids programming into tots and youth cohorts with recommended durations matched to attention span and maturity.
 
-## Key Details
+## Detailed Notes
 - Tots are generally ages 4 to 7.
 - Youth are generally ages 8 to 13.
 - Tots classes are typically 30 to 45 minutes depending on source phrasing and age.

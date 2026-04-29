@@ -97,6 +97,8 @@ confidence: 0.9
 claim_label: fact
 source_refs: [source-compendium#chunk-001, source-compendium#chunk-009]
 related_pages: [armbar, triangle-choke]
+domain_tags: [guard, offensive-cycle]
+keywords: [closed guard, posture breaking, hip control]
 ---
 # Closed Guard
 """,
@@ -144,6 +146,7 @@ related_pages: []
     gap_report_text = (repo / "generated" / "reports" / "gap-report.md").read_text(encoding="utf-8")
     conflict_report_text = (repo / "generated" / "reports" / "conflict-report.md").read_text(encoding="utf-8")
     improvement_report_text = (repo / "generated" / "reports" / "improvement-report.md").read_text(encoding="utf-8")
+    kb_manifest = json.loads((repo / "generated" / "kb-manifest.json").read_text(encoding="utf-8"))
     link_map = json.loads((repo / ".kb-state" / "link-map.json").read_text(encoding="utf-8"))
 
     assert "- [Closed Guard](concepts/closed-guard.md) (`confidence: 0.90`, `status: active`)" in index_text
@@ -156,12 +159,32 @@ related_pages: []
     assert "## Source Basis" in improvement_report_text
     assert "## Confidence" in improvement_report_text
     assert "## Missing Prerequisites" in improvement_report_text
+    assert kb_manifest["page_counts"]["concept"] == 4
+    assert isinstance(kb_manifest["pages"], list)
+    manifest_page_ids = [page["id"] for page in kb_manifest["pages"]]
+    assert manifest_page_ids == sorted(manifest_page_ids, key=str)
+    closed_guard_record = next(page for page in kb_manifest["pages"] if page["id"] == "closed-guard")
+    assert closed_guard_record["type"] == "concept"
+    assert closed_guard_record["title"] == "Closed Guard"
+    assert closed_guard_record["status"] == "active"
+    assert closed_guard_record["confidence"] == 0.9
+    assert closed_guard_record["path"] == "kb/concepts/closed-guard.md"
+    assert closed_guard_record["claim_label"] == "fact"
+    assert closed_guard_record["source_refs"] == ["source-compendium#chunk-001", "source-compendium#chunk-009"]
+    assert closed_guard_record["related_pages"] == ["armbar", "triangle-choke"]
+    assert closed_guard_record["domain_tags"] == ["guard", "offensive-cycle"]
+    assert closed_guard_record["keywords"] == ["closed guard", "posture breaking", "hip control"]
+    armbar_record = next(page for page in kb_manifest["pages"] if page["id"] == "armbar")
+    assert armbar_record["domain_tags"] == []
+    assert armbar_record["keywords"] == []
     assert link_map["closed-guard"]["path"] == "kb/concepts/closed-guard.md"
     assert link_map["closed-guard"]["related_pages"] == ["armbar", "triangle-choke"]
     assert isinstance(link_map["closed-guard"]["related_pages"], list)
     assert link_map["closed-guard"]["source_refs"] == ["source-compendium#chunk-001", "source-compendium#chunk-009"]
     assert isinstance(link_map["closed-guard"]["source_refs"], list)
     assert link_map["closed-guard"]["type"] == "concept"
+    assert link_map["closed-guard"]["domain_tags"] == ["guard", "offensive-cycle"]
+    assert link_map["closed-guard"]["keywords"] == ["closed guard", "posture breaking", "hip control"]
 
 
 def test_rebuild_indexes_includes_nested_index_and_readme_pages_without_re_reading_generated_top_level_index(tmp_path):

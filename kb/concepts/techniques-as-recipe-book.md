@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Techniques are the explicit step-by-step movement recipes that give students a concrete way to solve a specific grappling problem.
 
-## Key Details
+## Detailed Notes
 - Techniques are especially useful for beginners because they are easy to demonstrate, practice, and remember.
 - A technique gives a structured sequence rather than vague advice.
 - The source warns that technique knowledge alone does not guarantee success against resistance.

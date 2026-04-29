@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 Life skills chat is a structured teaching moment that connects BJJ participation to personal growth and values formation.
 
-## Key Details
+## Detailed Notes
 - Coaches can discuss adversity, courage, positive mindset, helping others, excellence, integrity, and respect.
 - The section can be used to earn game breaks by demonstrating good attention.
 - The chat should be adapted to age and maturity.

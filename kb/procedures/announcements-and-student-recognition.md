@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 Class closing is used to communicate with both students and parents while reinforcing positive behavior and belonging.
 
-## Key Details
+## Detailed Notes
 - Announcements should stay simple and cover promotions, tournaments, and team events.
 - Move of the day and student of the day should reward attention, questions, and work ethic.
 - New students can be honored to reinforce courage and welcome.

@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Guard passing is categorized by pathway, progression, and strategic style rather than by isolated moves alone.
 
-## Key Details
+## Detailed Notes
 - Pathways include around the legs, through the legs, and under the legs.
 - Hierarchical progress includes grip fighting and opening, clearing feet, clearing knees, and then controlling hips and chest.
 - Style categories include fast passing, pressure passing, and submission-oriented passing.

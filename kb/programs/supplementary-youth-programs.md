@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 The gym’s youth ecosystem includes multiple named programs that sit under the main kids umbrella but serve specialized purposes.
 
-## Key Details
+## Detailed Notes
 - Named programs are self defence, ambassadors, future coaches, and head start.
 - The self defence program is described as separate from sport curriculum.
 - The ambassadors program is associated with anti-bullying and life skills.

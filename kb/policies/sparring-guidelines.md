@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 Sparring is essential for learning, but it should be staged, supervised, and matched appropriately for the students involved.
 
-## Key Details
+## Detailed Notes
 - Coaches should match students by size, experience, temperament, and emotional fit.
 - Positional sparring should come before broader open sparring.
 - New white belts should remain in positional sparring until core safety habits are in place.

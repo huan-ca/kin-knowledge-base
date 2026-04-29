@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Knee on belly is presented as a high-pressure mobility position that connects side control and mount while preserving attack options.
 
-## Key Details
+## Detailed Notes
 - The system depends on knee placement, kickstand base, collar or hip grips, and active toes.
 - Attacks include near-side armbar, cross collar choke, americana or kimura, and spinning armbar.
 - Transitions include windshield-wiper changes, mount entry, and back takes when the opponent turns away.

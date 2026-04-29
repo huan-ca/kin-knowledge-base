@@ -1,14 +1,17 @@
 ---
 id: source-example-scripted-lesson-plan-tots
 type: source
-title: "example_scripted_lesson_plan_tots.md"
+title: "Example Scripted Lesson Plan Tots"
 status: active
 confidence: 1.0
 source_refs: []
 related_pages: []
+domain_tags: [source, example, lesson-format, tots]
+keywords: [tots scripted lesson plan example, movement based lesson format, playful class script]
+summary: Example tots lesson-plan source preserving a lighter movement-first markdown format built around theme introduction, warm-up, activity block, intro grappling, and closing script.
 ingestion_batch: batch-20260428T050532Z
 ---
-# example_scripted_lesson_plan_tots.md
+# Example Scripted Lesson Plan Tots
 
 ## Artifact
 - Path: `raw/example_scripted_lesson_plan_tots.md`
@@ -21,6 +24,7 @@ This source is an example scripted tots lesson-plan artifact. The authored markd
 - The source is a tots example lesson-plan format artifact rather than a full tots curriculum. (`chunk-001`)
 - The example uses a fenced markdown body with week metadata followed by lesson-script sections. (`chunk-002`)
 - The example separates warm-up, main activity, intro grappling, and closing-script blocks. (`chunk-003`)
+- The structure is intentionally lighter and more game-oriented than the adult or youth examples. (`chunk-004`)
 
 ## Preserved Example Format
 

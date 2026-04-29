@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Competition sessions are invite-only, higher-intensity classes for students who want targeted tournament preparation.
 
-## Key Details
+## Detailed Notes
 - Sessions may include BJJ-specific warm ups, rules or strategy discussion, a reviewed takedown, specific scenario drilling, and open rounds.
 - The tone is more self-motivated and intense than a regular class.
 - Training should be tailored to the ruleset and athletes preparing to compete.

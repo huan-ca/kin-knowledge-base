@@ -75,13 +75,13 @@
 - [Supplementary Youth Programs](programs/supplementary-youth-programs.md) (`confidence: 0.85`, `status: active`)
 
 ## Source Pages
-- [KIN BJJ Compendium.md](sources/kin-bjj-compendium.md) (`confidence: 1.00`, `status: active`)
-- [KIN BJJ kids lesson plan structure.md](sources/kin-bjj-kids-lesson-plan-structure.md) (`confidence: 1.00`, `status: active`)
-- [example_scripted_lesson_plan_adult.md](sources/example-scripted-lesson-plan-adult.md) (`confidence: 1.00`, `status: active`)
-- [example_scripted_lesson_plan_tots.md](sources/example-scripted-lesson-plan-tots.md) (`confidence: 1.00`, `status: active`)
-- [example_scripted_lesson_plan_youth.md](sources/example-scripted-lesson-plan-youth.md) (`confidence: 1.00`, `status: active`)
-- [high level overview.md](sources/high-level-overview.md) (`confidence: 1.00`, `status: active`)
-- [the_four_layers_of_bjj_skills_development.md](sources/the-four-layers-of-bjj-skills-development.md) (`confidence: 1.00`, `status: active`)
+- [Example Scripted Lesson Plan Adult](sources/example-scripted-lesson-plan-adult.md) (`confidence: 1.00`, `status: active`)
+- [Example Scripted Lesson Plan Tots](sources/example-scripted-lesson-plan-tots.md) (`confidence: 1.00`, `status: active`)
+- [Example Scripted Lesson Plan Youth](sources/example-scripted-lesson-plan-youth.md) (`confidence: 1.00`, `status: active`)
+- [High Level Overview](sources/high-level-overview.md) (`confidence: 1.00`, `status: active`)
+- [KIN BJJ Compendium](sources/kin-bjj-compendium.md) (`confidence: 1.00`, `status: active`)
+- [KIN BJJ Kids Lesson Plan Structure](sources/kin-bjj-kids-lesson-plan-structure.md) (`confidence: 1.00`, `status: active`)
+- [The Four Layers of BJJ Skills Development](sources/the-four-layers-of-bjj-skills-development.md) (`confidence: 1.00`, `status: active`)
 
 ## Value Pages
 - [Foundational Youth Values](values/foundational-youth-values.md) (`confidence: 0.90`, `status: active`)

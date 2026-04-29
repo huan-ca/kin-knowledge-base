@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 Community is a retention and culture system, and recognition should reinforce behavior, belonging, and team identity.
 
-## Key Details
+## Detailed Notes
 - Team culture matters even in an individual match sport.
 - Move of the day and student of the day should emphasize attention, effort, and attitude more than raw performance.
 - New students can be highlighted to reinforce courage and belonging.

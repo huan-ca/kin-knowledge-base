@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 Principles are the deeper reasons techniques work and the main bridge between isolated moves and adaptable system-level understanding.
 
-## Key Details
+## Detailed Notes
 - Principles help students understand why a technique succeeds or fails.
 - The source uses recurring ideas such as posture, connection, leverage, alignment, base, pressure, frames, angles, inside control, kuzushi, and energy management.
 - Understanding principles helps a student troubleshoot and adapt when the exact memorized sequence breaks down.

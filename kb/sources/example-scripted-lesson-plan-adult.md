@@ -1,14 +1,17 @@
 ---
 id: source-example-scripted-lesson-plan-adult
 type: source
-title: "example_scripted_lesson_plan_adult.md"
+title: "Example Scripted Lesson Plan Adult"
 status: active
 confidence: 1.0
 source_refs: []
 related_pages: []
+domain_tags: [source, example, lesson-format, adult]
+keywords: [adult scripted lesson plan example, coach-facing format, offensive cycle lesson]
+summary: Example adult lesson-plan source preserving the preferred coach-facing markdown format, including week metadata, opening script, warm-up options, technical blocks, submission block, and situational options.
 ingestion_batch: batch-20260428T050532Z
 ---
-# example_scripted_lesson_plan_adult.md
+# Example Scripted Lesson Plan Adult
 
 ## Artifact
 - Path: `raw/example_scripted_lesson_plan_adult.md`
@@ -20,6 +23,8 @@ This source is an example scripted adult lesson-plan artifact. The authored mark
 ## Extracted Claims
 - The source presents a week example as a formatted scripted lesson artifact rather than a bare list of techniques. (`chunk-001`)
 - The source uses distinct sections for week metadata, opening script, warm-up options, technical lesson blocks, and situational training. (`chunk-002`)
+- The example separates the live training portion into situational options rather than hiding it inside prose. (`chunk-003`)
+- The example also uses a dedicated submission block for an offensive-cycle class. (`chunk-004`)
 
 ## Preserved Example Format
 

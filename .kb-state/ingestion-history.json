@@ -59,6 +59,16 @@
         "removed": 3,
         "unchanged": 4
       }
+    },
+    {
+      "batch_id": "batch-20260429T201019Z",
+      "scanned_at": "2026-04-29T20:10:19.920163+00:00",
+      "summary": {
+        "changed": 2,
+        "new": 0,
+        "removed": 0,
+        "unchanged": 5
+      }
     }
   ]
 }

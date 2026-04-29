@@ -38,6 +38,19 @@ def test_parse_frontmatter_parses_inline_non_empty_lists():
     assert metadata["related_pages"] == ["armbar", "triangle-choke"]
 
 
+def test_parse_frontmatter_parses_inline_domain_tags_and_keywords():
+    metadata, _body = parse_frontmatter(
+        "---\n"
+        "domain_tags: [class-type, pedagogy]\n"
+        "keywords: [class structure, lesson flow, behavior management]\n"
+        "---\n"
+        "Body text\n"
+    )
+
+    assert metadata["domain_tags"] == ["class-type", "pedagogy"]
+    assert metadata["keywords"] == ["class structure", "lesson flow", "behavior management"]
+
+
 def test_parse_frontmatter_parses_indented_list_items():
     metadata, body = parse_frontmatter(
         "---\n"
@@ -54,6 +67,20 @@ def test_parse_frontmatter_parses_indented_list_items():
     assert metadata["source_refs"] == ["source-a#chunk-001", "source-b#chunk-002"]
     assert metadata["related_pages"] == ["armbar", "triangle-choke"]
     assert body == "Body text\n"
+
+
+def test_parse_frontmatter_parses_indented_keywords_list():
+    metadata, _body = parse_frontmatter(
+        "---\n"
+        "keywords:\n"
+        "  - closed guard\n"
+        "  - guard retention\n"
+        "  - posture control\n"
+        "---\n"
+        "Body text\n"
+    )
+
+    assert metadata["keywords"] == ["closed guard", "guard retention", "posture control"]
 
 
 def test_parse_frontmatter_accepts_crlf_newlines():

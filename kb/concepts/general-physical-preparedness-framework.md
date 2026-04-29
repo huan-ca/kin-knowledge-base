@@ -14,7 +14,7 @@ related_pages: []
 ## Definition
 General physical preparedness is used mainly for competition-team or support work to reduce injury risk and improve movement capacity.
 
-## Key Details
+## Detailed Notes
 - The source names stability, mobility, flexibility, strength, speed or agility, and coordination.
 - Strength work for kids is described mainly through bodyweight tasks rather than weight training.
 - The purpose is to balance repeated BJJ stress with broader physical readiness.

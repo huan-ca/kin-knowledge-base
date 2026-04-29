@@ -1,14 +1,17 @@
 ---
 id: source-example-scripted-lesson-plan-youth
 type: source
-title: "example_scripted_lesson_plan_youth.md"
+title: "Example Scripted Lesson Plan Youth"
 status: active
 confidence: 1.0
 source_refs: []
 related_pages: []
+domain_tags: [source, example, lesson-format, youth]
+keywords: [youth scripted lesson plan example, coach-facing format, youth class script]
+summary: Example youth lesson-plan source preserving the preferred markdown lesson structure while also capturing the current ambiguity between youth labeling and adult wording in the embedded example.
 ingestion_batch: batch-20260428T050532Z
 ---
-# example_scripted_lesson_plan_youth.md
+# Example Scripted Lesson Plan Youth
 
 ## Artifact
 - Path: `raw/example_scripted_lesson_plan_youth.md`
@@ -21,6 +24,7 @@ This source is an example scripted youth lesson-plan artifact. The authored mark
 - The source is labeled as a youth lesson-plan format example. (`chunk-001`)
 - The source uses a preserved fenced-markdown example body rather than only prose description. (`chunk-002`)
 - The example uses week metadata, an opening script, warm-up options, a technical lesson block, and situational options. (`chunk-003`)
+- The embedded example still contains adult wording, which creates a real differentiation question instead of a clean youth-only template. (`chunk-004`)
 
 ## Preserved Example Format
 

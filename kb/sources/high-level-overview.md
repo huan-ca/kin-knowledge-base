@@ -1,14 +1,17 @@
 ---
 id: source-high-level-overview
 type: source
-title: "high level overview.md"
+title: "High Level Overview"
 status: active
 confidence: 1.0
 source_refs: []
 related_pages: []
+domain_tags: [source, curriculum-brief, sequencing]
+keywords: [high level overview, curriculum brief, offensive defensive cycles, weekly structure]
+summary: Curriculum design brief defining weekly structure, level 1 and level 2 progression rules, offensive and defensive cycle cadence, and adult versus youth end-of-cycle focus.
 ingestion_batch: batch-20260426T003151Z
 ---
-# high level overview.md
+# High Level Overview
 
 ## Artifact
 - Path: `raw/high level overview.md`
@@ -16,6 +19,12 @@ ingestion_batch: batch-20260426T003151Z
 
 ## Summary
 This source is a curriculum design brief. It defines the intended shape of the multi-week curriculum, especially how takedowns, groundwork, submissions, offensive and defensive cycles, and level 1 versus level 2 progressions should fit together.
+
+## Design Signals
+- Weekly lessons should connect takedowns, ground work, and submissions into one match-like theme.
+- Every area should support a level 1 baseline and a level 2 follow-up chain, transition, or more advanced option.
+- Offensive and defensive cycles should stay grouped and alternate every two weeks.
+- Adult and youth should share a broad structure while diverging near the end around leg-lock versus self-defence emphasis.
 
 ## Extracted Claims
 - All curriculum should follow the Kin BJJ compendium. (`chunk-001`)

@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 The adult and youth scripted lesson examples finish with situational rounds that start from established control rather than fully open sparring.
 
-## Key Details
+## Detailed Notes
 - The example positional start is crossface plus underhook from side control top.
 - One situational version runs until escape, Americana, or a kimura-grip-based non-submission outcome.
 - Another situational version runs until either escape or submission.

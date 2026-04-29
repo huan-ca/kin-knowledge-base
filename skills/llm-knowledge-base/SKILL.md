@@ -75,9 +75,12 @@ Break synthesized knowledge into small pages with explicit links and source refe
 Default to a dense ingestion pass, not a minimal summary pass.
 
 - Preserve as much supported information from `raw/` as practical.
+- Do not collapse rich source material into thin summary pages unless the user explicitly asks for a lighter pass.
 - Prefer many small KB pages over a few broad summary pages when the source supports that decomposition.
 - Expand source pages with section-level or topic-level extracted claims so downstream generation has more recoverable evidence.
 - When a source contains multiple distinct operational, curriculum, policy, cultural, or technical concepts, split them into separate pages instead of collapsing them into one blended summary.
+- Preserve distinctions, examples, and contextual implications when the source supports them.
+- Treat each derived page as a retrieval unit that should be strong enough to support downstream generation with specificity.
 - Only use a lighter ingestion mode when the user explicitly asks for a fast, narrow, or partial pass.
 
 Use:
@@ -114,6 +117,14 @@ High-granularity ingestion is the default.
 - Prefer explicit decomposition of sections, rules, procedures, frameworks, and technical systems into separate pages.
 - Treat high-quality markdown or text sources as an opportunity to build a richer KB, not just a smaller summary.
 - If the source is too large to finish in one pass, still maximize useful coverage and leave explicit `open-question` pages for the remainder instead of shrinking the whole ingestion effort.
+- Denser pages should preserve useful structure, not add filler. Prefer concrete bullets, distinctions, and supported detail over broad summary prose.
+- Use `Operational Implications` when the page affects behavior, teaching, or process.
+- Use `Examples or Variants` when concrete forms, age bands, or contextual variants materially improve understanding.
+- Use `Constraints or Safety Notes` when limits, cautions, or sequencing boundaries materially affect use.
+- These sections are conditional, not mandatory on every page.
+- Use `domain_tags` for short curated topic labels that help categorical retrieval.
+- Use `keywords` for retrieval terms, aliases, common phrases, and likely search vocabulary.
+- Prefer a few strong retrieval terms over long noisy metadata lists.
 
 ## Page Types
 

@@ -15,7 +15,7 @@ related_pages: []
 ## Definition
 Class opening is used to establish order, welcome new students, and positively frame the session.
 
-## Key Details
+## Detailed Notes
 - Higher-ranking students line up left to right.
 - New students should be introduced by name and welcomed publicly.
 - The coach should use upbeat framing to set a positive class tone.
